@@ -1,0 +1,16 @@
+--- original/texture-anim.gc
++++ mod/texture-anim.gc
+@@ -543,6 +543,13 @@
+            )
+           ((*darkjak-texture-anim-array*)
+            (pc-clut-blender bucket (texture-anim-pc darkjak) anim-array)
++           ;; Cinematic gameplay replacement: keep its native hi-res textures animated.
++           (when (not (movie?))
++             (let ((saved-frame (-> *darkjak-highres-texture-anim-array* array-data 0 frame-time)))
++               (set! (-> *darkjak-highres-texture-anim-array* array-data 0 frame-time)
++                     (-> anim-array array-data 0 frame-time))
++               (pc-clut-blender bucket (texture-anim-pc darkjak-highres) *darkjak-highres-texture-anim-array*)
++               (set! (-> *darkjak-highres-texture-anim-array* array-data 0 frame-time) saved-frame)))
+            (return #f)
+            )
+           ((*darkjak-highres-texture-anim-array*)

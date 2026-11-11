@@ -1,0 +1,25 @@
+Jak 3: The Cinematic Legacy for OpenGOAL
+By @jacopobassan
+https://jacopobassan.me
+
+1. Install vanilla Jak 3 using OpenGOAL tooling v0.3.9 and a supported
+   EU or USA PS2 disc.
+2. Close the game. Open Features > Mods > Add from File in OpenGOAL Launcher
+   and select the Jak 3 launcher ZIP.
+3. Wait for setup, then press Play.
+
+Setup reads your own installed files and builds the replacements locally.
+No Python installation, Blender or terminal is needed. This download contains
+no game models or textures. Windows x64 is the supported installer platform.
+
+Mods have separate saves. Vanilla saves are preserved and are not copied
+automatically. Keep the local ZIP filename unchanged when updating.
+
+Allow space for the normal launcher mod installation and temporary conversion.
+The installer checks free disk space before copying. Conversion may require
+approximately 6 GiB available RAM and can take several minutes.
+
+Logs remain in OpenGOAL-Cinematic-Builds beside the OpenGOAL installation.
+Successful builds remove temporary assets; failed builds retain diagnostics.
+
+Use the published Mod Source for list images, author links and version updates.

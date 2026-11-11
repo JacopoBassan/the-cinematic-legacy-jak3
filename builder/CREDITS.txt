@@ -1,0 +1,11 @@
+The Cinematic Legacy for OpenGOAL
+
+By @jacopobassan
+https://jacopobassan.me
+
+Original mod build code is licensed under LICENSE.
+Derived source code retains the notices in licenses/OpenGOAL-ISC.txt.
+Bundled Python and dependency distributions include their own license notices.
+
+The public installers contain no game models or textures. Game assets are read
+from the user's own supported local installations and generated locally.

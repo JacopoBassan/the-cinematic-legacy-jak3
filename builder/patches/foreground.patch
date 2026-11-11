@@ -1,0 +1,188 @@
+--- original/foreground.gc
++++ mod/foreground.gc
+@@ -826,6 +826,8 @@
+                                     )
+         )
+ 
++(define *cinematic-jak-shadow-clip* #t)
++
+ (defun foreground-shadow ((arg0 draw-control) (arg1 (inline-array pris-mtx)) (arg2 pointer))
+   "Generate DMA for shadow drawing."
+   (local-vars (a3-3 shadow-settings))
+@@ -908,6 +910,13 @@
+                       (set! (-> t2-10 settings center y) (-> t7-4 y))
+                       (set! (-> t2-10 settings center z) (-> t7-4 z))
+                       )
++                    ;; Cinematic replacement: the gameplay shadow proxy intersects
++                    ;; the visible skin. Native top clipping retains the ground shadow
++                    ;; while excluding the incompatible upper-body self-shadow volume.
++                    (when (and *cinematic-jak-shadow-clip*
++                               (string= (-> arg0 mgeo name) "jakb-c-lod0")
++                               (string= (-> v1-0 name) "jakb-c-shadow"))
++                      (logior! (-> t2-10 settings flags) (shadow-flags shdf03)))
+                     (set! (-> t2-10 geo-ref dma)
+                           (new 'static 'dma-tag :id (dma-tag-id ref) :addr (the-as int t4-0) :qwc (the-as int t6-0))
+                           )
+@@ -1653,7 +1662,8 @@
+    If update-verts is set to 'blerc, tell the PC renderer to use the included blerc weights
+    to modify the vertices."
+   (let ((start-packet (the-as dma-packet dma-buf))
+-        (qwc-total 0))
++        (qwc-total 0)
++        (cinematic-replacement? (or (string= (-> dc mgeo name) "jakb-c-lod0") (string= (-> dc mgeo name) "daxter-lod0"))))
+     (set! (-> start-packet dma) (new 'static 'dma-tag :id (dma-tag-id cnt)))
+     (set! (-> start-packet vif0) (new 'static 'vif-tag))
+     (set! (-> start-packet vif1) (new 'static 'vif-tag :cmd (vif-cmd pc-port)))
+@@ -1691,12 +1701,14 @@
+             ;; We want to use "merc"
+             ;; We aren't disabled (new feature in jak 2)
+             ;; We match the texture index for the bucket.
+-            (when (and (zero? (-> (-> *foreground* merc-bucket-info) effect effect-idx merc-path))
+-                       (zero? (-> (-> *foreground* merc-bucket-info) effect effect-idx disable-draw))
+-                       (= tex-idx (-> merc-ctrl effect effect-idx texture-index))
+-                       )
++            (when (or cinematic-replacement?
++                      (and (zero? (-> (-> *foreground* merc-bucket-info) effect effect-idx merc-path))
++                           (zero? (-> (-> *foreground* merc-bucket-info) effect effect-idx disable-draw))
++                           (= tex-idx (-> merc-ctrl effect effect-idx texture-index))))
+               ;; set enable bit for pc render
+-              (logior! enable-mask (ash 1 effect-idx))
++              (when (or (not (string= (-> dc mgeo name) "jakb-c-lod0"))
++                        (zero? (-> (-> *foreground* merc-bucket-info) effect effect-idx disable-draw)))
++                (logior! enable-mask (ash 1 effect-idx)))
+               ;; set alpha bit for pc render
+               (when (nonzero? (-> (-> *foreground* merc-bucket-info) effect effect-idx ignore-alpha))
+                 (logior! ignore-alpha-mask (ash 1 effect-idx))
+@@ -1730,11 +1742,66 @@
+               )
+             ) ;; end effect loop
+ 
++          ;; The replacement may weight joints absent from the original visible fragments.
++          ;; Use the same allocated matrix count as foreground-draw, not a guessed bone count.
++          (when cinematic-replacement?
++            (dotimes (mat-idx (+ (-> dc mgeo num-joints) 3))
++              (when (and (< mat-idx 128) (zero? (-> transferred-matrices mat-idx)))
++                (set! (-> transferred-matrices mat-idx) 1)
++                (set! (-> matrix-slot-string matrix-out-idx) mat-idx)
++                (+! matrix-out-idx 1)
++                (set! (-> (the (pointer pointer) dma-buf)) (&+ matrix-buf (* 128 mat-idx)))
++                (&+! dma-buf 16)
++                (+! qwc-total 1))))
++
+           ;; end matrix string
+           (while (< matrix-out-idx 128)
+             (set! (-> matrix-slot-string matrix-out-idx) #xff)
+             (+! matrix-out-idx 1)
+             )
++
++          ;; Cinematic effects keep their own boundaries; map native visibility and alpha.
++          (when (string= (-> dc mgeo name) "jakb-c-lod0")
++            (let ((original-enable enable-mask) (original-alpha ignore-alpha-mask))
++              (set! enable-mask 0)
++              (set! ignore-alpha-mask 0)
++              (when (logtest? original-enable 1024) (logior! enable-mask 1))
++              (when (logtest? original-alpha 1024) (logior! ignore-alpha-mask 1))
++              (when (logtest? original-enable 131072) (logior! enable-mask 2))
++              (when (logtest? original-alpha 131072) (logior! ignore-alpha-mask 2))
++              (when (logtest? original-enable 2) (logior! enable-mask 4))
++              (when (logtest? original-alpha 2) (logior! ignore-alpha-mask 4))
++              (when (logtest? original-enable 8192) (logior! enable-mask 8))
++              (when (logtest? original-alpha 8192) (logior! ignore-alpha-mask 8))
++              (when (logtest? original-enable 8192) (logior! enable-mask 16))
++              (when (logtest? original-alpha 8192) (logior! ignore-alpha-mask 16))
++              (when (logtest? original-enable 32768) (logior! enable-mask 32))
++              (when (logtest? original-alpha 32768) (logior! ignore-alpha-mask 32))
++              (when (logtest? original-enable 32) (logior! enable-mask 64))
++              (when (logtest? original-alpha 32) (logior! ignore-alpha-mask 64))
++              (when (logtest? original-enable 16) (logior! enable-mask 128))
++              (when (logtest? original-alpha 16) (logior! ignore-alpha-mask 128))
++              (when (logtest? original-enable 4) (logior! enable-mask 256))
++              (when (logtest? original-alpha 4) (logior! ignore-alpha-mask 256))
++              (when (logtest? original-enable 65536) (logior! enable-mask 512))
++              (when (logtest? original-alpha 65536) (logior! ignore-alpha-mask 512))
++              (when (logtest? original-enable 65536) (logior! enable-mask 1024))
++              (when (logtest? original-alpha 65536) (logior! ignore-alpha-mask 1024))
++              (when (logtest? original-enable 64) (logior! enable-mask 2048))
++              (when (logtest? original-alpha 64) (logior! ignore-alpha-mask 2048))
++              (when (logtest? original-enable 256) (logior! enable-mask 4096))
++              (when (logtest? original-alpha 256) (logior! ignore-alpha-mask 4096))
++              (when (logtest? original-enable 2048) (logior! enable-mask 8192))
++              (when (logtest? original-alpha 2048) (logior! ignore-alpha-mask 8192))
++              (when (logtest? original-enable 4096) (logior! enable-mask 16384))
++              (when (logtest? original-alpha 4096) (logior! ignore-alpha-mask 16384))
++              (when (logtest? original-enable 262144) (logior! enable-mask 32768))
++              (when (logtest? original-alpha 262144) (logior! ignore-alpha-mask 32768))
++              (when (logtest? original-enable 65536) (logior! enable-mask 65536))
++              (when (logtest? original-alpha 65536) (logior! ignore-alpha-mask 65536))
++              (when (logtest? original-enable 16384) (logior! enable-mask 131072))
++              (when (logtest? original-alpha 16384) (logior! ignore-alpha-mask 131072))
++              ))
+ 
+           ;; flags
+           (let ((flags (the (pc-merc-flags) dma-buf)))
+@@ -1770,9 +1837,31 @@
+ 
+           ;; fades
+           (let ((fades (the (pointer uint32) dma-buf)))
++            (cond ((string= (-> dc mgeo name) "jakb-c-lod0")
++              (set! (-> fades 0) (the-as uint (-> (-> *foreground* merc-bucket-info) effect 10 color-fade)))
++              (set! (-> fades 1) (the-as uint (-> (-> *foreground* merc-bucket-info) effect 17 color-fade)))
++              (set! (-> fades 2) (the-as uint (-> (-> *foreground* merc-bucket-info) effect 1 color-fade)))
++              (set! (-> fades 3) (the-as uint (-> (-> *foreground* merc-bucket-info) effect 13 color-fade)))
++              (set! (-> fades 4) (the-as uint (-> (-> *foreground* merc-bucket-info) effect 13 color-fade)))
++              (set! (-> fades 5) (the-as uint (-> (-> *foreground* merc-bucket-info) effect 15 color-fade)))
++              (set! (-> fades 6) (the-as uint (-> (-> *foreground* merc-bucket-info) effect 5 color-fade)))
++              (set! (-> fades 7) (the-as uint (-> (-> *foreground* merc-bucket-info) effect 4 color-fade)))
++              (set! (-> fades 8) (the-as uint (-> (-> *foreground* merc-bucket-info) effect 2 color-fade)))
++              (set! (-> fades 9) (the-as uint (-> (-> *foreground* merc-bucket-info) effect 16 color-fade)))
++              (set! (-> fades 10) (the-as uint (-> (-> *foreground* merc-bucket-info) effect 16 color-fade)))
++              (set! (-> fades 11) (the-as uint (-> (-> *foreground* merc-bucket-info) effect 6 color-fade)))
++              (set! (-> fades 12) (the-as uint (-> (-> *foreground* merc-bucket-info) effect 8 color-fade)))
++              (set! (-> fades 13) (the-as uint (-> (-> *foreground* merc-bucket-info) effect 11 color-fade)))
++              (set! (-> fades 14) (the-as uint (-> (-> *foreground* merc-bucket-info) effect 12 color-fade)))
++              (set! (-> fades 15) (the-as uint (-> (-> *foreground* merc-bucket-info) effect 18 color-fade)))
++              (set! (-> fades 16) (the-as uint (-> (-> *foreground* merc-bucket-info) effect 16 color-fade)))
++              (set! (-> fades 17) (the-as uint (-> (-> *foreground* merc-bucket-info) effect 14 color-fade)))
++              (set! (-> fades 18) 0))
++              (else
+             (dotimes (i (-> merc-ctrl header effect-count))
+               (set! (-> fades i) (the-as uint (-> (-> *foreground* merc-bucket-info) effect i color-fade)))
+               )
++              ))
+             )
+ 
+           (let ((num-fades (/ (+ (-> merc-ctrl header effect-count) 3) 4)))
+@@ -1806,8 +1895,12 @@
+          (mctrl (-> dc mgeo))
+          (buckets (-> (scratchpad-object foreground-work) grid level-buckets (-> (scratchpad-object foreground-work) draw-index-map (-> dc level-index))))
+          (has-ripple-or-texscroll #f)
+-         (uses-fp-blerc (and *use-fp-blerc* (pc-merc-blend-shape (the process-drawable (-> dc process)) blerc-weights)))
++         (uses-fp-blerc #f)
+          )
++    (dotimes (i 40) (set! (-> blerc-weights i) 0.0))
++    (set! uses-fp-blerc
++      (and (or *use-fp-blerc* (or (string= (-> dc mgeo name) "jakb-c-lod0") (string= (-> dc mgeo name) "daxter-lod0")))
++           (pc-merc-blend-shape (the process-drawable (-> dc process)) blerc-weights)))
+     ;; mark all as unused, until we see a use
+     (dotimes (i 7) (set! (-> use-flags i) 0))
+ 
+@@ -1822,6 +1915,11 @@
+         )
+       )
+ 
++    ;; Local cinematic prototype: submit its complete mesh in a single bucket.
++    (when (or (string= (-> dc mgeo name) "jakb-c-lod0") (string= (-> dc mgeo name) "daxter-lod0"))
++      (dotimes (i 7) (set! (-> use-flags i) 0))
++      (set! (-> use-flags 0) 1))
++
+     ;; loop over texture groupe
+     (dotimes (i 7)
+       (when (nonzero? (-> use-flags i))
+@@ -1849,6 +1947,7 @@
+               )
+             )
+ 
++          (when (or (string= (-> dc mgeo name) "jakb-c-lod0") (string= (-> dc mgeo name) "daxter-lod0")) (set! vertex-update 'blerc))
+          ; (format 0 "~D weights: ~X~%" i blerc-weights)
+ 
+           (set! dma-buf (pc-merc-draw-request dc dma-buf matrix-buf i vertex-update blerc-weights))

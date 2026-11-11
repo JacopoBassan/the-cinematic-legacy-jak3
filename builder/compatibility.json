@@ -1,0 +1,571 @@
+{
+  "openGoalVersion": "v0.3.9",
+  "platform": "windows-x64",
+  "supportedSerials": [
+    "SCES-52460",
+    "SCUS-97330"
+  ],
+  "version": "0.3.0-rc.1",
+  "tools": {
+    "extractor.exe": "bc2d0718894c48f63e6bfcfe2535cf96401542286b1572aa1dbf4a90ff8f5cc9",
+    "gk.exe": "ae8a107d6ecaaa7e83948b5c9c01fabf43a0117fd82a3305ae084114c54da45d",
+    "goalc.exe": "8d877457c13349f43a8fe5a8622e319622de42e0ce4731f3b32e6a732600e28e"
+  },
+  "inputs": {
+    "iso_data/jak3/CGO/KERNEL.CGO": "ce54561924c8d20ff052351a304820e49c9278b85786b8fb87112a64c26af25a",
+    "iso_data/jak3/CGO/GAME.CGO": "8f94831d67a483b67ab98064988cff337feec49367ccb177af485a703b5977d6",
+    "iso_data/jak3/DGO/ARENACST.DGO": "805492ea0f230057436173c0ff5df43dafc56d34ffe3b9724472be4b582388f5",
+    "out/jak3/iso/GAME.CGO": "2e92da6318292ac3b2d7fc339a289b042dfebeb8b8f121afa0af2949af0768a7",
+    "iso_data/jak3/CGO/ART.CGO": "3ae437ca610bd5e1678c5bb0faa7c543d6960f7c31adeb8420b597213b848741",
+    "iso_data/jak3/CGO/COMMON.CGO": "fc1ad99a05c001b94e92ba0c38cd9904f60c1ba9eb4154e7b26912a6c4f1993d",
+    "iso_data/jak3/CGO/ENGINE.CGO": "ed132a14cccfb8de7327fce8856abbca223a9d8c0a10607de0364d936ac3cc46",
+    "iso_data/jak3/DGO/CFA.DGO": "b41cc0ee75c953ee81298fc10e0ccd965ffe2f2cc65801cac0f1c18850f2b923",
+    "iso_data/jak3/DGO/CFB.DGO": "5cc16be034e2722980b7d8be634edc34f13883abb0eeb443109928c2412bbb80",
+    "iso_data/jak3/DGO/CGB.DGO": "c735c3b55dea2094b4b74b58382e4591295e8cdce4f23bb203829171aaa57885",
+    "iso_data/jak3/DGO/CIA.DGO": "35a32b7bdc7992284f452d6fbe9d548f8aaaeef3bcbc63a12d2857db61a5bbb6",
+    "iso_data/jak3/DGO/CIB.DGO": "b3650a0fd0767746a349c1c5595af925a8d21b641bc6d68d22f4cd6b9605e62c",
+    "iso_data/jak3/DGO/CITYCAST.DGO": "7e4c35c0ff92f76fecf6691e9cf8a7970f7ecd3a6385ce50056fc1aba425a3cc",
+    "iso_data/jak3/DGO/COMBA.DGO": "2978daed0bbd3947e6a0996ecc00c52fcdbdd31ec378f364fe25b05ad551e3b4",
+    "iso_data/jak3/DGO/COMBB.DGO": "0c9b8587cd83049449b67a1fd9d5dd246986b8c491a0960e86f11f7625d00a5d",
+    "iso_data/jak3/DGO/COMBC.DGO": "efb25ec4ea50e76551c2db732ac98dc49adb80c86f897c4f1c59fa730b29981f",
+    "iso_data/jak3/DGO/COMBD.DGO": "9bac275b3bebc727fa20ac55cc2572ca1b01f2d6af88968a598c192882423423",
+    "iso_data/jak3/DGO/COMBE.DGO": "950b5a3abd2a73d6447e4bd8c2d21e6cd40ad78f95d9f7b04afc6de1b50730cd",
+    "iso_data/jak3/DGO/COMBN.DGO": "8869742bb53eab37d5f26d12c4f02454eb5554a7f2193357a59748a0b4b747f5",
+    "iso_data/jak3/DGO/COMBX.DGO": "63f819e30c9cb08640e9da85f18a1f384758db4ceb3745bf26bdbc32e1a71fbb",
+    "iso_data/jak3/DGO/CPO.DGO": "361f1ecb41fad0a07cdc122279a1512dc3e4fcca4b961665ef49724941cfa523",
+    "iso_data/jak3/DGO/CTA.DGO": "ffe25980e29f791cde08ca9aa8eeb7c026221cfe946ca0ed9d4930a922f61d8c",
+    "iso_data/jak3/DGO/CTB.DGO": "b023d63282090965511a9196a5bb48f40a10fb1ca258929ef170f5f3da648fe1",
+    "iso_data/jak3/DGO/CTC.DGO": "03e31f1a38972ac27f34d7ce42f19babf73c40488326cb3013b7d2a83aa62e58",
+    "iso_data/jak3/DGO/CTYCARA.DGO": "b410e340a8eca003f7edb5c25fd989357991da12cbd173c84a33a990bfb753de",
+    "iso_data/jak3/DGO/CTYCARB.DGO": "581a08bf0a83cdc577a5574ea742afbcb0c196a0adbc1001fcc77718e2cfe82d",
+    "iso_data/jak3/DGO/CTYCARC.DGO": "c7406cf682093da35d700adae042b31844438fe530bf4ecad4858b8a3d681e6e",
+    "iso_data/jak3/DGO/CTYCARKG.DGO": "797d5551d476ecd87578f420ea4a1b483a181826015159bd620546336991340b",
+    "iso_data/jak3/DGO/CTYPEPA.DGO": "bdd98148170320b2a0334b666df1ff3bbc88efd8fb20e98a3f557c532cf40f98",
+    "iso_data/jak3/DGO/CTYPEPB.DGO": "562da04a2b2b15e0cf6fd0355bb49b278c23765ed4a554b16d64cd239ef8a4a3",
+    "iso_data/jak3/DGO/CTYPEPC.DGO": "eccb2badbaae3437ec5d015e06afdde5945101f4bb4aab53cc648615a3f09013",
+    "iso_data/jak3/DGO/CTYPESA.DGO": "0822e3f4dec051386dc58e17daf1239fa2b46f1d9d2daba729441e935705c8c1",
+    "iso_data/jak3/DGO/CTYPESB.DGO": "7908b87253a5b43f5625cb2d23fe5b46dbd7ce03df2a919167f0377b0e3448df",
+    "iso_data/jak3/DGO/CTYPESC.DGO": "e08f8434fc4613022fd5f516c8a77ab488a0c618c8dcdc5de4680b9c508f059e",
+    "iso_data/jak3/DGO/CWI.DGO": "fc246f96b83cac088b33876f1d9d1f206c60554dff3ef5c32ef9ba170c51ea9d",
+    "iso_data/jak3/DGO/DESA.DGO": "7c316376e65f7213c239b3cc495ab2b6920eb2c63475c386c7c29a1790a39d78",
+    "iso_data/jak3/DGO/DESB.DGO": "0e376410489ac3894b585a3ddacb4e688cf19d471a2f1f2a3111459b91c88053",
+    "iso_data/jak3/DGO/DESBATTL.DGO": "cb9dabd407777fe4b8f68940aefe5bbf8d725609894252b47724f2f8fc8adc81",
+    "iso_data/jak3/DGO/DESBCST.DGO": "6a9df6b73d45ced2320fcdb163146c9f91e995c88fad0571ea3d0746f22bf78f",
+    "iso_data/jak3/DGO/DESBOSS1.DGO": "99b33daffe8c68c95a7d266f3dce6cceeca8eb141ebec9424c87b80e845eb5a7",
+    "iso_data/jak3/DGO/DESBOSS2.DGO": "1e8e4977cfec8f520a5f7df2528013522664085c4d090f8521adaf2f8b3eba9a",
+    "iso_data/jak3/DGO/DESC.DGO": "9f77b269e8e0d714a5ed156d5cabdf2f258ffa0d5ff410b176858f2a5e027c3c",
+    "iso_data/jak3/DGO/DESCHASE.DGO": "fcdd7cce3e4b276327b8a201d806726c59eb74c5ce410e13c81fc4048e430ca8",
+    "iso_data/jak3/DGO/DESD.DGO": "e1a7bb6ac493179bce34f4704e8223f9a82b924c5782b83bba2d09341263d88a",
+    "iso_data/jak3/DGO/DESE.DGO": "558ac914c029271cd7246b2d4e987959598e599bf89b04e9d69890874f15e056",
+    "iso_data/jak3/DGO/DESERROL.DGO": "5df59d38a6c2e32fc1fa05837b52f2d70cf3c4bcc7444a7d61b9998d3b7c6f5b",
+    "iso_data/jak3/DGO/DESF.DGO": "f442d1bf1c7d7d22959724892128e174fd8ae6344172f28922a83ab46d6554e4",
+    "iso_data/jak3/DGO/DESG.DGO": "bfebebc30423362b5074417d32ba7208d9b53a2b8459605f22ff8bd8c514ff3e",
+    "iso_data/jak3/DGO/DESH.DGO": "2b301d2ac8ecbc17337421812e9229a439bfc87b2ade3369cbe22663b0332596",
+    "iso_data/jak3/DGO/DESHOVER.DGO": "0e360d4cf1aeab925fbe10a391a3e33c48b02c8350fe6302b0be2c91f0f2027d",
+    "iso_data/jak3/DGO/DESHUNT.DGO": "b5b54e57457c7495e86a805bb8de3979bd8f1d18e107be53b90d282b02836f09",
+    "iso_data/jak3/DGO/DESINTER.DGO": "df83896dd474a388e242bd6a5491c20274d648a6caa9e80eb4b8c88f417dd13b",
+    "iso_data/jak3/DGO/DESJUMP.DGO": "50ebc2e3f1cb96e5465a9ee687f1b4cb9e77653ed44bd99443dce83a282f3678",
+    "iso_data/jak3/DGO/DESLIZ.DGO": "f8cf6212f7e805ef1cf67a0a29d9e721f59f71f81e9abf56757478741800aa51",
+    "iso_data/jak3/DGO/DESOASIS.DGO": "135981d50ef649a08accb45bdf604434fb9d03f8969c48b79f37c7a457218eb0",
+    "iso_data/jak3/DGO/DESRACE1.DGO": "df074b4c0d6c89433e610bb3dae17561fffe5b54f04d951b780638c01118278e",
+    "iso_data/jak3/DGO/DESRACE2.DGO": "61f5986fb3d0089c2dc69abcd2b80d7013688998c2e3e944330b69fac787d92b",
+    "iso_data/jak3/DGO/DESRALLY.DGO": "a1d91070fc16ecddef15937e9c23ce1619c75adff6c22d59d7fc4af0f4249484",
+    "iso_data/jak3/DGO/DESRESC.DGO": "efb995ccb676bbfd60d6574578f7e19213d1ab7c9dbdc828e5f4169b8fc1e3f6",
+    "iso_data/jak3/DGO/DESRESCC.DGO": "266da3ab21e3ed526d33644623db2d4af3bd601d74dd520fde5351e4b31ea492",
+    "iso_data/jak3/DGO/DESRESCG.DGO": "4a677e041cb652821e2a113d66bea6be2dcfd729b3286697553792bf92272998",
+    "iso_data/jak3/DGO/DESTRACK.DGO": "faac535bd3eebb573ff1ba89c113072e730b16d81d1deb2280b7f824bdfc52e5",
+    "iso_data/jak3/DGO/DESW.DGO": "2416ba112fca7cc1a22d6a7326c7ae0768a33d1394ad8b2a9e185f695e039dfe",
+    "iso_data/jak3/DGO/DST.DGO": "018a607d423dc3add5ddf2d018b4ab01b4f4fba660ae0a85b1c6a0b9a8152cd3",
+    "iso_data/jak3/DGO/FACB.DGO": "dd7d35cd9aa1c28cb9817317f04ccd4434b576b04430f7765dab53704a90b596",
+    "iso_data/jak3/DGO/FACC.DGO": "a897b2b301f74cbd45bb1f8b33ddcef475bdb1c1e6f5a6e2246ca54becdcdb6a",
+    "iso_data/jak3/DGO/FACD.DGO": "6e946dddd8059e55669dd40fccee38ce6932c322b0c4b840b8bfea9248ad3173",
+    "iso_data/jak3/DGO/FACTORYA.DGO": "cb6cc3cdcb0bf80a5166a103072d1d8adc0ddde4025b044ef5c6b7cee4fe978f",
+    "iso_data/jak3/DGO/FREECAST.DGO": "afde10ae0e7c90b6b3234a174866d311e23b832013ffe0bdd3bdd89a5f924da8",
+    "iso_data/jak3/DGO/FREEHQ.DGO": "d7b4e80e57527820f27cba7c195d3507a629185fce5dd089bb4d2a7daf288bf9",
+    "iso_data/jak3/DGO/FRSTA.DGO": "cfcd99a4232717153f6c3eff4a9e37833b64d6879f15e955b470c671a44d2938",
+    "iso_data/jak3/DGO/FRSTB.DGO": "b1d22033a9330a1b14f58c9f2c5d5cf79c7a6d8f662bf3e6a8248c619ca2ef6d",
+    "iso_data/jak3/DGO/FRSTX.DGO": "d09d58d3d0c8c4f0276946b557a0080eab5b5b41d07fbe00f068e03489598e0a",
+    "iso_data/jak3/DGO/GGA.DGO": "455f925c8c818ef4310baad73a3074c464558ffe98b1c3effedf105eb21efddf",
+    "iso_data/jak3/DGO/GRIDCST.DGO": "28417eec6611bb6b82b60e663d7c38007632cdf1270a8905df087e9acbbc589a",
+    "iso_data/jak3/DGO/GUNGAME1.DGO": "422eed9c9b3cb42fdcc5fc2328d3c899514faacf731a800ec91558ddc2a86c4a",
+    "iso_data/jak3/DGO/GUNGAME2.DGO": "d1bc08e7fee5a6b72010c1b91f199500c768d4f1f3051822d7ad2772cdca2d5e",
+    "iso_data/jak3/DGO/HALFPIPE.DGO": "3a4566d1ba9f2fdb331436ab3be1ab16aeef9f97c80e0e7f9002e6e50fbf3527",
+    "iso_data/jak3/DGO/HGA.DGO": "686b3075b90ea28264a8d280f51a631c13fdb74136ea2270be69138123173c95",
+    "iso_data/jak3/DGO/HGB.DGO": "edd443c724dcce6961184f70754a97a7d30fffa02c0ce3381e179196075f0259",
+    "iso_data/jak3/DGO/HHG.DGO": "d213cfcbcab16583e01dda031de373959e5470c646d7e94b9e1565f99f660b89",
+    "iso_data/jak3/DGO/INTPALRF.DGO": "c37cb37226da7a03f24ff41e1ea0bca3ca383f90705b17c2ed0ad811d0577e59",
+    "iso_data/jak3/DGO/INTROCST.DGO": "d6b46692d33fa207ef8135f71b5eff49a773135927a34ad1cb3e3e7f9cdf5b9f",
+    "iso_data/jak3/DGO/INTTITLE.DGO": "4ecfb7121bf1ce6e4fa11684c472f8f949089789bfc3b6c64ab0389f59775d62",
+    "iso_data/jak3/DGO/IPF.DGO": "1b77fc1b0c3f988751aa0709b76e62641d22e8a69ec94181caab14194d182689",
+    "iso_data/jak3/DGO/LASHELIN.DGO": "bdf69b37888e52601ad7f442a60240440027918bf2f6be3c42f25f88e1af12e5",
+    "iso_data/jak3/DGO/LBBRING1.DGO": "0e96fbb35ffada6a52afb47c8e49ed1077b107f25b4ac665773780238f33d5a1",
+    "iso_data/jak3/DGO/LBBRING2.DGO": "7cf1f085a348b2bd1b92cf59b7e08db13a3e754464331c333aae5bd3c6cbde92",
+    "iso_data/jak3/DGO/LBBRING3.DGO": "f25303bcce720c68f30b0624fdb876d20a55779c92607d95a9683745b0dd0060",
+    "iso_data/jak3/DGO/LBBRING4.DGO": "4da10ec855ea64963a1469386b9abca38f2173727466221526abd7db1be6009b",
+    "iso_data/jak3/DGO/LBBRING5.DGO": "6c06e8e480d7e404c8fe2facf053c60988cefaa218282276104d83e33b3bc4ce",
+    "iso_data/jak3/DGO/LBBRING6.DGO": "cb6493a6e1c998f4728fa5137114323d6f0943e2f05f185c68ac68659a8f20cc",
+    "iso_data/jak3/DGO/LBBSDRP1.DGO": "651f14ed2e20de3e028e6667abc413e56a6230eb6dfe111fee609a17a98915e7",
+    "iso_data/jak3/DGO/LBBSDRP2.DGO": "03b94a0250c9020a2fcda20fb1d450ab62fd035b967e44ef968a5fd500f9c42e",
+    "iso_data/jak3/DGO/LBBSDRP3.DGO": "d783a7b02b0359e40c902b896c4a946e4d48a8c044dad882d81ab0a5c6ecc2d3",
+    "iso_data/jak3/DGO/LBBSPID.DGO": "939d4c56c153cc6cd33db574f0d8d8a5e146311ab459914e7a158cbd4cc6b3c2",
+    "iso_data/jak3/DGO/LBBSPIRT.DGO": "78ab3a13f94c83bfaa6d27aca4791ed836bbd211a8f3bf49d01bd4f5ee9073c6",
+    "iso_data/jak3/DGO/LBBSPRT2.DGO": "26ce9ad08609ce7d5b6213087da5d2d88e58609f57b6eac0866a005ec041b23b",
+    "iso_data/jak3/DGO/LBBSPRT3.DGO": "a9fecdb06fcb98d8e9b0303db01dbee13929c8c9ae3bb0db02cd73f8d3ee16a0",
+    "iso_data/jak3/DGO/LBBTCHA1.DGO": "dd2b7d8621f891ac7fe8cc473a6f89629129d56a9aea1d4c83f8d28f183c2b33",
+    "iso_data/jak3/DGO/LBBTCHA2.DGO": "7b0d5517fff1bc377d07614e7ac651af26e55f9816b17c3921d1b018be0267c0",
+    "iso_data/jak3/DGO/LBBTCHA3.DGO": "8fa7a49ca013ee29f0599eaa2f9a07576513e023e14bad17f176e7e1d3ae3c2b",
+    "iso_data/jak3/DGO/LBIPED.DGO": "14cd5e8c298d6f4b2d70fb77d3ec983d3d12ee2fb6839fcfc53de678b0bc9097",
+    "iso_data/jak3/DGO/LBLOWCST.DGO": "7bc9d74a70df297303fb81369e8460f93878e363f1b7c7680e2a6205a1ac4c6d",
+    "iso_data/jak3/DGO/LBLOWTKG.DGO": "c85ecd15c4c019fdab1e0481281063872c510eedfcf33e598382a80539b66841",
+    "iso_data/jak3/DGO/LBLOWTMH.DGO": "4451cd1976944dd094c74d5dbdd55088fdb7636dd480a60d1cf150f6a9140218",
+    "iso_data/jak3/DGO/LBOMBBOT.DGO": "2f088cc0a6cf5b0fe547352ee23930f1fc5b53fec81b1534f629def00006e714",
+    "iso_data/jak3/DGO/LCITYSML.DGO": "a51680f076ec415abc970e3261df53236fd61270dd8d4b2d2334a6804ea1df64",
+    "iso_data/jak3/DGO/LCTYASS.DGO": "c05d9a78108df1b3e7db06c05c2173bf2d4c32cc33c548bd09cda6c6a859f344",
+    "iso_data/jak3/DGO/LCTYBLOW.DGO": "b260a5089aaa14363a29027ee986479ee65efc738b594ac39ffa56e27d347f5f",
+    "iso_data/jak3/DGO/LCTYDEST.DGO": "e59936bc16508bde63fd8fb040232895e49b0054855f59c34ed21cf62092e172",
+    "iso_data/jak3/DGO/LCTYHIJK.DGO": "04a4bede0c8b31e04f4100d86aa3887e56b19d59f8fc82cac854545d0ee005e1",
+    "iso_data/jak3/DGO/LCTYPALT.DGO": "a3b187da509693ddcc728469eae3d23fcdb374ac23b2c19e40fe8f9520dfa2d5",
+    "iso_data/jak3/DGO/LCTYPATK.DGO": "186435790500e83990337913f224c483e4d5b3972694a9e355c7b2783790d4c7",
+    "iso_data/jak3/DGO/LCTYPROT.DGO": "05faa785de648e46221f03f79576c7f7adf28c13f211833f70c323b55b2cb8af",
+    "iso_data/jak3/DGO/LCTYSNPR.DGO": "7f456e3c73643a109bceaf83a0d6efd90db45d4e178357d498ed021c27bf6dec",
+    "iso_data/jak3/DGO/LDAMKLEV.DGO": "7f1381578469e6ffb0fa9ca5cc0397ae10f9227cac31ed8d01bc7a9364089bd9",
+    "iso_data/jak3/DGO/LDAMPECK.DGO": "9c770a1cc41ba637d69f1e0405b3c536e79038935e1a90b01901f28f7ac5d9e0",
+    "iso_data/jak3/DGO/LDAMPKSM.DGO": "411d718b470d301e61511d8b692e44b3b18ab35daecb95731cc6d750d9db7c72",
+    "iso_data/jak3/DGO/LDAMSIG.DGO": "9a2966b89d1fb0dc71128326777ce0f05bb2f20cd2bf8c91bb033d5ac7b587cc",
+    "iso_data/jak3/DGO/LDAX.DGO": "f371fbc1f513aa923d408ea10c167579d17c24db3b7574bee0c862b3e53d0488",
+    "iso_data/jak3/DGO/LDESGCST.DGO": "9f272306c8668a0749017d33f262df4bd1f39339e91b553e113199bcd38f9798",
+    "iso_data/jak3/DGO/LDMPCKGN.DGO": "cabe37971f8009b6098de1eb09b9c4f3dcf78d0e554549a14f7816cdde7dfcdb",
+    "iso_data/jak3/DGO/LERROL.DGO": "3894c13e77808ff18b44eb6c54b0be8065020200af3b1963c02b0e71e5aa8e27",
+    "iso_data/jak3/DGO/LFACB.DGO": "287b7d8eb112aa22d698f8911dba770a11ebff6e7349c57162c7cc2ed903c926",
+    "iso_data/jak3/DGO/LFACCAR.DGO": "bf50a0da5485cb2dcc38631c9d4912e0e4d6a15059b5e51187c78cbab1f98be3",
+    "iso_data/jak3/DGO/LFACCITY.DGO": "6eda490090ff82c55c5c78da0b2dcfb78d56628031516c6f9d61afcc3594c00c",
+    "iso_data/jak3/DGO/LFACO.DGO": "eff52396cf896bfb44172aff7413a45553c103dd29c81303ec2b691183f69fd5",
+    "iso_data/jak3/DGO/LFACRM1.DGO": "ea67be16697a1824b99811f2f88442b428a01244e6e6e85992caf33dd1c949f3",
+    "iso_data/jak3/DGO/LFACRM2.DGO": "ebd96b2d472ee85e23f3ba38876994ea624f7e853ef599d3b39722b22f2b008f",
+    "iso_data/jak3/DGO/LFACTORY.DGO": "e024787b0a94e83d094d9db9779d532ef4267bc9086d02ed89dc21b5b1f11dfb",
+    "iso_data/jak3/DGO/LFORM.DGO": "a36e0293174987e4ba1547ed75b650378a09d3d9b881322493a10e1832eb93fe",
+    "iso_data/jak3/DGO/LFORP.DGO": "d8dac4a505fba4232f34e97d6a019d977c4fd696fc86540fadbaaa34ed992c27",
+    "iso_data/jak3/DGO/LFORRING.DGO": "6ba6fc039c83ca631c727b7c6b61c4f2f9ffbbcc7a7c9c2657f33a822ece7a75",
+    "iso_data/jak3/DGO/LFREEOUT.DGO": "291e9cd757d63b19663086df4015cb78eb4e462f1a269b5fab68e55a14c95cb9",
+    "iso_data/jak3/DGO/LGUNNORM.DGO": "bbabe468df2bb6ba0d730818543e4d1b51443fb6027208ba34239ad89225dd9d",
+    "iso_data/jak3/DGO/LGUNRNC.DGO": "ab71d75017f5c8ed7a215ebc8a8eeba96902ba3a6b5210db03c96d9b199d5647",
+    "iso_data/jak3/DGO/LJAK.DGO": "59c2aa2dff8288c6b1eda4c71cd3a72cd853f142509393bb3e00562cbedf8eb0",
+    "iso_data/jak3/DGO/LJAKC.DGO": "a065570ff735bd1eb44818531cc0bb18692fd04c2cb1c5b7c5dd3771d391eeba",
+    "iso_data/jak3/DGO/LJAKCKLV.DGO": "042c29fb20915f789859b77bb8751479c0a07f92dafd92ac74a417b3cb6c8bc7",
+    "iso_data/jak3/DGO/LJAKKLEV.DGO": "75678df96879db9f1db811a3c8ea2ca1852badde839c7b5d5ebc6032d67a7c7d",
+    "iso_data/jak3/DGO/LJAKNDAX.DGO": "a301cb587f5bdb1ca436637e940610ef46acbd7dd64dad505566258a93b990b3",
+    "iso_data/jak3/DGO/LJAKSIG.DGO": "8e18408c458c59bdcc70b6a584e325b64e6e8d28ab2705b7fdaebda7ad0e277b",
+    "iso_data/jak3/DGO/LJINX.DGO": "fa305ed4e3d084ef7b0825d4f97068dd7b4c21d9a5054b418ce91c80a2fc6ca5",
+    "iso_data/jak3/DGO/LJKCDMKL.DGO": "d8fd7d2aeb5148f81ef93486370b0ef59b6d356ae21407ec7277f1ed6312b6e7",
+    "iso_data/jak3/DGO/LJKDMPK.DGO": "aa2535aef52045dce0d132a12695f84aa2043f3e7ed520089c02ca8dbb44365d",
+    "iso_data/jak3/DGO/LJKDXVIN.DGO": "d6d2388c8fac9c5220e03c0743a6f0c8a5484ec876979bd1dc872cad4183890b",
+    "iso_data/jak3/DGO/LJKFEET.DGO": "4cae121e3ccc282662a252c2fe414178a781086d62dcd9e74f67ce76235df63f",
+    "iso_data/jak3/DGO/LJNDKLEV.DGO": "4c793c51f5fd70a98748c45c1f9099b5327919e63419f55fcb6d5d2028b9b248",
+    "iso_data/jak3/DGO/LKEIRA.DGO": "d964db4f9b9cd8a32d3c586b35f2e364a114e5dbef4002090cb8743e48bb6623",
+    "iso_data/jak3/DGO/LKLEEVER.DGO": "a07e7ed0ce93c257a8650e5936338a123e652db8504831aea6e9c05ce15a990c",
+    "iso_data/jak3/DGO/LMECH.DGO": "1c3d98e664199a814fdffaa3e28dc58cfe29a965d5359f3b743b3112d3669ab9",
+    "iso_data/jak3/DGO/LMHCA.DGO": "6eb3815749b7f984be5051bb866960cc9d0eb64d65adaf5250b833bcca8bf2ec",
+    "iso_data/jak3/DGO/LMHCB.DGO": "0268eb6ccd67cc760ea442db66a91ed41f46a303bd313474b710e2966e1edd36",
+    "iso_data/jak3/DGO/LNSTCST.DGO": "eff155d89e8c8700689efb7a51b0076f81b051574541dd6ce25c9aef603e2589",
+    "iso_data/jak3/DGO/LNSTOA.DGO": "5374171f8d9470dc3faa83b86ff77c4a019c7d4dfd3dd0928bc775d17e2cd806",
+    "iso_data/jak3/DGO/LNSTOBB.DGO": "d3d525adef39a301178b9ce3db8278021bff01210b01247747cea41e2593fd1f",
+    "iso_data/jak3/DGO/LNSTOBC.DGO": "9778460ce5d64272778e9fb500c50b094980c484d91891fa45452f1896b31936",
+    "iso_data/jak3/DGO/LONINSIM.DGO": "3ad74266bcec9930c8437a3ce4c53543270978b66a9b137867a90d4a5c234689",
+    "iso_data/jak3/DGO/LOUTRO.DGO": "3929bd339977630f70452a9c9c3e9e99cc68dd7a395fdd456b103f0a7c9b6cdb",
+    "iso_data/jak3/DGO/LOUTRO2.DGO": "99d6b197a3d39f4459e76e2f02df9a2fe3e298731a2a43588b6e862cda982d0b",
+    "iso_data/jak3/DGO/LOUTRO3.DGO": "384bc34d7ea2ee4f129cfc511b83a781a4dcd3bfd47b856900a72990d11fef10",
+    "iso_data/jak3/DGO/LPATK.DGO": "4b1de27da7e4a05f82ecde55626777e358191b338ce130d7c4128aae0ef2699c",
+    "iso_data/jak3/DGO/LPATKCS.DGO": "d700df3bee49efd6d9f62a0bc90b84b08ffaf804ec64fb1dc24b76b89119e2c4",
+    "iso_data/jak3/DGO/LPRECC.DGO": "ac8eeb9a1391169f0d0126f3b2df8ba39e0465413452f2a6cf7f147513129318",
+    "iso_data/jak3/DGO/LPRENME.DGO": "8fd4c0ec329e456076a7b78e320c7907474b873916271d319a5241030fa18d48",
+    "iso_data/jak3/DGO/LPTRL.DGO": "546ddc9217a2e36190ba3ab3a06619e9fdb658e0f68a02584775b23db340de22",
+    "iso_data/jak3/DGO/LSAMOS.DGO": "adbce035afd4bed0a252646daaabff61df7a7d7853bae2a8d298d121849fe304",
+    "iso_data/jak3/DGO/LSEEMWCA.DGO": "887c77f7b0a3d7645f6f9c807da091d6eae7cafa28406f191039fc233235c708",
+    "iso_data/jak3/DGO/LSIG.DGO": "a6cc43a3c04e87272b8e85f19054d85c1eaf4ffab00221f4c48b552af06c3e0e",
+    "iso_data/jak3/DGO/LSIGJAKC.DGO": "9cd27f189200aab55fe3bf5a8f48839395950bef582e96f7a7941a50531b6731",
+    "iso_data/jak3/DGO/LSIGKLV.DGO": "dfc829c5df17d88db3d43e71332c84dc0aa116b43d2abb0b3b21e8173257efdb",
+    "iso_data/jak3/DGO/LSNKWHLS.DGO": "5bfb66f11a9c2a4cced38a898a6326229e50cf6b422ec59deb0fbcd2395499b5",
+    "iso_data/jak3/DGO/LTNFXHIP.DGO": "d7f089324def4f2477ab651a5182594fed4b1abed4d2261bf870cb69dba43eba",
+    "iso_data/jak3/DGO/LTNJXHIP.DGO": "12e89b32efc14b8268096590b8833e8b8c0ccb0aa72783e152f5088c0f983e15",
+    "iso_data/jak3/DGO/LTORN.DGO": "054146975c94eebc96fbdc9b7d10fcba994e529ffb7c240e6193214d77f4b53e",
+    "iso_data/jak3/DGO/LTORNJNX.DGO": "299c67735e4f0ce5a1bb5cb35d86f6405eff2d9f4718ce9cf366a438c73b909d",
+    "iso_data/jak3/DGO/LTORNSAM.DGO": "f20096e79db4d0c8b2f41672987bd2a81b9d030a5ed93146cb86570bb0c89590",
+    "iso_data/jak3/DGO/LTOWA.DGO": "4bf0858ba1e717118a72fec23825c1cf2cf42d59a728795df02c6aea3e0d12e6",
+    "iso_data/jak3/DGO/LTOWB.DGO": "d2c1e0f575a90b09684684b2df78bffa3417f0cc4992ad29b4e43e28a08ee84f",
+    "iso_data/jak3/DGO/LTOWCITY.DGO": "b74353c9a3be49e2a43071aa14bd4ccca80bf33b8932f96b26f1289266d7df01",
+    "iso_data/jak3/DGO/LTRTWHLS.DGO": "5e824a3f2d55c6abce09431048a22cfc44eda56dac2abbb8276d9f3077b8b522",
+    "iso_data/jak3/DGO/LVINCST.DGO": "d3551edb08efecca431da17d8f4635a03dcb39cd7ab095338e8f0950ca13c267",
+    "iso_data/jak3/DGO/LWASBBV.DGO": "756ad742e4a7f5ac2eb757f3f30cba75fe96f718adcf7ce6b04131001cb564a0",
+    "iso_data/jak3/DGO/LWASSIG.DGO": "119933cedd3603370a996e5e465c83da34d936069dce430abda594788c8829fa",
+    "iso_data/jak3/DGO/LWLANDM.DGO": "3c5faf3269fd033fe214bfd63a88dbd85bf18b82cb21d7ce8655ef7c70fde7d4",
+    "iso_data/jak3/DGO/LWSTDPCK.DGO": "75e9b059903630283599033c1691f188fd565083854c56828636b0ccf5595f19",
+    "iso_data/jak3/DGO/MHCA.DGO": "e40130099c12674a5922eca9a014f772379921a4f508edd9e8ca87b1c5e75ea2",
+    "iso_data/jak3/DGO/MHCB.DGO": "013767ddbdfa7c8478df9680d718343e2f8d1d7179d993e2d4a99e5933b31abd",
+    "iso_data/jak3/DGO/MHCTYCST.DGO": "379ff4a5c04691d0dcbe4924a8c0bbb30e357047033eaa334bac37d95b2c64c9",
+    "iso_data/jak3/DGO/MIA.DGO": "1b94469e56f1ca1eeb6c5f8dd1f8775325f06df5879a2d8649fda0612d429059",
+    "iso_data/jak3/DGO/MIB.DGO": "e487bb67e63387a7c44d1b1e8311ac07bce6521e97327971be0a3c6ef0a11dda",
+    "iso_data/jak3/DGO/MIC.DGO": "05b9632af85b965f5a295c2d1cba0245af3da09a0c2cb9d82bc0cf7363d2e4e0",
+    "iso_data/jak3/DGO/MINED.DGO": "e1d1dcc313257139e93f633404334f1c33bf9c0a221c8ed56bc41e3a96deb073",
+    "iso_data/jak3/DGO/MINEE.DGO": "eafb51435e8c8fe5f5bffae691294db5fdec5514e3e999a3429ae065ec091808",
+    "iso_data/jak3/DGO/MUSEUM.DGO": "43c8d74dca77aca56fa6676703f66b11887f960ae174543eac4fab6c9b160ea6",
+    "iso_data/jak3/DGO/MUSEUM2.DGO": "e003e9c7d910a0bf7b045a24ed44c2bdb9aeafaf89ba4b25f2ed45ddd8bcd578",
+    "iso_data/jak3/DGO/MUSEUM3.DGO": "6b0023b0a83b16770d884bd23112a099fe518e606203453485fdc79167f5c28f",
+    "iso_data/jak3/DGO/MUSEUM3B.DGO": "90c4e8e9f6006ca15c255d903e4da6bb1ffac0bd7c764d0ee968ab542a70bfa9",
+    "iso_data/jak3/DGO/MUSEUM4.DGO": "b7085aa0911d6cf032813b0ac7b1e4cbfeb273dc32f6e0cd3ba9b8bb1a7c85bd",
+    "iso_data/jak3/DGO/MUSEUM4B.DGO": "6fcac268954982dce84b920fad1967902dc0020fc6dd31fd49c7e554bc15f827",
+    "iso_data/jak3/DGO/NSA.DGO": "e3fdb7decda3ac381ac0b108e5fa50d04ac1632afa5ae147e40e9fc735b38880",
+    "iso_data/jak3/DGO/NSB.DGO": "c4fa3da9f4e530f6b7b0e989f1cb3e9f80a25fd8e80e7817ad927103681965ca",
+    "iso_data/jak3/DGO/OASISCST.DGO": "fbff2eba0abb5c85085333715b0c8c278b30beaddac2e3a7b934c84eb1eaba4a",
+    "iso_data/jak3/DGO/ONINTENT.DGO": "71dc9e3eefbe7a151cca08cfd05ca340bf3f86f63e5189838421f6c0d2e50e96",
+    "iso_data/jak3/DGO/OUTCAST3.DGO": "86233b2a6c9447dbb716b958e4e818626a026acdef7f58c82fc6403bc0fc2fe5",
+    "iso_data/jak3/DGO/OUTROCST.DGO": "559aae364861a1358baf7219eb41ecb121ef60a79b161795f3d4e52cba0643d0",
+    "iso_data/jak3/DGO/POWERGD.DGO": "1a79673468f71b0918ac029158cf38ea4e9a68a13f08be5ab5a242dfb0d6d01a",
+    "iso_data/jak3/DGO/PRECA.DGO": "142e7ec23c4cf2d9949566ebe97f78bedf5f3b799e8b6193e24e2d1455a065b7",
+    "iso_data/jak3/DGO/PRECB.DGO": "f4018ddca6ed53da3358dedeaa95d44967ab2bbc3c89ee8ca55c6de9494323de",
+    "iso_data/jak3/DGO/PRECC.DGO": "c8de4ca23dddd7d8b6dc857d54c6f91d0d49c83b053713f6bff6670c13d376f6",
+    "iso_data/jak3/DGO/PRECD.DGO": "9d311ff463dd869a0b9eac9c547b8df64d8bc9aee61dd7d2f12ab5c9583fd8e1",
+    "iso_data/jak3/DGO/RAILA.DGO": "c3913423bbf3ff9a2ff42c4934b68a7edf9bf397fbe7017196afd749ff2e084c",
+    "iso_data/jak3/DGO/RAILB.DGO": "5dc2b2cbd87a52c0afb84e665c21689e3c38debf4db92636ef12c06e20d477b6",
+    "iso_data/jak3/DGO/RAILB2.DGO": "266eac1f4a7da0dce9ddcdb44a1d699feb4883f8c7540c1e662efef2a8801772",
+    "iso_data/jak3/DGO/RAILC.DGO": "9bccc0f0350c11cacdfacb514377f65adfb59b014f7e811181276af56feabfb9",
+    "iso_data/jak3/DGO/RAILCST.DGO": "f9158ae39743ddf2a9f6fabafd18371192dc6356652f5f57aac77bbba8018416",
+    "iso_data/jak3/DGO/RAILD.DGO": "c8b19018f847dcafc64f51f57e6ee558d5237604e632c03c3dd27396a5c29b30",
+    "iso_data/jak3/DGO/RAILE.DGO": "bb8ac6b8edb49c5e1d44ac96b553ee806db346b17462d8b93ea0576e55754d67",
+    "iso_data/jak3/DGO/RAILF.DGO": "86b98564e8072336e5ee7fb2c539002910066a88856e83d00be7e9f7bc06a443",
+    "iso_data/jak3/DGO/RAILX.DGO": "7307166f68c1575a8dbb8e3520b588a15131dd22d49f26f844898cbd000f6bff",
+    "iso_data/jak3/DGO/RBCT.DGO": "abc5f0664ae4e8117616e84c35477de6be4d8edaa1961a6f4934d6fb472d8dd1",
+    "iso_data/jak3/DGO/RUBA.DGO": "6c0a0ed2c8ba072eec601d79e7d679a0244511f1f09582e4cdbae2e1b1719f1f",
+    "iso_data/jak3/DGO/RUBA2.DGO": "5d2dc869a1921a7b301f846c3b461abedfbd37989042aaf90553ba057bb55950",
+    "iso_data/jak3/DGO/RUBB.DGO": "ae69462f273a850cfe6747e8674bbbacd6ed1d24bf498653e220c45ff91a8eef",
+    "iso_data/jak3/DGO/RUBC.DGO": "2b4abb31f87a4e0f9474227cd04fff891687fc7fef7fbfbf3198fa284375560d",
+    "iso_data/jak3/DGO/SEA.DGO": "f7c831a1af6a3b814a614d24fff62f72070dc58d6ae3d1113e5a3404e59dd9b3",
+    "iso_data/jak3/DGO/SEB.DGO": "f3cb1ed7aa518d106321095be20157d669538ba0eec0b5117ca894913484e3f3",
+    "iso_data/jak3/DGO/SEC.DGO": "8acb1ff5295d0c0551928e90b2d35b9aacca0a47aa5a134ec8e2992949de7cc5",
+    "iso_data/jak3/DGO/SED.DGO": "6cc701f67786ab012041125024a0b264ee8fd9a5a550e0e1a060cd08de282a77",
+    "iso_data/jak3/DGO/SEE.DGO": "b8e91676bacffc91a5a7567a2769b784cf4cb997ce6a8585fe95b967f1bd6c16",
+    "iso_data/jak3/DGO/SEF.DGO": "4817f8f57f2bcd0f10fe5bb3620b356a60e2822af76665c0cdb3682ba500065e",
+    "iso_data/jak3/DGO/SEG.DGO": "fe2bbb597d9c36525e70b304c88afc97f3958f1da0c0130ad14f0eccd7da9b06",
+    "iso_data/jak3/DGO/SEH.DGO": "d5dc6cfb2aa09e0d1786a3d98a17a13bd366fe6c1359c254ca14ac49301a6502",
+    "iso_data/jak3/DGO/SEI.DGO": "07796c4a40e1fc9604dc33e123c9eb317747349e299551055e5874c452e4b8ae",
+    "iso_data/jak3/DGO/SEJ.DGO": "98b04e1858809f75e82e4309bf7cfd9dd4351fb9efcb36e154778bbb53e4db3a",
+    "iso_data/jak3/DGO/SEK.DGO": "0ef67e64c3983ffc3cfa666d4a1ff9ba2b2f334b2f5cb664fbb999542a24a01a",
+    "iso_data/jak3/DGO/SEL.DGO": "dd4067f9a2e22bd0a825b9d6a82165eb99b56138fc9b80e8b4f84443494d8724",
+    "iso_data/jak3/DGO/SEM.DGO": "fd83be73433530f6951bb5c4cad0fc3f7be1743ea348432d553f936a5182eef4",
+    "iso_data/jak3/DGO/SEN.DGO": "b6341694d77c3eb4802c8c51270ed3d74915f7a2eeec3c7cdd57a373ac4f4976",
+    "iso_data/jak3/DGO/SEO.DGO": "b785fd118e31cca0cc3517816022737df81bf2ee0c0f7b130c8c961c93615404",
+    "iso_data/jak3/DGO/SLUMBSET.DGO": "ab4701573137ed12bb3b98497a264b5d911d79b39330a7fc80a41500442f905e",
+    "iso_data/jak3/DGO/STA.DGO": "ba4fe95c4bae3090f2fdb419ba1315f38c1cf4a2fba4920b9929405ebc669ff4",
+    "iso_data/jak3/DGO/STAA.DGO": "694599c9251d2df28803a0d3deeaeea8acbbb75b60ea72688e94e8ca197830cc",
+    "iso_data/jak3/DGO/STB.DGO": "590f334241e8ca5a4bed635480f27bf5829413ea1548e724076979666dba64ca",
+    "iso_data/jak3/DGO/TEMA.DGO": "669784074de9a533fecc4f977a5427a8844c940dc947c89209d43856ba9b1f52",
+    "iso_data/jak3/DGO/TEMB.DGO": "b9a2c6aff8f88f1ec20b63a7eed5b55ca5e2a7517b7b6a24421d6687d3823a39",
+    "iso_data/jak3/DGO/TEMC.DGO": "31639271cff7e40d4f12053b0b78afd9fdf63161473f9aa7d295167523f3c170",
+    "iso_data/jak3/DGO/TEMD.DGO": "8be223d4387ad915a0ae098ab2150c3ca5c7b5b4e58cd261b7dfcae255ef8314",
+    "iso_data/jak3/DGO/TEMP.DGO": "6f6bb35c6518b4872acbca596f147ccb4ce676662307dbce8aa67376ac3f2be5",
+    "iso_data/jak3/DGO/TEMPLEE.DGO": "ef471829f01d4195ca8903b51671c11567e309104fb550b2ce199cf416d7bd2d",
+    "iso_data/jak3/DGO/TEMX.DGO": "4708437437cd8679f03212cf1cbc3a8125b6ea0ad8c2382c9e472577cf93b371",
+    "iso_data/jak3/DGO/TITLE.DGO": "898e8eef1fefc3947a86783011cd6e953c49ea552db6a8415248f775f3d599de",
+    "iso_data/jak3/DGO/TOWB.DGO": "3c0a83cf5de4241313c66d4cdf5b00c8ddaf6e17627f4fd6f46a8599bc5515c7",
+    "iso_data/jak3/DGO/TOWERA.DGO": "dd0013c8f1b9c6c1d0b65b38d743b658b99c86e66a59625cf1ab0bd028df2afc",
+    "iso_data/jak3/DGO/TOWERC.DGO": "21aa1ce3d14543aa2cd6ce608e409bb766cbb02ab25a7c130751666d654af9f9",
+    "iso_data/jak3/DGO/TOWERCST.DGO": "74d279cdd8ba05f9d4d948e6575f39c2c0b9e4e6a9981aeb86f8794b8eaa38cd",
+    "iso_data/jak3/DGO/VIN.DGO": "aaebe6a4f1b0aaf6a86872f31b0d60c56adadba131a45b9804f06fa4d4de5b60",
+    "iso_data/jak3/DGO/VOCA.DGO": "32c94fbe69ea6112cc107228773723f40b286a4c16649bab6b30ce947fee77dc",
+    "iso_data/jak3/DGO/VOCX.DGO": "a72cdb6fa38283f0e3152be71c96e2a03b3d41e5de2e82a3e21c32ea40061c37",
+    "iso_data/jak3/DGO/WARPCAST.DGO": "df0fc608cf659df24de64f3878febf933fadf7c38bb8d5c877a51b4e9ab9a801",
+    "iso_data/jak3/DGO/WASALL.DGO": "099b3ac38f333344ebe6846cc2327ab3e2b072d191cd5a460d1ed36ee9d78c61",
+    "iso_data/jak3/DGO/WASCAST.DGO": "b75366591f61d646fa4944b205018c0a73a89d64e99b5e00913c5d698efd573f",
+    "iso_data/jak3/DGO/WASCHASE.DGO": "da7373dae374f65474d83f50f45863b821f6413f9ffea78f6f257f7a18f14aaa",
+    "iso_data/jak3/DGO/WASDEFEN.DGO": "82a39bd050b586406f92dbcc33cfa19bc85b572d8187a85c53b2e18935f282a1",
+    "iso_data/jak3/DGO/WASLEAPR.DGO": "1f812a33628ab06b74ce77584162eeb0f13d6ef7cac31b494a3ade561b3457f0",
+    "iso_data/jak3/DGO/WASPALA.DGO": "f57ddbc37b07faa3e180413d31452e36a5bbdf8b5343dc5854c0c2dccabf0102",
+    "iso_data/jak3/DGO/WASPGAME.DGO": "a676e82f577e71114be3af94685a276aa25a4a92473e03cec238e8b1555aa070",
+    "iso_data/jak3/DGO/WASSEEM.DGO": "45427a968de8832ca6e67d6e7c8e154baef13472432d682c268049f6219f29c1",
+    "iso_data/jak3/DGO/WASSTADA.DGO": "790c25f62d449d6fd1e0b280fa451a6ce013951f7140426156c8492e7c32c1a3",
+    "iso_data/jak3/DGO/WASSTADB.DGO": "814098e461603769daf1152ac7f71cf633f8008ec8966f477268bcbce4d2b5f1",
+    "iso_data/jak3/DGO/WASSTADC.DGO": "dba7919ac6e3f8d821797f6c138f909712f8f4c4bf60bd0295e26e44a2a324d1",
+    "iso_data/jak3/DGO/WCA.DGO": "832a1cbd4f1dc3ac4996bb56ae6b06a805054dbe3535b5c1038fd3a05b405c63",
+    "iso_data/jak3/DGO/WCASEEM.DGO": "304de9584135469e9fad59e4c44dea49bfdb245d65698cf9d6c03957396023e5",
+    "iso_data/jak3/DGO/WCB.DGO": "1ab88b55b7fa54975905da5a965eba5dd37d695e7b7f1e0471d2aa6352b3250c",
+    "iso_data/jak3/DGO/WIN.DGO": "22f7d0625332586352cc7413bc050acbbc02dc45335609dd55497ef5675def20",
+    "iso_data/jak3/DGO/WSD.DGO": "4e3156059b88feab223dcf874a9fe31c8599dca29d321c7f7eaa52d6abd7d66d",
+    "iso_data/jak3/DGO/WWD.DGO": "7aafb447a5ab08e315f831f58ab1b84d3e9e2b466286652ba681ac12637f4c35",
+    "decompiler_out/jak3/raw_obj/ashelin-ag.go": "111ae7aae54df1bf35085101c6f7fef7854d03c8ca482d30872e45886a6943f9",
+    "decompiler_out/jak3/raw_obj/ashelin-highres-ag.go": "24012a534118f5d52aafb0f4bc6059c88407de09b8418a64075c8228a16bb55c",
+    "decompiler_out/jak3/raw_obj/bt-sig-ag.go": "434d7300ae30d40aad9d3cda941adc4aae07dc506be1a12ae5dae5eabd77ec4a",
+    "decompiler_out/jak3/raw_obj/crimson-guard-ag.go": "b424e39e7e4ccbb7a1bd263156e3010f1acc97ff19343969bcf365bdb3db5b31",
+    "decompiler_out/jak3/raw_obj/crimson-guard-highres-ag.go": "9e77abd6034ad87dd98829bf189dfdb7f2e89bfe6303eca745418f83a526b4f9",
+    "decompiler_out/jak3/raw_obj/jinx-ag.go": "4fcf3cf0588f0c2a842cb771de05230e9b70644cfa8940d8b4262a2772932e2a",
+    "decompiler_out/jak3/raw_obj/jinx-highres-ag.go": "5bc5b8a7d8a674660ae7105bd8f5fa56920f5599ab673d81ec62f63d5c4d6dd5",
+    "decompiler_out/jak3/raw_obj/king-highres-ag.go": "5a687ab013b8d7b523c35ac5be6e7259f45fb9f7ff502ebe8d78e3388712c702",
+    "decompiler_out/jak3/raw_obj/king-rider-ag.go": "07d334078750dfff0c2a0fc03a7a16352e9b70efaecf697cfb0e85fba794dcf5",
+    "decompiler_out/jak3/raw_obj/sig-highres-ag.go": "ca37ac9768c21b69493f9095793802d70d25bd2929f72dce92fe470e820534d8",
+    "decompiler_out/jak3/raw_obj/sig-rider-ag.go": "8a1fbc70f499b004cd83c2aee75ac483b10b8f6d7cfd811e596740bd2b2fd972",
+    "iso_data/jak3/STR/PRMINIMA.STR": "49a487f658629f34cc72e06fa66d5b27fbeb1651b961bf52611bfa16079794b7",
+    "iso_data/jak3/buildinfo.json": "03eb33084031e186b24d0e1d15d9a0187a693fcae36c7505efa9965600f237fa",
+    "out/jak3/iso/LPATK.DGO": "ef6f7303ce81236812a7960097c765dbd3675b517f7a77729bc11a6371a803f3",
+    "decompiler_out/jak3/raw_obj/kleever-rider-ag.go": "bf3bf83bd1ecf44fb460d09bbce3c2442ea8d1691bc309e1a43f0fc38930ddb6",
+    "decompiler_out/jak3/raw_obj/torn-highres-ag.go": "92b48add1d5038158630e5179fecec87bbe7d3a4b5ce4c71bcb566f2a78daf38",
+    "decompiler_out/jak3/raw_obj/bt-torn-ag.go": "ef7a01f56f90610b7ee452299be11c438a1e088ff1d9924938f0b212eb89800b",
+    "decompiler_out/jak3/raw_obj/errol-lowres-ag.go": "325836fe1d85351ebf4d6e1d903560fefa03b8227e655dc120217f54c5ded712",
+    "decompiler_out/jak3/raw_obj/errol-ag.go": "c1e2e3d9501f5b4e4611f0a4e9af34d59f534b82ba1567eba1aa7a06ec6e6260",
+    "decompiler_out/jak3/raw_obj/kleever-highres-ag.go": "dab7e678def9d9b2688376cfa409dacc2e0282606d4875175ec79ddfd2817e55"
+  },
+  "source": {
+    "goal_src/jak3/engine/gfx/foreground/foreground.gc": "75c8e3345ba76d447e33ef8cfd1d09222d8e874e1794c5258a8778ef73a3ebc4",
+    "goal_src/jak3/engine/gfx/texture/texture-anim.gc": "952cdae333ca0cb60c9d1960ed2b393e5410f3dd8213a3409e4f1e84798324fc",
+    "goal_src/jak3/levels/stadium/king-rider.gc": "5ee394e18a70cf7b4aa5487d88c9f97b7f35402b68bf1f8b606b2cd75d647e5a",
+    "game/graphics/opengl_renderer/shaders/merc2.vert": "cd5f5e182bccf0b8a4d084e0843a49d7452e20d8cdee2a2ec793188bf3277d32"
+  },
+  "sourceTrees": {
+    "goal_src": {
+      "files": 4050,
+      "sha256": "fd605b6d4e8b6d789eb363769df8491f8a2fb1f8737cb1f37c2cd63dc88ca476"
+    },
+    "decompiler": {
+      "files": 83,
+      "sha256": "74d4f8ae46de5be70f7e5a67b162f849558f44cba919812dde3ef4fc49cbbc98"
+    },
+    "game": {
+      "files": 358,
+      "sha256": "6fa623babf949890351c2de732e912e185e6cdcb9df13c460f09763efa970ede"
+    }
+  },
+  "fr3Inputs": {
+    "out/jak3/fr3/GAME.fr3": {
+      "firstModel": "collectables-bomb-blast-lod0",
+      "sha256": "4c6f064dfeb0918b72f91a1d9d73c692ca78c47517d2358ec21114185ecd739d"
+    },
+    "out/jak3/fr3/waspala.fr3": {
+      "firstModel": "daxter-highres-lod0",
+      "sha256": "d94899dec03b57bb478b375ee38f76fed1c0cc6a242a79e199ff1f77b5663fa3"
+    },
+    "out/jak3/fr3/lsigklv.fr3": {
+      "firstModel": "kleever-highres-lod0",
+      "sha256": "781d77a26949779f860c3beca3f0d0ab2cfd008f5ab25a1020dde79eaaaa14a2"
+    },
+    "out/jak3/fr3/rublcst.fr3": {
+      "firstModel": "daxter-highres-lod0",
+      "sha256": "fe4a46f025fb4e54b86ff07a2f29e1fb486634579495db36a67a63b84b4cc4e7"
+    },
+    "out/jak3/fr3/museum2.fr3": {
+      "firstModel": "errol-lod0",
+      "sha256": "943d9dc855e64da60c968064227406496f2ce82771e9c1478845d56fb6cef40f"
+    },
+    "out/jak3/fr3/ltnjxhip.fr3": {
+      "firstModel": "torn-highres-lod0",
+      "sha256": "3706bd071a9fa16f7fa0002663d0f1c3066b52d0273550b54c9bbedc1ce363bf"
+    },
+    "out/jak3/fr3/lsigjakc.fr3": {
+      "firstModel": "jakc-highres-lod0",
+      "sha256": "7682e3ac05ab6e9b6e9e6a3f715ec5d476a2586937a8395acede2bf155cff6b1"
+    },
+    "out/jak3/fr3/deshunt.fr3": {
+      "firstModel": "sig-highres-lod0",
+      "sha256": "bf59aa826f9d7dfe0d25d6a8013c041b4ca012836ccfcc8274ba587536f86f0d"
+    },
+    "out/jak3/fr3/ljaksig.fr3": {
+      "firstModel": "sig-highres-lod0",
+      "sha256": "1c725da1cbab324b8c53d2794b35ed0f081ba93b1b298b6e7d00b78b9838eb55"
+    },
+    "out/jak3/fr3/desbcst.fr3": {
+      "firstModel": "daxter-highres-lod0",
+      "sha256": "b75893d4068fb6f489eef97d599856100385f50ae313fa8b4667a50da7aeb72d"
+    },
+    "out/jak3/fr3/ldmpckgn.fr3": {
+      "firstModel": "pecker-highres-lod0",
+      "sha256": "32e575e01681a632a7fd7a2fe47724319e7563ccf60bb128ce5239b7990b3182"
+    },
+    "out/jak3/fr3/desoasis.fr3": {
+      "firstModel": "ashelin-highres-lod0",
+      "sha256": "59223b530847ce91d213e4e6fa3aac24c9f537b5bc3e84cae7dd29646ddad723"
+    },
+    "out/jak3/fr3/lsig.fr3": {
+      "firstModel": "sig-highres-lod0",
+      "sha256": "ad77bf7bf1d30edd33e4671355d5718bbd86ba29aed58e64481defb01d8735a3"
+    },
+    "out/jak3/fr3/ltowerb.fr3": {
+      "firstModel": "errol-lod0",
+      "sha256": "73df5b51580534e553a83510e08ed90b73f09884fcf4c43d260b0caf175287a0"
+    },
+    "out/jak3/fr3/wascast.fr3": {
+      "firstModel": "daxter-highres-lod0",
+      "sha256": "1989dd393fd2b552647b94cf9c24e73387dafae0e6c409f9ca71c473658608d0"
+    },
+    "out/jak3/fr3/ljkdmpk.fr3": {
+      "firstModel": "pecker-highres-lod0",
+      "sha256": "9f41bfcfa055a641eafc92b00a61af1f8b09c18bdde2e9950ecb97332a20bcaa"
+    },
+    "out/jak3/fr3/lashelin.fr3": {
+      "firstModel": "ashelin-highres-lod0",
+      "sha256": "e6d227461849feb2f85a646086361cd3c4db727a63c3b0ef289f31ca9a48013e"
+    },
+    "out/jak3/fr3/freecast.fr3": {
+      "firstModel": "pecker-highres-lod0",
+      "sha256": "1181b64afe9f6a32cbe233cef79c3cfb6d757cb1e618ca461c64acd2f28d3d39"
+    },
+    "out/jak3/fr3/ctypesa.fr3": {
+      "firstModel": "crimson-guard-lod0",
+      "sha256": "bc5a5305658dd521dc6fd6a68b146a784f4a713aef96ff1ee838303b58a11dab"
+    },
+    "out/jak3/fr3/museum.fr3": {
+      "firstModel": "kleever-highres-lod0",
+      "sha256": "191cc011877fd61c3650adce6f9ee63d96810d4b149785904efe4dd8ed96c1bc"
+    },
+    "out/jak3/fr3/oasiscst.fr3": {
+      "firstModel": "daxter-highres-lod0",
+      "sha256": "aff5fb8701c4832618045ad02897a6f2c7f11f8291e81d610f1d58fea2e666d9"
+    },
+    "out/jak3/fr3/loutro2.fr3": {
+      "firstModel": "ottsel-daxpants-lod0",
+      "sha256": "798c087faa2c57c03a56055af9dc730041877e1237c98b63d338adf3b8939f38"
+    },
+    "out/jak3/fr3/lpattack.fr3": {
+      "firstModel": "dp-bipedal-lod0",
+      "sha256": "813e3e118056e0ee00a54e73379e422d1554672a5430e95d3d41053351ee5b7f"
+    },
+    "out/jak3/fr3/ldamklev.fr3": {
+      "firstModel": "kleever-highres-lod0",
+      "sha256": "44f711d8e2060f31d66ec1521b657a983ef48d043534d05081cee6749927ca42"
+    },
+    "out/jak3/fr3/lnstcst.fr3": {
+      "firstModel": "daxter-highres-lod0",
+      "sha256": "648747310d412a28f4ed0c62d4c73ec7838949c7dd887cb64933795528e16aef"
+    },
+    "out/jak3/fr3/towercst.fr3": {
+      "firstModel": "daxter-highres-lod0",
+      "sha256": "8d6a93131be0ad369565171514e63d42cbd67384ece4aaf75e53b9e51fe209eb"
+    },
+    "out/jak3/fr3/ldampeck.fr3": {
+      "firstModel": "pecker-highres-lod0",
+      "sha256": "c49d39d8e13127f1182c741535f689476616bf6f755334d5df5b0e0f7a98e78c"
+    },
+    "out/jak3/fr3/forestb.fr3": {
+      "firstModel": "crimson-guard-lod0",
+      "sha256": "333ac53adc841d3fff9a4c0251ab4098c6fba76a59d635af5dae48298d0ef952"
+    },
+    "out/jak3/fr3/desertb.fr3": {
+      "firstModel": "wascity-airlock-lod0",
+      "sha256": "c88437762d1ee7fce203b8790724ca385cdb7e35b571b5fd580cf8a4db981beb"
+    },
+    "out/jak3/fr3/outrocst.fr3": {
+      "firstModel": "kleever-highres-lod0",
+      "sha256": "7bc0f2fa2ab823180c0898df4bfdeec08d0e8fd3ec7f1d3df04d871c671662cb"
+    },
+    "out/jak3/fr3/arenacst.fr3": {
+      "firstModel": "daxter-highres-lod0",
+      "sha256": "42d115d8fe98c2840a96c77632a9d92268b19b8f3a8aefdf23143ecc048d2a9c"
+    },
+    "out/jak3/fr3/ljkcdmkl.fr3": {
+      "firstModel": "kleever-highres-lod0",
+      "sha256": "e182e7dc2ed65fde0a56b8677a4c7b234db3ff8a657284b7547a9bb5b6bd01fe"
+    },
+    "out/jak3/fr3/lwassig.fr3": {
+      "firstModel": "sig-rider-lod0",
+      "sha256": "e432f96b951c1439d2aa744518f73ba952052ecc925cd687e268191ba967f5a5"
+    },
+    "out/jak3/fr3/introcst.fr3": {
+      "firstModel": "daxter-highres-lod0",
+      "sha256": "a01d443b8b48f8530ddd914ceb2c310ab513b1e585baf16cccb64284421a7756"
+    },
+    "out/jak3/fr3/ctyport.fr3": {
+      "firstModel": "com-airlock-outer-lod0",
+      "sha256": "b4574b7d3340377c81c6e55220668c678c30cf24e68c327ed70e32e523c54352"
+    },
+    "out/jak3/fr3/lblowcst.fr3": {
+      "firstModel": "bt-torn-lod0",
+      "sha256": "620fbbe9c609e017e82f98b928d509dcc8c6aada063bb6cb8da5de1754c0cccb"
+    },
+    "out/jak3/fr3/ltornjnx.fr3": {
+      "firstModel": "torn-highres-lod0",
+      "sha256": "45f41e49b60a12a640c8d359798180a748243730a837c01206ccf9a5705bbe1d"
+    },
+    "out/jak3/fr3/ldamsig.fr3": {
+      "firstModel": "sig-highres-lod0",
+      "sha256": "a98adae8d39f2966dc5d7cc6bdb815e659e46db59bdb699df8ef461ed585399a"
+    },
+    "out/jak3/fr3/ljinx.fr3": {
+      "firstModel": "jinx-lod0",
+      "sha256": "343f7924f708d4a0597d21b51ecc739edec7820c206b736d303426172ae286bd"
+    },
+    "out/jak3/fr3/gridcst.fr3": {
+      "firstModel": "daxter-highres-lod0",
+      "sha256": "7710126d4281098e5bbe040d3685b43fe9213041f709dc2cac1934d4c0b1f042"
+    },
+    "out/jak3/fr3/ldesgcst.fr3": {
+      "firstModel": "daxter-highres-lod0",
+      "sha256": "83c34d36aef6a8ee3f13c316fc9797e7ff5f905ad3ae2f6d4df61b2c9a2a77bb"
+    },
+    "out/jak3/fr3/rubblea.fr3": {
+      "firstModel": "daxter-highres-lod0",
+      "sha256": "881263077f4f3e148b453e7f9af09c7b59ffee617a673d412fce7e806da5cb2f"
+    },
+    "out/jak3/fr3/ldampksm.fr3": {
+      "firstModel": "pecker-highres-lod0",
+      "sha256": "51ea96833875be713249d05d8dfa21829a97978981d7c9bf1d044a73c7c8022a"
+    },
+    "out/jak3/fr3/desliz.fr3": {
+      "firstModel": "daxter-highres-lod0",
+      "sha256": "4d750500f01b1117a1e8f85927fcb43948f08d32eceb3c60592e1014511a4041"
+    },
+    "out/jak3/fr3/destrack.fr3": {
+      "firstModel": "daxter-highres-lod0",
+      "sha256": "42558ffeab719881713aca88fd53025a187d2de999d60d6bdb80613ee30da744"
+    },
+    "out/jak3/fr3/citycast.fr3": {
+      "firstModel": "daxter-highres-lod0",
+      "sha256": "7d6c3ec8f8dc3d61488495afc1ab9303851aa2a33f58fc369340dd6a5ec092f2"
+    },
+    "out/jak3/fr3/desboss2.fr3": {
+      "firstModel": "daxter-highres-lod0",
+      "sha256": "5b5a68e967ce1921d1231077b380f8ec343f023e49e5a1a84d54a13981af88f4"
+    },
+    "out/jak3/fr3/factoryd.fr3": {
+      "firstModel": "kg-grunt-lod0",
+      "sha256": "21ab329390541494e41c70f6570627615d85fd4b62d6b06e47493357ad967081"
+    },
+    "out/jak3/fr3/ltorn.fr3": {
+      "firstModel": "torn-highres-lod0",
+      "sha256": "41906964e89caf289a304ddf5dd538ec349e3293f365df2806f4ce85aef95792"
+    },
+    "out/jak3/fr3/mhctycst.fr3": {
+      "firstModel": "daxter-highres-lod0",
+      "sha256": "c8ec77460b432c6e65190358feaeeabe44e09e2258ba6e6f73b2a7833cb47b78"
+    }
+  },
+  "payloadPaths": [
+    "data/out/jak3/fr3/GAME.fr3",
+    "data/out/jak3/iso/GAME.CGO",
+    "data/out/jak3/fr3/ctypesa.fr3",
+    "data/out/jak3/fr3/desoasis.fr3",
+    "data/out/jak3/fr3/forestb.fr3",
+    "data/out/jak3/fr3/lblowcst.fr3",
+    "data/out/jak3/fr3/ljinx.fr3",
+    "data/out/jak3/fr3/lpattack.fr3",
+    "data/out/jak3/fr3/lwassig.fr3",
+    "data/out/jak3/fr3/ctyport.fr3",
+    "data/out/jak3/fr3/desertb.fr3",
+    "data/out/jak3/iso/LPATK.DGO",
+    "data/game/graphics/opengl_renderer/shaders/merc2.vert",
+    "data/out/jak3/fr3/desboss2.fr3",
+    "data/out/jak3/fr3/factoryd.fr3",
+    "data/out/jak3/fr3/destrack.fr3"
+  ],
+  "regionalProfiles": {
+    "SCUS-97330": {
+      "elfHash": 4975852519304227343,
+      "inputs": {
+        "iso_data/jak3/CGO/GAME.CGO": "c51aa1224e658a0451f70566201d8ad2271e65ad3355c759cda40d8fe99b367f",
+        "out/jak3/iso/GAME.CGO": "10f3f207becff76b382fa3533c1cfe3c7a49e041d291968aec8e61480805cfb2",
+        "iso_data/jak3/CGO/ENGINE.CGO": "4f36cac313a15601ced0f9fe46f5ecb537a5f7c8a8696dfece6aa069dfefd695",
+        "iso_data/jak3/DGO/SEA.DGO": "3f7546c85c0c7bd7ff92503537e8a369ba86a2c0e838717d8da0486f1b24880f",
+        "iso_data/jak3/DGO/TITLE.DGO": "a227256486c2e56cce4a4245f8b7a2e405da38eea29b402c5f084c9d9be9bba9",
+        "iso_data/jak3/DGO/WASALL.DGO": "8579d6597c8ce1d379fbabfb5c51df10a8d16da78472b8b4fea7d6d4a00ee0b7",
+        "iso_data/jak3/buildinfo.json": "ab94f7e920ee133bac5a87160683377ee05c3319dd9789d1034189ae227b8fab"
+      },
+      "fr3Inputs": {},
+      "defaultTerritory": 0
+    }
+  },
+  "defaultTerritory": 1
+}

@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "game": "jak3",
+  "displayName": "Jak 3: The Cinematic Legacy",
+  "description": "Cinematic character models in Jak 3 gameplay",
+  "repository": "JacopoBassan/the-cinematic-legacy-jak3",
+  "version": "0.3.0-rc.1",
+  "openGoalVersion": "v0.3.9"
+}

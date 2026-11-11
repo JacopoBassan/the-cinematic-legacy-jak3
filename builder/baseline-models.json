@@ -1,0 +1,207 @@
+{
+  "collectables-bomb-blast-lod0": [
+    {
+      "file": "GAME.fr3"
+    }
+  ],
+  "collectables-health-lod0": [
+    {
+      "file": "GAME.fr3"
+    }
+  ],
+  "collectables-gem-lod0": [
+    {
+      "file": "GAME.fr3"
+    }
+  ],
+  "collectables-gem-lod1": [
+    {
+      "file": "GAME.fr3"
+    }
+  ],
+  "collectables-generic-blast-lod0": [
+    {
+      "file": "GAME.fr3"
+    }
+  ],
+  "collectables-generic-ripples-lod0": [
+    {
+      "file": "GAME.fr3"
+    }
+  ],
+  "collectables-skill-lod0": [
+    {
+      "file": "GAME.fr3"
+    }
+  ],
+  "collectables-skill-lod1": [
+    {
+      "file": "GAME.fr3"
+    }
+  ],
+  "collectables-skill-lod2": [
+    {
+      "file": "GAME.fr3"
+    }
+  ],
+  "collectables-warp-time-lod0": [
+    {
+      "file": "GAME.fr3"
+    }
+  ],
+  "crate-krimson-lod0": [
+    {
+      "file": "GAME.fr3"
+    }
+  ],
+  "crate-krimson-lod1": [
+    {
+      "file": "GAME.fr3"
+    }
+  ],
+  "talk-box-lod0": [
+    {
+      "file": "GAME.fr3"
+    }
+  ],
+  "scenecamera-lod0": [
+    {
+      "file": "GAME.fr3"
+    }
+  ],
+  "hud-ring-lod0": [
+    {
+      "file": "GAME.fr3"
+    }
+  ],
+  "hud-ring-part-lod0": [
+    {
+      "file": "GAME.fr3"
+    }
+  ],
+  "jakb-lod0": [
+    {
+      "file": "GAME.fr3"
+    }
+  ],
+  "daxter-lod0": [
+    {
+      "file": "GAME.fr3"
+    }
+  ],
+  "board-lod0": [
+    {
+      "file": "GAME.fr3"
+    }
+  ],
+  "gun-ammo-yellow-lod0": [
+    {
+      "file": "GAME.fr3"
+    }
+  ],
+  "gun-ammo-red-lod0": [
+    {
+      "file": "GAME.fr3"
+    }
+  ],
+  "gun-ammo-blue-lod0": [
+    {
+      "file": "GAME.fr3"
+    }
+  ],
+  "gun-ammo-dark-lod0": [
+    {
+      "file": "GAME.fr3"
+    }
+  ],
+  "gun-lod0": [
+    {
+      "file": "GAME.fr3"
+    }
+  ],
+  "gun-red-cone-lod0": [
+    {
+      "file": "GAME.fr3"
+    }
+  ],
+  "gun-red-burst-lod0": [
+    {
+      "file": "GAME.fr3"
+    }
+  ],
+  "gun-saucer-lod0": [
+    {
+      "file": "GAME.fr3"
+    }
+  ],
+  "gun-grenade-lod0": [
+    {
+      "file": "GAME.fr3"
+    }
+  ],
+  "gun-grenade-lod1": [
+    {
+      "file": "GAME.fr3"
+    }
+  ],
+  "gun-red-sphere-lod0": [
+    {
+      "file": "GAME.fr3"
+    }
+  ],
+  "gun-nuke-sphere-lod0": [
+    {
+      "file": "GAME.fr3"
+    }
+  ],
+  "gun-nuke-lod0": [
+    {
+      "file": "GAME.fr3"
+    }
+  ],
+  "gun-suck-lod0": [
+    {
+      "file": "GAME.fr3"
+    }
+  ],
+  "gun-dark-2-ring-lod0": [
+    {
+      "file": "GAME.fr3"
+    }
+  ],
+  "blocking-plane-lod0": [
+    {
+      "file": "GAME.fr3"
+    }
+  ],
+  "com-rod-of-god-lod0": [
+    {
+      "file": "GAME.fr3"
+    }
+  ],
+  "jakb-wings-wings-lod0": [
+    {
+      "file": "GAME.fr3"
+    }
+  ],
+  "jakb-shield-shield-lod0": [
+    {
+      "file": "GAME.fr3"
+    }
+  ],
+  "jakb-normal-lod0": [
+    {
+      "file": "GAME.fr3"
+    }
+  ],
+  "jakb-old-lod0": [
+    {
+      "file": "GAME.fr3"
+    }
+  ],
+  "jakb-c-lod0": [
+    {
+      "file": "GAME.fr3"
+    }
+  ]
+}

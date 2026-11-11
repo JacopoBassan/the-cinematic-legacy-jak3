@@ -1,0 +1,21 @@
+name: Cut Mod Release ⭐
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Committed mod version, without v
+        required: true
+        default: 0.3.0-rc.1
+        type: string
+permissions:
+  contents: write
+concurrency:
+  group: mod-release
+  cancel-in-progress: false
+jobs:
+  cut_mod_release:
+    name: Cut Mod Release
+    uses: ./.github/workflows/mod-release-pipeline.yml
+    with:
+      version: ${{ inputs.version }}
+    secrets: inherit

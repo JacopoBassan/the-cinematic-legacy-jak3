@@ -1,0 +1,108 @@
+name: Mod Release Pipeline
+on:
+  workflow_call:
+    inputs:
+      version:
+        description: Committed mod version
+        required: true
+        type: string
+permissions:
+  contents: write
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          sparse-checkout: |
+            .github
+            builder
+            tools
+            tests
+            docs
+            artwork
+      - uses: actions/setup-python@v7.1.0
+        with:
+          python-version: '3.11'
+      - run: python -m pip install -r builder/requirements.txt
+      - run: python tools/verify_mod_repository.py
+      - run: python tools/run_tests.py
+  installers:
+    needs: verify
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: windows-x64
+            runner: windows-latest
+          - platform: macos-arm64
+            runner: macos-15
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          sparse-checkout: |
+            .github
+            builder
+            tools
+            tests
+            docs
+            artwork
+      - uses: actions/setup-python@v7.1.0
+        with:
+          python-version: '3.11'
+      - name: Package pinned native installer
+        run: python tools/build_mod_installer.py --platform ${{ matrix.platform }} --output dist/input
+      - uses: actions/upload-artifact@v7.0.2
+        with:
+          name: installer-${{ matrix.platform }}
+          path: dist/input/*
+          retention-days: 7
+  release:
+    needs: installers
+    runs-on: ubuntu-latest
+    env:
+      VERSION: ${{ inputs.version }}
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          sparse-checkout: |
+            .github
+            builder
+            tools
+            tests
+            docs
+            artwork
+      - uses: actions/setup-python@v7.1.0
+        with:
+          python-version: '3.11'
+      - uses: actions/download-artifact@v8.0.2
+        with:
+          pattern: installer-*
+          path: dist/input
+          merge-multiple: true
+      - name: Prepare standard mod assets and template metadata
+        run: python tools/prepare_mod_release.py --input dist/input --output dist/release --version "$VERSION"
+      - name: Create a draft for final review
+        shell: bash
+        run: |
+          set -euo pipefail
+          extra=()
+          if [[ "$VERSION" == *-* ]]; then extra+=(--prerelease); fi
+          tag="v$VERSION"
+          if gh release view "$tag" --json isDraft > "$RUNNER_TEMP/mod-release-state.json"; then
+            if [[ "$(jq -r '.isDraft' "$RUNNER_TEMP/mod-release-state.json")" != "true" ]]; then
+              echo "Refusing to change an already published release." >&2
+              exit 1
+            fi
+            gh release edit "$tag" --target "$GITHUB_SHA" "${extra[@]}" --title "The Cinematic Legacy $VERSION" --notes-file dist/release/RELEASE-NOTES.md
+          else
+            gh release create "$tag" --target "$GITHUB_SHA" --draft "${extra[@]}" --title "The Cinematic Legacy $VERSION" --notes-file dist/release/RELEASE-NOTES.md
+          fi
+          if [[ "$(gh release view "$tag" --json isDraft --jq '.isDraft')" != "true" ]]; then
+            echo "Refusing to upload assets to a published release." >&2
+            exit 1
+          fi
+          gh release upload "$tag" dist/release/windows-*.zip dist/release/macos-*.tar.gz dist/release/source-*.zip dist/release/metadata.json dist/release/release-manifest.json dist/release/SHA256SUMS.txt --clobber

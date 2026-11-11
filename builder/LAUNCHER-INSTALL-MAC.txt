@@ -1,0 +1,18 @@
+Jak 3: The Cinematic Legacy for OpenGOAL
+Apple Silicon macOS candidate. EU and supported USA discs.
+By @jacopobassan
+https://jacopobassan.me
+
+1. Install vanilla Jak 3 with OpenGOAL tooling v0.3.9.
+2. Close the game. Open Features > Mods > Add from File in OpenGOAL Launcher.
+   Select the Jak 3 Mac .tar.gz archive.
+3. Wait for setup, then press Play.
+
+No separate Python installation or terminal is needed.
+Supported discs: Jak 3 EU (SCES-52460) and USA (SCUS-97330).
+Setup builds the models from your installed game files. Mods have separate saves.
+Vanilla saves stay in place and are not copied automatically.
+
+Allow space for the mod installation and temporary conversion.
+Logs remain in OpenGOAL-Cinematic-Builds beside the OpenGOAL installation.
+Successful builds remove temporary assets. Failed builds retain diagnostics.

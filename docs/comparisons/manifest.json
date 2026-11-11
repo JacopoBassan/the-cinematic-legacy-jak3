@@ -1,0 +1,519 @@
+{
+  "schemaVersion": 1,
+  "source": "OpenGOAL in-game screenshots",
+  "pixelEdits": false,
+  "copiesPreserveSourceBytes": false,
+  "games": {
+    "jak3": {
+      "subjects": 12,
+      "pairs": [
+        {
+          "subject": "Jak",
+          "view": "Front",
+          "path": "jak3/jak-0.webp",
+          "dimensions": [
+            936,
+            958
+          ],
+          "sha256": "0a4800e6e43d52044d5431604a0bb5b185b50c3588e95976a2aac4ddef9d1440",
+          "losslessCompression": {
+            "sourceSha256": "c235375be1af2485b4b8d7cd9f66f3e063463ee706427108b7702736b31a3246",
+            "decodedRgbSha256": "95892b29647a9018a3cf52146a4b890f111d8115ef98d930330c51c3378f9013",
+            "method": "cwebp lossless exact z9"
+          }
+        },
+        {
+          "subject": "Jak",
+          "view": "Side",
+          "path": "jak3/jak-1.webp",
+          "dimensions": [
+            936,
+            958
+          ],
+          "sha256": "fc85ff5c7d0857c65d753b32384b2ea1049ecae63551d7ec0451e80582ebf907",
+          "losslessCompression": {
+            "sourceSha256": "aaaab4fb6b696604753990f502358c906b0c07cb79f18b90c65436600630306d",
+            "decodedRgbSha256": "17cfbce6e8b2581e6db60cb852efcd773d5e3c7d391d2d3e39bdda7444e42aa5",
+            "method": "cwebp lossless exact z9"
+          }
+        },
+        {
+          "subject": "Dark Jak",
+          "view": "Front",
+          "path": "jak3/darkjak-0.webp",
+          "dimensions": [
+            1336,
+            963
+          ],
+          "sha256": "6ac0684602f350a607ca55d20b1eaba6892c49e11e97c4bee015b56c37a8e9f2",
+          "losslessCompression": {
+            "sourceSha256": "a32aa05e56a35bb3cd4f7f11e9f811cb1ffec66a435fc298750653a153cbf057",
+            "decodedRgbSha256": "401b5a40fc031c3646a8efb09840ee1068253bc1e72ae6b8837b81a52c5a159b",
+            "method": "cwebp lossless exact z9"
+          }
+        },
+        {
+          "subject": "Dark Jak",
+          "view": "Side",
+          "path": "jak3/darkjak-1.webp",
+          "dimensions": [
+            1336,
+            963
+          ],
+          "sha256": "33429631f04746f42f85ea9942b2e149ba4d37ba9d0ae5ff8150eca6fe3d590f",
+          "losslessCompression": {
+            "sourceSha256": "665a058049ca4def82787951c066f4ccec6978403b4581bb2196fd596c6d05d7",
+            "decodedRgbSha256": "9627fd2fdc9fca96e7d38a9e48f7b0a3f28ffe8562b7e994dda94d81586ac183",
+            "method": "cwebp lossless exact z9"
+          }
+        },
+        {
+          "subject": "Dark Jak",
+          "view": "Back",
+          "path": "jak3/darkjak-2.webp",
+          "dimensions": [
+            1336,
+            963
+          ],
+          "sha256": "49a35fbf54338db581443272ec27ca5efa2faccbf80020ad3d3905f2998e7653",
+          "losslessCompression": {
+            "sourceSha256": "910d4913063a098c6f6c5e5cc9744e25ee0bd069b916a588f62dcd5641190922",
+            "decodedRgbSha256": "8c4d74dbed9aafa48fdba8baefae82e45cf70fb00fe28a250f79327dd938c22b",
+            "method": "cwebp lossless exact z9"
+          }
+        },
+        {
+          "subject": "Light Jak",
+          "view": "Front",
+          "path": "jak3/lightjak-0.webp",
+          "dimensions": [
+            1256,
+            958
+          ],
+          "sha256": "aa7e656e5f68db10974fe58198712d10514a5a967f71f57dfc0b15dd88ed0681",
+          "losslessCompression": {
+            "sourceSha256": "208e35f1f893dccb323f6c2ec77285028b962b066e7a60fd5b6aefb11f7ed9b9",
+            "decodedRgbSha256": "2f4c5adb5928592d0e0d54dfaf20d57b30d6f2659e615140f89eccacc9c9b611",
+            "method": "cwebp lossless exact z9"
+          }
+        },
+        {
+          "subject": "Light Jak",
+          "view": "Side",
+          "path": "jak3/lightjak-1.webp",
+          "dimensions": [
+            1256,
+            958
+          ],
+          "sha256": "171244c76be600f121237fea969531d62c099ee17958e4d6e66373b7d00f31ed",
+          "losslessCompression": {
+            "sourceSha256": "3fff0ff04ba58832d1d2b890ed322ce25438937dba7123de9a52f114e0a8f911",
+            "decodedRgbSha256": "0cb3a3025d78d6af83a5eca187971bac854118230d3aec960784f364915814a5",
+            "method": "cwebp lossless exact z9"
+          }
+        },
+        {
+          "subject": "Daxter",
+          "view": "Front",
+          "path": "jak3/dax-0.webp",
+          "dimensions": [
+            756,
+            778
+          ],
+          "sha256": "4287fe110b75adc7517c1683d3d0d0880629b7de46230ee5a03b149113da400f",
+          "losslessCompression": {
+            "sourceSha256": "fe149febd18586d2456441b356a0cc28bf1e1fbdfbbd4f722163f69983df4863",
+            "decodedRgbSha256": "2db2da65928a4bc010ce02989e5a18f34f76cf1240133d49ef76e1ba6c7508f8",
+            "method": "cwebp lossless exact z9"
+          }
+        },
+        {
+          "subject": "Daxter",
+          "view": "Side",
+          "path": "jak3/dax-1.webp",
+          "dimensions": [
+            1136,
+            778
+          ],
+          "sha256": "319e70023cabc40ce1bfd6ef01b41301103cb37c41cdffc59f294af7098ba79d",
+          "losslessCompression": {
+            "sourceSha256": "b162b0419d1bbb5ec9377c6aaf220f059b7f44707ccc26c9266873ec27c42c99",
+            "decodedRgbSha256": "baa19f42e7d65442143e8c25b70752f62b615a7e05aadb58f86ac5b192b3da5a",
+            "method": "cwebp lossless exact z9"
+          }
+        },
+        {
+          "subject": "Damas",
+          "view": "Seated, side",
+          "path": "jak3/damas-0.webp",
+          "dimensions": [
+            1776,
+            888
+          ],
+          "sha256": "ef2ca6089d5ba225d9c4bda9999e4799dcd28e75e3abb243e96445ccc12a9a45",
+          "losslessCompression": {
+            "sourceSha256": "996fb54173011342e15a8b6f60c9976f75b5266ea920700b7ddc5ddbfec5f0cb",
+            "decodedRgbSha256": "b8c671b7dfb71de5da4d8239d7c32c2639a325bd63123b5200f3c6dfbccc6967",
+            "method": "cwebp lossless exact z9"
+          }
+        },
+        {
+          "subject": "Kleiver",
+          "view": "Driving, front",
+          "path": "jak3/kleiver-0.webp",
+          "dimensions": [
+            1076,
+            878
+          ],
+          "sha256": "fb30a37a35c675c8e28e48da6d5f06201394b7165b8a891b9bddf9876b699dc8",
+          "losslessCompression": {
+            "sourceSha256": "d6ebfcb6ae065ba803c0fd38fdad3021e67d49f954e052b2d62f24bd7158c141",
+            "decodedRgbSha256": "c0013f6a33b481ec301516b4fc551458fc98fe952c5ab947f6da5de0818711a9",
+            "method": "cwebp lossless exact z9"
+          }
+        },
+        {
+          "subject": "Kleiver",
+          "view": "Driving, side",
+          "path": "jak3/kleiver-1.webp",
+          "dimensions": [
+            1676,
+            668
+          ],
+          "sha256": "52fc78a9b41db22ca3b1d92eeaf18d573b4ae158a1951d5d61f9a9d51a845624",
+          "losslessCompression": {
+            "sourceSha256": "d3b7eca39e69ce1944dd63036ebe54cc0be5289028121451a149588f11d96a5a",
+            "decodedRgbSha256": "27a8cc499ccb57673ec786e204cb287ba3ea9e5b65ab987ec90a4e59809c9014",
+            "method": "cwebp lossless exact z9"
+          }
+        },
+        {
+          "subject": "Ashelin",
+          "view": "Front",
+          "path": "jak3/ashelin-0.webp",
+          "dimensions": [
+            836,
+            858
+          ],
+          "sha256": "698787377889f7af448623469f731e6b2b5366928604b73daff01be7b311bf49",
+          "framing": {
+            "sourceDimensions": [
+              1920,
+              1080
+            ],
+            "sharedCrop": [
+              760,
+              150,
+              1160,
+              910
+            ],
+            "sourceImagesResized": false,
+            "sourcePixelEdits": false,
+            "sourceCaptureSha256": {
+              "original": "80f2530d125676c227c661a12f373af903f9dfc0ce4679be61e264e9013aa3b8",
+              "cinematic": "add928e6f184bb7535d11a5da1e3de9c2c8b646affd8011210ac4fe68fe58847"
+            },
+            "outputEncoding": {
+              "format": "PNG",
+              "mode": "RGB",
+              "lossless": true,
+              "optimize": true
+            },
+            "outputLayout": {
+              "header": 82,
+              "gap": 12,
+              "marginX": 12,
+              "marginTop": 0,
+              "marginBottom": 16
+            }
+          },
+          "losslessCompression": {
+            "sourceSha256": "d8ad25f2721f96f20c76d479ded5d5d32e4a3409a5987dd8fe5d721995ab95b1",
+            "decodedRgbSha256": "97b3adc0a1b315f3a4df253e33f02ce09cf7d7050cfce548bc36c1e094382474",
+            "method": "cwebp lossless exact z9"
+          }
+        },
+        {
+          "subject": "Sig",
+          "view": "Seated, front",
+          "path": "jak3/sig-0.webp",
+          "dimensions": [
+            1156,
+            778
+          ],
+          "sha256": "61c144ced143e45ddb2a8825d217a92e14fa653c4f9e6ed3f390897c2abcf44f",
+          "framing": {
+            "sourceDimensions": [
+              1920,
+              1080
+            ],
+            "sharedCrop": [
+              780,
+              350,
+              1340,
+              1030
+            ],
+            "sourceImagesResized": false,
+            "sourcePixelEdits": false,
+            "sourceCaptureSha256": {
+              "original": "0fd06ed11a80b5a30bd5740998dbb97f71c672fdf89f46327e061105465a821b",
+              "cinematic": "7b26c84943680685dce721cd4bc15f0623f1ba2dbdceb785e7d6cb1a3dd2a3e0"
+            },
+            "outputEncoding": {
+              "format": "PNG",
+              "mode": "RGB",
+              "lossless": true,
+              "optimize": true
+            },
+            "outputLayout": {
+              "header": 82,
+              "gap": 12,
+              "marginX": 12,
+              "marginTop": 0,
+              "marginBottom": 16
+            }
+          },
+          "losslessCompression": {
+            "sourceSha256": "b49dcef63b5712e50bbfa7dad1949a9d2f10c2aabd80e19fc14f491b966c6ce1",
+            "decodedRgbSha256": "14167d94c6c69eec4cfd54575177cc93f53780ea1b043916db5686b36125408f",
+            "method": "cwebp lossless exact z9"
+          }
+        },
+        {
+          "subject": "Sig",
+          "view": "Seated, side",
+          "path": "jak3/sig-1.webp",
+          "dimensions": [
+            1436,
+            828
+          ],
+          "sha256": "6ddc5fdefa4be6b3ce8ef8412e1b0f6ded8398c093ba269d5dfb2ee92b2f6180",
+          "framing": {
+            "sourceDimensions": [
+              1920,
+              1080
+            ],
+            "sharedCrop": [
+              650,
+              350,
+              1350,
+              1080
+            ],
+            "sourceImagesResized": false,
+            "sourcePixelEdits": false,
+            "sourceCaptureSha256": {
+              "original": "cecf3ba9809f2e7a5e9af0ace3088e53e61d86779144cd9018c562aba8feeda1",
+              "cinematic": "1bb80af4127a6fa18e3afb77fb55ac49a31af5f7b2470bc977d18624b9553022"
+            },
+            "outputEncoding": {
+              "format": "PNG",
+              "mode": "RGB",
+              "lossless": true,
+              "optimize": true
+            },
+            "outputLayout": {
+              "header": 82,
+              "gap": 12,
+              "marginX": 12,
+              "marginTop": 0,
+              "marginBottom": 16
+            }
+          },
+          "losslessCompression": {
+            "sourceSha256": "8873fa312a335c1712bbfa08596626e58a2076803d32a7cbd8421d676a7688ee",
+            "decodedRgbSha256": "32f09a696771358cc59463255b3c882feb37ec1309df52661473bebdc6286d31",
+            "method": "cwebp lossless exact z9"
+          }
+        },
+        {
+          "subject": "Sig",
+          "view": "Convoy, front",
+          "path": "jak3/sig-2.webp",
+          "dimensions": [
+            1156,
+            718
+          ],
+          "sha256": "673464190eaa6e8352cf440d7b40ec3c5b479f0b29a6e3c829b110e5e007845e",
+          "framing": {
+            "sourceDimensions": [
+              1920,
+              1080
+            ],
+            "sharedCrop": [
+              430,
+              400,
+              990,
+              1020
+            ],
+            "sourceImagesResized": false,
+            "sourcePixelEdits": false,
+            "sourceCaptureSha256": {
+              "original": "49ad925505e0c91ac0cb61c0b02cb95e392c6380654c9274d7e07141d914db3f",
+              "cinematic": "580138ab7c6c5dcaec00605239b884e756b319065793b920d2fd0bfeda968288"
+            },
+            "outputEncoding": {
+              "format": "PNG",
+              "mode": "RGB",
+              "lossless": true,
+              "optimize": true
+            },
+            "outputLayout": {
+              "header": 82,
+              "gap": 12,
+              "marginX": 12,
+              "marginTop": 0,
+              "marginBottom": 16
+            }
+          },
+          "losslessCompression": {
+            "sourceSha256": "202d9d96074be075e219357eb2279d3172dff4877d29c9db46c567f44d465daf",
+            "decodedRgbSha256": "92b2d8a65f06f6f20b67eb4c677049512e4d7cc910f7e8be2d04082bd9b00b0d",
+            "method": "cwebp lossless exact z9"
+          }
+        },
+        {
+          "subject": "Jinx",
+          "view": "Front",
+          "path": "jak3/jinx-0.webp",
+          "dimensions": [
+            936,
+            908
+          ],
+          "sha256": "a97065dd1510a3b8abd690bb97b7ffb1d340472113768370b09d0e6e61138bcb",
+          "losslessCompression": {
+            "sourceSha256": "3a44343153fd2836a3a28ba0e993e7d65c8a280c76a5ec965a28d82d52c7fd6a",
+            "decodedRgbSha256": "c31353a06263be2be2a70675c6ae9edd1672b5fb184d01e4410dd275a01a0720",
+            "method": "cwebp lossless exact z9"
+          }
+        },
+        {
+          "subject": "Jinx",
+          "view": "Side",
+          "path": "jak3/jinx-1.webp",
+          "dimensions": [
+            936,
+            908
+          ],
+          "sha256": "4b14bf354a5a1b54737452d45dda7b27f1a0f2ae7ff1af89ce190f53f90c24ad",
+          "losslessCompression": {
+            "sourceSha256": "a2cdb12603023a4d29275690ed2fb75a71bc22f9a46e86db85757bd231165d86",
+            "decodedRgbSha256": "2b198a8c85d02879b2ff866c6f6e7fea5636854a480a40383cd8dc7b944df0a7",
+            "method": "cwebp lossless exact z9"
+          }
+        },
+        {
+          "subject": "Crimson Guard",
+          "view": "Front",
+          "path": "jak3/guard-0.webp",
+          "dimensions": [
+            1996,
+            988
+          ],
+          "sha256": "452133a115e9792fbccab5a6c7f0788daea8890760416f9d6591c77d0920c44b",
+          "losslessCompression": {
+            "sourceSha256": "06dd442f97134fb1b4c540d659f0c8b1a31dc999b069fdf5e0d5160d28d70f00",
+            "decodedRgbSha256": "3ddee0c8b6596f5d86cc71cd52599bc4cd1a2e1c74ae01c5928dc6edfe585a8e",
+            "method": "cwebp lossless exact z9"
+          }
+        },
+        {
+          "subject": "Crimson Guard",
+          "view": "Side",
+          "path": "jak3/guard-1.webp",
+          "dimensions": [
+            1336,
+            958
+          ],
+          "sha256": "9dee3f06ae39f0035814ddd71bf283e81b7a7821f671f16ec2fe08812a9fc1c5",
+          "losslessCompression": {
+            "sourceSha256": "d508365161792120ca6ad0322fe9de05fa462ff24005d3872fe9e68d302bd6e9",
+            "decodedRgbSha256": "1d226f7179f0d09767c8ad772ca1173700075d386b6a7a11ae46be02c7810e42",
+            "method": "cwebp lossless exact z9"
+          }
+        },
+        {
+          "subject": "Crimson Guard",
+          "view": "Dark armor, front",
+          "path": "jak3/guard-2.webp",
+          "dimensions": [
+            1996,
+            988
+          ],
+          "sha256": "f08a1bc413efc3fa2b623e6c9127eaa86ea2616b4b1e0f17c24ba74606b37060",
+          "losslessCompression": {
+            "sourceSha256": "b008fbfd1b67c639600957108432f278979ec3295d7e6a97dd23ace53af22800",
+            "decodedRgbSha256": "492be554280760503529694c562b7bcf155ad41459c6cabd1770202b12d37266",
+            "method": "cwebp lossless exact z9"
+          }
+        },
+        {
+          "subject": "Crimson Guard",
+          "view": "Dark armor, side",
+          "path": "jak3/guard-3.webp",
+          "dimensions": [
+            1336,
+            958
+          ],
+          "sha256": "9beb62f8643ef1927647ab7c2c2c74a5ce31969a7d1683bbc9251ebfebd80a18",
+          "losslessCompression": {
+            "sourceSha256": "cd9d8a3be099bf751a22f681c416288acd75d9e6ba5849e69d74f9e8f2738e53",
+            "decodedRgbSha256": "ca955f86e244520b448b1b147544631df944e6802ef94a72f7a7fe424cad8f2c",
+            "method": "cwebp lossless exact z9"
+          }
+        },
+        {
+          "subject": "Cyber Errol",
+          "view": "Factory battle",
+          "path": "jak3/errol-0.webp",
+          "dimensions": [
+            1436,
+            1048
+          ],
+          "sha256": "375615e20c37ff6050e713d818cc7cf992a6df04a1870a83662c2f50f055392b",
+          "losslessCompression": {
+            "sourceSha256": "0f85c6916d3c5e69d6cd75b14d1d577d0c0a2df31f61646399c2f292de0f73d9",
+            "decodedRgbSha256": "df1669e1cc89d9dae135418b6491eb3e20697a19618d46c6e26e61d2ffa77d42",
+            "method": "cwebp lossless exact z9"
+          }
+        },
+        {
+          "subject": "Air transport",
+          "view": "Front",
+          "path": "jak3/air-0.webp",
+          "dimensions": [
+            2156,
+            708
+          ],
+          "sha256": "8b87c71fff8c9781a2b86d6309146e04674c629a7d125a7b64be1049a2cb194f",
+          "losslessCompression": {
+            "sourceSha256": "f1aac9c1205549206dc64000be316b86406e6c387b9297fc20cbb48e1aca0f61",
+            "decodedRgbSha256": "ee07451f28a9f8151d2b69da7dd871b689d4cc0d74bebb9a5fa0c5d518909183",
+            "method": "cwebp lossless exact z9"
+          }
+        },
+        {
+          "subject": "Air transport",
+          "view": "Side",
+          "path": "jak3/air-1.webp",
+          "dimensions": [
+            2316,
+            698
+          ],
+          "sha256": "28f25b4142e0e96ad3bb3f863221e274479847448d97eac4abafc1ff53af2ae5",
+          "losslessCompression": {
+            "sourceSha256": "2f31b07968d81390f22ee6ed813dec18017308753407f4724a34a797659fb888",
+            "decodedRgbSha256": "00535576b67f450b3e63372ca27a6fc37f762cf00ad1faca5f5e08a9acb2a78e",
+            "method": "cwebp lossless exact z9"
+          }
+        }
+      ]
+    }
+  },
+  "losslessCompression": {
+    "sourceCommit": "7c6e5a873ec171d1f5f55fe1bb40dffc7acef8d1",
+    "decodedPixelsPreserved": true,
+    "dimensionsPreserved": true,
+    "beforeBytes": 26350747,
+    "afterBytes": 22031032
+  }
+}

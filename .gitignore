@@ -1,0 +1,9 @@
+AGENTS.md
+agents.md
+_local/
+dist/
+_staging/
+.venv/
+__pycache__/
+*.py[cod]
+.DS_Store

@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "game": "jak3",
+  "displayName": "Jak 3: The Cinematic Legacy",
+  "modName": "jak3-cinematic-models-windows-x64",
+  "builderModule": "build",
+  "compatibilityFile": "compatibility.json",
+  "runtimeFolders": [
+    "out/jak3/fr3",
+    "out/jak3/iso",
+    "game",
+    "goal_src",
+    "decompiler",
+    "custom_assets"
+  ],
+  "thumbnail": "artwork/jak3.png",
+  "installGuide": "LAUNCHER-INSTALL.txt",
+  "description": "Cinematic character models in Jak 3 gameplay"
+}

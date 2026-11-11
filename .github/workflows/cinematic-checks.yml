@@ -1,0 +1,29 @@
+name: Verify Cinematic Mod
+on:
+  push:
+    branches: [main]
+    paths: ["builder/**", "tools/**", "tests/**", "artwork/**", "docs/comparisons/**", "README.md", "mod-*.json", ".github/workflows/*release*", ".github/workflows/cinematic-checks.yml"]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          sparse-checkout: |
+            .github
+            builder
+            tools
+            tests
+            docs
+            artwork
+      - uses: actions/setup-python@v7.1.0
+        with:
+          python-version: '3.11'
+      - run: python -m pip install -r builder/requirements.txt
+      - run: python tools/verify_mod_repository.py
+      - run: python tools/run_tests.py

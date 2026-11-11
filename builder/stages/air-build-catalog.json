@@ -1,0 +1,190 @@
+{
+  "models": {
+    "air-train-lod0": {
+      "name": "air-train-lod0",
+      "triangles": 708,
+      "effects": 4,
+      "joints": {
+        "hatch": "6",
+        "thruster_r": "5",
+        "thruster_l": "4",
+        "main": "3",
+        "prejoint": "2",
+        "align": "1"
+      },
+      "textures": [
+        {
+          "name": "common-white",
+          "width": 4,
+          "height": 4
+        },
+        {
+          "name": "common-white",
+          "width": 4,
+          "height": 4
+        },
+        {
+          "name": "kgtrns-side01",
+          "width": 256,
+          "height": 256
+        },
+        {
+          "name": "kgtrns-wing01",
+          "width": 64,
+          "height": 64
+        },
+        {
+          "name": "kgtrns-box01",
+          "width": 64,
+          "height": 64
+        },
+        {
+          "name": "kgtrns-topjet01",
+          "width": 64,
+          "height": 64
+        }
+      ],
+      "files": [
+        "ctyport.fr3",
+        "desertb.fr3"
+      ]
+    },
+    "air-train-fma-lod0": {
+      "name": "air-train-fma-lod0",
+      "triangles": 12290,
+      "effects": 4,
+      "joints": {
+        "thruster_r": "6",
+        "thruster_l": "5",
+        "hatch": "4",
+        "main": "3",
+        "prejoint": "2",
+        "align": "1"
+      },
+      "textures": [
+        {
+          "name": "common-white",
+          "width": 4,
+          "height": 4
+        },
+        {
+          "name": "common-white",
+          "width": 4,
+          "height": 4
+        },
+        {
+          "name": "cguard-air-train-glass",
+          "width": 32,
+          "height": 32
+        },
+        {
+          "name": "cguard-air-train-fin",
+          "width": 128,
+          "height": 128
+        },
+        {
+          "name": "cguard-air-train-gold",
+          "width": 64,
+          "height": 64
+        },
+        {
+          "name": "cguard-air-train-inside-plain",
+          "width": 128,
+          "height": 64
+        },
+        {
+          "name": "cguard-air-train-side1",
+          "width": 256,
+          "height": 256
+        },
+        {
+          "name": "cguard-air-train-hatch-door",
+          "width": 128,
+          "height": 128
+        },
+        {
+          "name": "cguard-air-train-belt",
+          "width": 16,
+          "height": 16
+        },
+        {
+          "name": "cguard-air-train-inside-wall",
+          "width": 128,
+          "height": 128
+        },
+        {
+          "name": "cguard-air-train-inside-pipel",
+          "width": 32,
+          "height": 32
+        },
+        {
+          "name": "cguard-air-train-backdoor",
+          "width": 128,
+          "height": 128
+        },
+        {
+          "name": "cguard-air-train-side3",
+          "width": 256,
+          "height": 256
+        },
+        {
+          "name": "cguard-air-train-inside-mechanical",
+          "width": 128,
+          "height": 128
+        },
+        {
+          "name": "cguard-air-train-sidepack",
+          "width": 128,
+          "height": 128
+        },
+        {
+          "name": "cguard-air-train-side2",
+          "width": 256,
+          "height": 256
+        },
+        {
+          "name": "cguard-air-train-canister",
+          "width": 128,
+          "height": 64
+        },
+        {
+          "name": "cguard-air-train-light",
+          "width": 32,
+          "height": 32
+        },
+        {
+          "name": "cguard-air-train-window-trim",
+          "width": 16,
+          "height": 16
+        },
+        {
+          "name": "cguard-air-train-inside-floor",
+          "width": 128,
+          "height": 128
+        },
+        {
+          "name": "cguard-air-train-seat",
+          "width": 64,
+          "height": 64
+        }
+      ],
+      "files": [
+        "introcst.fr3"
+      ]
+    }
+  },
+  "file_models": {
+    "ctyport.fr3": [
+      "com-airlock-outer-lod0",
+      "broken-mdaxter-lod0",
+      "barge-lod0",
+      "mecha-daxter-lod0",
+      "air-train-lod0",
+      "hip-door-a-lod0"
+    ],
+    "desertb.fr3": [
+      "air-train-lod0",
+      "wascity-airlock-lod0"
+    ]
+  }
+}

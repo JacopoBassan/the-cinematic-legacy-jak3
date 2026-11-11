@@ -1,0 +1,8 @@
+{
+  "platform": "windows-x64",
+  "pythonRuntime": {
+    "version": "3.11.18",
+    "url": "https://github.com/astral-sh/python-build-standalone/releases/download/20261026/cpython-3.11.18%2B20261026-x86_64-pc-windows-msvc-install_only_stripped.tar.gz",
+    "sha256": "67215a7bf1643e33d01b17ee3f1e91a8b0b39163746855ee02594bf0608f68b4"
+  }
+}
