@@ -14,7 +14,7 @@ The installer includes Python and its dependencies. No terminal, Blender or sepa
 
 ## Saves and updates
 
-Each mod has its own save folder. Vanilla saves stay in place and are not copied automatically. To continue an existing save, close the games and use the launcher's save-folder controls to copy it into the mod's save folder. Keep the original save.
+Each mod has its own save folder. Vanilla saves stay in place and are not copied automatically. To continue an existing save, close the games and use the launcher's save-folder controls to copy it into the mod's save folder. Keep the original save. [Copy guide with screenshots](https://github.com/JacopoBassan/the-cinematic-legacy-jak1/blob/main/docs/copy-saves.md).
 
 Keep the local archive filename unchanged when updating. Launcher v2.11.2 uses that name to identify local imports. Use TAR.GZ on macOS; the checked launcher version cannot complete local Mac imports from ZIP.
 
