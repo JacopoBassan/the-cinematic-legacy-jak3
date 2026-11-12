@@ -1,0 +1,447 @@
+{
+  "platform": "linux-x64",
+  "openGoalVersion": "v0.3.9",
+  "tools": {
+    "extractor": "9c3ed1520ada1f505a63227fbdced5fe57394301a58e4f375968010533054299",
+    "goalc": "2537523db5c5fac4c47dd97ea34f54c795d95bdfad0439a584844b2e1254ba42",
+    "gk": "dde06494a3c707f2d30adbe8394e1e76bc157b2096700b8bb6b010f2eaf24a13"
+  },
+  "toolArchive": {
+    "url": "https://github.com/open-goal/jak-project/releases/download/v0.3.9/opengoal-linux-v0.3.9.tar.gz",
+    "sha256": "acacd03896e09902503fee2ac98e8cb72228cfd221d8ff96b3e88a98ada04ee1"
+  },
+  "pythonRuntime": {
+    "version": "3.11.18",
+    "url": "https://github.com/astral-sh/python-build-standalone/releases/download/20261026/cpython-3.11.18%2B20261026-x86_64-unknown-linux-gnu-install_only_stripped.tar.gz",
+    "sha256": "17c4978a36c496dc53c08899ef8dad1ad2734f6325f08d6033a1e66419e0af26"
+  },
+  "validationStatus": "Linux x64 original input extraction and native archive fingerprints verified for the supported EU and USA revisions; cinematic conversion and gameplay are not validated",
+  "gameProfiles": {
+    "jak3": {
+      "SCES-52460": {
+        "elfHash": 1406394940700478958,
+        "validation": "Official v0.3.9 Linux x64 original input extraction and required native archive compile passed; cinematic conversion and in-game behavior are not validated",
+        "defaultTerritory": 1,
+        "inputs": {
+          "out/jak3/iso/GAME.CGO": "3f0822cbdd94d324c3258d3cdc62463ab8a50200e7eb2736cc3bdb2577126704",
+          "out/jak3/iso/LPATK.DGO": "0e58d73ec621c09a1ad321fc1841cececf06f0f069ff1b18ae37f76fe7da77b9",
+          "iso_data/jak3/buildinfo.json": "716427777b6474b9f24cc7ad6040a660344221b4ec0ff4c8bfa3c402eb98ae3c"
+        },
+        "fr3Inputs": {
+          "out/jak3/fr3/GAME.fr3": {
+            "firstModel": "collectables-bomb-blast-lod0",
+            "sha256": "4c6f064dfeb0918b72f91a1d9d73c692ca78c47517d2358ec21114185ecd739d"
+          },
+          "out/jak3/fr3/waspala.fr3": {
+            "firstModel": "daxter-highres-lod0",
+            "sha256": "d94899dec03b57bb478b375ee38f76fed1c0cc6a242a79e199ff1f77b5663fa3"
+          },
+          "out/jak3/fr3/lsigklv.fr3": {
+            "firstModel": "kleever-highres-lod0",
+            "sha256": "781d77a26949779f860c3beca3f0d0ab2cfd008f5ab25a1020dde79eaaaa14a2"
+          },
+          "out/jak3/fr3/rublcst.fr3": {
+            "firstModel": "daxter-highres-lod0",
+            "sha256": "fe4a46f025fb4e54b86ff07a2f29e1fb486634579495db36a67a63b84b4cc4e7"
+          },
+          "out/jak3/fr3/museum2.fr3": {
+            "firstModel": "errol-lod0",
+            "sha256": "943d9dc855e64da60c968064227406496f2ce82771e9c1478845d56fb6cef40f"
+          },
+          "out/jak3/fr3/ltnjxhip.fr3": {
+            "firstModel": "torn-highres-lod0",
+            "sha256": "3706bd071a9fa16f7fa0002663d0f1c3066b52d0273550b54c9bbedc1ce363bf"
+          },
+          "out/jak3/fr3/lsigjakc.fr3": {
+            "firstModel": "jakc-highres-lod0",
+            "sha256": "7682e3ac05ab6e9b6e9e6a3f715ec5d476a2586937a8395acede2bf155cff6b1"
+          },
+          "out/jak3/fr3/deshunt.fr3": {
+            "firstModel": "sig-highres-lod0",
+            "sha256": "bf59aa826f9d7dfe0d25d6a8013c041b4ca012836ccfcc8274ba587536f86f0d"
+          },
+          "out/jak3/fr3/ljaksig.fr3": {
+            "firstModel": "sig-highres-lod0",
+            "sha256": "1c725da1cbab324b8c53d2794b35ed0f081ba93b1b298b6e7d00b78b9838eb55"
+          },
+          "out/jak3/fr3/desbcst.fr3": {
+            "firstModel": "daxter-highres-lod0",
+            "sha256": "b75893d4068fb6f489eef97d599856100385f50ae313fa8b4667a50da7aeb72d"
+          },
+          "out/jak3/fr3/ldmpckgn.fr3": {
+            "firstModel": "pecker-highres-lod0",
+            "sha256": "32e575e01681a632a7fd7a2fe47724319e7563ccf60bb128ce5239b7990b3182"
+          },
+          "out/jak3/fr3/desoasis.fr3": {
+            "firstModel": "ashelin-highres-lod0",
+            "sha256": "59223b530847ce91d213e4e6fa3aac24c9f537b5bc3e84cae7dd29646ddad723"
+          },
+          "out/jak3/fr3/lsig.fr3": {
+            "firstModel": "sig-highres-lod0",
+            "sha256": "ad77bf7bf1d30edd33e4671355d5718bbd86ba29aed58e64481defb01d8735a3"
+          },
+          "out/jak3/fr3/ltowerb.fr3": {
+            "firstModel": "errol-lod0",
+            "sha256": "73df5b51580534e553a83510e08ed90b73f09884fcf4c43d260b0caf175287a0"
+          },
+          "out/jak3/fr3/wascast.fr3": {
+            "firstModel": "daxter-highres-lod0",
+            "sha256": "1989dd393fd2b552647b94cf9c24e73387dafae0e6c409f9ca71c473658608d0"
+          },
+          "out/jak3/fr3/ljkdmpk.fr3": {
+            "firstModel": "pecker-highres-lod0",
+            "sha256": "9f41bfcfa055a641eafc92b00a61af1f8b09c18bdde2e9950ecb97332a20bcaa"
+          },
+          "out/jak3/fr3/lashelin.fr3": {
+            "firstModel": "ashelin-highres-lod0",
+            "sha256": "e6d227461849feb2f85a646086361cd3c4db727a63c3b0ef289f31ca9a48013e"
+          },
+          "out/jak3/fr3/freecast.fr3": {
+            "firstModel": "pecker-highres-lod0",
+            "sha256": "1181b64afe9f6a32cbe233cef79c3cfb6d757cb1e618ca461c64acd2f28d3d39"
+          },
+          "out/jak3/fr3/ctypesa.fr3": {
+            "firstModel": "crimson-guard-lod0",
+            "sha256": "bc5a5305658dd521dc6fd6a68b146a784f4a713aef96ff1ee838303b58a11dab"
+          },
+          "out/jak3/fr3/museum.fr3": {
+            "firstModel": "kleever-highres-lod0",
+            "sha256": "191cc011877fd61c3650adce6f9ee63d96810d4b149785904efe4dd8ed96c1bc"
+          },
+          "out/jak3/fr3/oasiscst.fr3": {
+            "firstModel": "daxter-highres-lod0",
+            "sha256": "aff5fb8701c4832618045ad02897a6f2c7f11f8291e81d610f1d58fea2e666d9"
+          },
+          "out/jak3/fr3/loutro2.fr3": {
+            "firstModel": "ottsel-daxpants-lod0",
+            "sha256": "798c087faa2c57c03a56055af9dc730041877e1237c98b63d338adf3b8939f38"
+          },
+          "out/jak3/fr3/lpattack.fr3": {
+            "firstModel": "dp-bipedal-lod0",
+            "sha256": "813e3e118056e0ee00a54e73379e422d1554672a5430e95d3d41053351ee5b7f"
+          },
+          "out/jak3/fr3/ldamklev.fr3": {
+            "firstModel": "kleever-highres-lod0",
+            "sha256": "44f711d8e2060f31d66ec1521b657a983ef48d043534d05081cee6749927ca42"
+          },
+          "out/jak3/fr3/lnstcst.fr3": {
+            "firstModel": "daxter-highres-lod0",
+            "sha256": "648747310d412a28f4ed0c62d4c73ec7838949c7dd887cb64933795528e16aef"
+          },
+          "out/jak3/fr3/towercst.fr3": {
+            "firstModel": "daxter-highres-lod0",
+            "sha256": "8d6a93131be0ad369565171514e63d42cbd67384ece4aaf75e53b9e51fe209eb"
+          },
+          "out/jak3/fr3/ldampeck.fr3": {
+            "firstModel": "pecker-highres-lod0",
+            "sha256": "c49d39d8e13127f1182c741535f689476616bf6f755334d5df5b0e0f7a98e78c"
+          },
+          "out/jak3/fr3/forestb.fr3": {
+            "firstModel": "crimson-guard-lod0",
+            "sha256": "333ac53adc841d3fff9a4c0251ab4098c6fba76a59d635af5dae48298d0ef952"
+          },
+          "out/jak3/fr3/desertb.fr3": {
+            "firstModel": "wascity-airlock-lod0",
+            "sha256": "c88437762d1ee7fce203b8790724ca385cdb7e35b571b5fd580cf8a4db981beb"
+          },
+          "out/jak3/fr3/outrocst.fr3": {
+            "firstModel": "kleever-highres-lod0",
+            "sha256": "7bc0f2fa2ab823180c0898df4bfdeec08d0e8fd3ec7f1d3df04d871c671662cb"
+          },
+          "out/jak3/fr3/arenacst.fr3": {
+            "firstModel": "daxter-highres-lod0",
+            "sha256": "42d115d8fe98c2840a96c77632a9d92268b19b8f3a8aefdf23143ecc048d2a9c"
+          },
+          "out/jak3/fr3/ljkcdmkl.fr3": {
+            "firstModel": "kleever-highres-lod0",
+            "sha256": "e182e7dc2ed65fde0a56b8677a4c7b234db3ff8a657284b7547a9bb5b6bd01fe"
+          },
+          "out/jak3/fr3/lwassig.fr3": {
+            "firstModel": "sig-rider-lod0",
+            "sha256": "e432f96b951c1439d2aa744518f73ba952052ecc925cd687e268191ba967f5a5"
+          },
+          "out/jak3/fr3/introcst.fr3": {
+            "firstModel": "daxter-highres-lod0",
+            "sha256": "a01d443b8b48f8530ddd914ceb2c310ab513b1e585baf16cccb64284421a7756"
+          },
+          "out/jak3/fr3/ctyport.fr3": {
+            "firstModel": "com-airlock-outer-lod0",
+            "sha256": "b4574b7d3340377c81c6e55220668c678c30cf24e68c327ed70e32e523c54352"
+          },
+          "out/jak3/fr3/lblowcst.fr3": {
+            "firstModel": "bt-torn-lod0",
+            "sha256": "620fbbe9c609e017e82f98b928d509dcc8c6aada063bb6cb8da5de1754c0cccb"
+          },
+          "out/jak3/fr3/ltornjnx.fr3": {
+            "firstModel": "torn-highres-lod0",
+            "sha256": "45f41e49b60a12a640c8d359798180a748243730a837c01206ccf9a5705bbe1d"
+          },
+          "out/jak3/fr3/ldamsig.fr3": {
+            "firstModel": "sig-highres-lod0",
+            "sha256": "a98adae8d39f2966dc5d7cc6bdb815e659e46db59bdb699df8ef461ed585399a"
+          },
+          "out/jak3/fr3/ljinx.fr3": {
+            "firstModel": "jinx-lod0",
+            "sha256": "343f7924f708d4a0597d21b51ecc739edec7820c206b736d303426172ae286bd"
+          },
+          "out/jak3/fr3/gridcst.fr3": {
+            "firstModel": "daxter-highres-lod0",
+            "sha256": "7710126d4281098e5bbe040d3685b43fe9213041f709dc2cac1934d4c0b1f042"
+          },
+          "out/jak3/fr3/ldesgcst.fr3": {
+            "firstModel": "daxter-highres-lod0",
+            "sha256": "83c34d36aef6a8ee3f13c316fc9797e7ff5f905ad3ae2f6d4df61b2c9a2a77bb"
+          },
+          "out/jak3/fr3/rubblea.fr3": {
+            "firstModel": "daxter-highres-lod0",
+            "sha256": "881263077f4f3e148b453e7f9af09c7b59ffee617a673d412fce7e806da5cb2f"
+          },
+          "out/jak3/fr3/ldampksm.fr3": {
+            "firstModel": "pecker-highres-lod0",
+            "sha256": "51ea96833875be713249d05d8dfa21829a97978981d7c9bf1d044a73c7c8022a"
+          },
+          "out/jak3/fr3/desliz.fr3": {
+            "firstModel": "daxter-highres-lod0",
+            "sha256": "4d750500f01b1117a1e8f85927fcb43948f08d32eceb3c60592e1014511a4041"
+          },
+          "out/jak3/fr3/destrack.fr3": {
+            "firstModel": "daxter-highres-lod0",
+            "sha256": "c2f186c113e3dd56759be711d8e55befdf18b4e6f94ff6dc6b0d36281675e9a7"
+          },
+          "out/jak3/fr3/citycast.fr3": {
+            "firstModel": "daxter-highres-lod0",
+            "sha256": "7d6c3ec8f8dc3d61488495afc1ab9303851aa2a33f58fc369340dd6a5ec092f2"
+          },
+          "out/jak3/fr3/desboss2.fr3": {
+            "firstModel": "daxter-highres-lod0",
+            "sha256": "5b5a68e967ce1921d1231077b380f8ec343f023e49e5a1a84d54a13981af88f4"
+          },
+          "out/jak3/fr3/factoryd.fr3": {
+            "firstModel": "kg-grunt-lod0",
+            "sha256": "21ab329390541494e41c70f6570627615d85fd4b62d6b06e47493357ad967081"
+          },
+          "out/jak3/fr3/ltorn.fr3": {
+            "firstModel": "torn-highres-lod0",
+            "sha256": "41906964e89caf289a304ddf5dd538ec349e3293f365df2806f4ce85aef95792"
+          },
+          "out/jak3/fr3/mhctycst.fr3": {
+            "firstModel": "daxter-highres-lod0",
+            "sha256": "c8ec77460b432c6e65190358feaeeabe44e09e2258ba6e6f73b2a7833cb47b78"
+          }
+        }
+      },
+      "SCUS-97330": {
+        "elfHash": 4975852519304227343,
+        "defaultTerritory": 0,
+        "validation": "Official v0.3.9 Linux x64 original input extraction and required native archive compile passed; cinematic conversion and in-game behavior are not validated",
+        "inputs": {
+          "out/jak3/iso/GAME.CGO": "8040afaaef11f0ec3d066646b92fd3922e93d7e42808ebe2d7d760c0fced8564",
+          "out/jak3/iso/LPATK.DGO": "0e58d73ec621c09a1ad321fc1841cececf06f0f069ff1b18ae37f76fe7da77b9",
+          "iso_data/jak3/buildinfo.json": "ef05d94407f6b35fc77403950556f043a8f6f148921e7a862ab773e0659f0e31"
+        },
+        "fr3Inputs": {
+          "out/jak3/fr3/GAME.fr3": {
+            "firstModel": "collectables-bomb-blast-lod0",
+            "sha256": "4c6f064dfeb0918b72f91a1d9d73c692ca78c47517d2358ec21114185ecd739d"
+          },
+          "out/jak3/fr3/waspala.fr3": {
+            "firstModel": "daxter-highres-lod0",
+            "sha256": "d94899dec03b57bb478b375ee38f76fed1c0cc6a242a79e199ff1f77b5663fa3"
+          },
+          "out/jak3/fr3/lsigklv.fr3": {
+            "firstModel": "kleever-highres-lod0",
+            "sha256": "781d77a26949779f860c3beca3f0d0ab2cfd008f5ab25a1020dde79eaaaa14a2"
+          },
+          "out/jak3/fr3/rublcst.fr3": {
+            "firstModel": "daxter-highres-lod0",
+            "sha256": "fe4a46f025fb4e54b86ff07a2f29e1fb486634579495db36a67a63b84b4cc4e7"
+          },
+          "out/jak3/fr3/museum2.fr3": {
+            "firstModel": "errol-lod0",
+            "sha256": "943d9dc855e64da60c968064227406496f2ce82771e9c1478845d56fb6cef40f"
+          },
+          "out/jak3/fr3/ltnjxhip.fr3": {
+            "firstModel": "torn-highres-lod0",
+            "sha256": "3706bd071a9fa16f7fa0002663d0f1c3066b52d0273550b54c9bbedc1ce363bf"
+          },
+          "out/jak3/fr3/lsigjakc.fr3": {
+            "firstModel": "jakc-highres-lod0",
+            "sha256": "7682e3ac05ab6e9b6e9e6a3f715ec5d476a2586937a8395acede2bf155cff6b1"
+          },
+          "out/jak3/fr3/deshunt.fr3": {
+            "firstModel": "sig-highres-lod0",
+            "sha256": "bf59aa826f9d7dfe0d25d6a8013c041b4ca012836ccfcc8274ba587536f86f0d"
+          },
+          "out/jak3/fr3/ljaksig.fr3": {
+            "firstModel": "sig-highres-lod0",
+            "sha256": "1c725da1cbab324b8c53d2794b35ed0f081ba93b1b298b6e7d00b78b9838eb55"
+          },
+          "out/jak3/fr3/desbcst.fr3": {
+            "firstModel": "daxter-highres-lod0",
+            "sha256": "b75893d4068fb6f489eef97d599856100385f50ae313fa8b4667a50da7aeb72d"
+          },
+          "out/jak3/fr3/ldmpckgn.fr3": {
+            "firstModel": "pecker-highres-lod0",
+            "sha256": "32e575e01681a632a7fd7a2fe47724319e7563ccf60bb128ce5239b7990b3182"
+          },
+          "out/jak3/fr3/desoasis.fr3": {
+            "firstModel": "ashelin-highres-lod0",
+            "sha256": "59223b530847ce91d213e4e6fa3aac24c9f537b5bc3e84cae7dd29646ddad723"
+          },
+          "out/jak3/fr3/lsig.fr3": {
+            "firstModel": "sig-highres-lod0",
+            "sha256": "ad77bf7bf1d30edd33e4671355d5718bbd86ba29aed58e64481defb01d8735a3"
+          },
+          "out/jak3/fr3/ltowerb.fr3": {
+            "firstModel": "errol-lod0",
+            "sha256": "73df5b51580534e553a83510e08ed90b73f09884fcf4c43d260b0caf175287a0"
+          },
+          "out/jak3/fr3/wascast.fr3": {
+            "firstModel": "daxter-highres-lod0",
+            "sha256": "1989dd393fd2b552647b94cf9c24e73387dafae0e6c409f9ca71c473658608d0"
+          },
+          "out/jak3/fr3/ljkdmpk.fr3": {
+            "firstModel": "pecker-highres-lod0",
+            "sha256": "9f41bfcfa055a641eafc92b00a61af1f8b09c18bdde2e9950ecb97332a20bcaa"
+          },
+          "out/jak3/fr3/lashelin.fr3": {
+            "firstModel": "ashelin-highres-lod0",
+            "sha256": "e6d227461849feb2f85a646086361cd3c4db727a63c3b0ef289f31ca9a48013e"
+          },
+          "out/jak3/fr3/freecast.fr3": {
+            "firstModel": "pecker-highres-lod0",
+            "sha256": "1181b64afe9f6a32cbe233cef79c3cfb6d757cb1e618ca461c64acd2f28d3d39"
+          },
+          "out/jak3/fr3/ctypesa.fr3": {
+            "firstModel": "crimson-guard-lod0",
+            "sha256": "bc5a5305658dd521dc6fd6a68b146a784f4a713aef96ff1ee838303b58a11dab"
+          },
+          "out/jak3/fr3/museum.fr3": {
+            "firstModel": "kleever-highres-lod0",
+            "sha256": "191cc011877fd61c3650adce6f9ee63d96810d4b149785904efe4dd8ed96c1bc"
+          },
+          "out/jak3/fr3/oasiscst.fr3": {
+            "firstModel": "daxter-highres-lod0",
+            "sha256": "aff5fb8701c4832618045ad02897a6f2c7f11f8291e81d610f1d58fea2e666d9"
+          },
+          "out/jak3/fr3/loutro2.fr3": {
+            "firstModel": "ottsel-daxpants-lod0",
+            "sha256": "798c087faa2c57c03a56055af9dc730041877e1237c98b63d338adf3b8939f38"
+          },
+          "out/jak3/fr3/lpattack.fr3": {
+            "firstModel": "dp-bipedal-lod0",
+            "sha256": "813e3e118056e0ee00a54e73379e422d1554672a5430e95d3d41053351ee5b7f"
+          },
+          "out/jak3/fr3/ldamklev.fr3": {
+            "firstModel": "kleever-highres-lod0",
+            "sha256": "44f711d8e2060f31d66ec1521b657a983ef48d043534d05081cee6749927ca42"
+          },
+          "out/jak3/fr3/lnstcst.fr3": {
+            "firstModel": "daxter-highres-lod0",
+            "sha256": "648747310d412a28f4ed0c62d4c73ec7838949c7dd887cb64933795528e16aef"
+          },
+          "out/jak3/fr3/towercst.fr3": {
+            "firstModel": "daxter-highres-lod0",
+            "sha256": "8d6a93131be0ad369565171514e63d42cbd67384ece4aaf75e53b9e51fe209eb"
+          },
+          "out/jak3/fr3/ldampeck.fr3": {
+            "firstModel": "pecker-highres-lod0",
+            "sha256": "c49d39d8e13127f1182c741535f689476616bf6f755334d5df5b0e0f7a98e78c"
+          },
+          "out/jak3/fr3/forestb.fr3": {
+            "firstModel": "crimson-guard-lod0",
+            "sha256": "333ac53adc841d3fff9a4c0251ab4098c6fba76a59d635af5dae48298d0ef952"
+          },
+          "out/jak3/fr3/desertb.fr3": {
+            "firstModel": "wascity-airlock-lod0",
+            "sha256": "c88437762d1ee7fce203b8790724ca385cdb7e35b571b5fd580cf8a4db981beb"
+          },
+          "out/jak3/fr3/outrocst.fr3": {
+            "firstModel": "kleever-highres-lod0",
+            "sha256": "7bc0f2fa2ab823180c0898df4bfdeec08d0e8fd3ec7f1d3df04d871c671662cb"
+          },
+          "out/jak3/fr3/arenacst.fr3": {
+            "firstModel": "daxter-highres-lod0",
+            "sha256": "42d115d8fe98c2840a96c77632a9d92268b19b8f3a8aefdf23143ecc048d2a9c"
+          },
+          "out/jak3/fr3/ljkcdmkl.fr3": {
+            "firstModel": "kleever-highres-lod0",
+            "sha256": "e182e7dc2ed65fde0a56b8677a4c7b234db3ff8a657284b7547a9bb5b6bd01fe"
+          },
+          "out/jak3/fr3/lwassig.fr3": {
+            "firstModel": "sig-rider-lod0",
+            "sha256": "e432f96b951c1439d2aa744518f73ba952052ecc925cd687e268191ba967f5a5"
+          },
+          "out/jak3/fr3/introcst.fr3": {
+            "firstModel": "daxter-highres-lod0",
+            "sha256": "a01d443b8b48f8530ddd914ceb2c310ab513b1e585baf16cccb64284421a7756"
+          },
+          "out/jak3/fr3/ctyport.fr3": {
+            "firstModel": "com-airlock-outer-lod0",
+            "sha256": "b4574b7d3340377c81c6e55220668c678c30cf24e68c327ed70e32e523c54352"
+          },
+          "out/jak3/fr3/lblowcst.fr3": {
+            "firstModel": "bt-torn-lod0",
+            "sha256": "620fbbe9c609e017e82f98b928d509dcc8c6aada063bb6cb8da5de1754c0cccb"
+          },
+          "out/jak3/fr3/ltornjnx.fr3": {
+            "firstModel": "torn-highres-lod0",
+            "sha256": "45f41e49b60a12a640c8d359798180a748243730a837c01206ccf9a5705bbe1d"
+          },
+          "out/jak3/fr3/ldamsig.fr3": {
+            "firstModel": "sig-highres-lod0",
+            "sha256": "a98adae8d39f2966dc5d7cc6bdb815e659e46db59bdb699df8ef461ed585399a"
+          },
+          "out/jak3/fr3/ljinx.fr3": {
+            "firstModel": "jinx-lod0",
+            "sha256": "343f7924f708d4a0597d21b51ecc739edec7820c206b736d303426172ae286bd"
+          },
+          "out/jak3/fr3/gridcst.fr3": {
+            "firstModel": "daxter-highres-lod0",
+            "sha256": "7710126d4281098e5bbe040d3685b43fe9213041f709dc2cac1934d4c0b1f042"
+          },
+          "out/jak3/fr3/ldesgcst.fr3": {
+            "firstModel": "daxter-highres-lod0",
+            "sha256": "83c34d36aef6a8ee3f13c316fc9797e7ff5f905ad3ae2f6d4df61b2c9a2a77bb"
+          },
+          "out/jak3/fr3/rubblea.fr3": {
+            "firstModel": "daxter-highres-lod0",
+            "sha256": "881263077f4f3e148b453e7f9af09c7b59ffee617a673d412fce7e806da5cb2f"
+          },
+          "out/jak3/fr3/ldampksm.fr3": {
+            "firstModel": "pecker-highres-lod0",
+            "sha256": "51ea96833875be713249d05d8dfa21829a97978981d7c9bf1d044a73c7c8022a"
+          },
+          "out/jak3/fr3/desliz.fr3": {
+            "firstModel": "daxter-highres-lod0",
+            "sha256": "4d750500f01b1117a1e8f85927fcb43948f08d32eceb3c60592e1014511a4041"
+          },
+          "out/jak3/fr3/destrack.fr3": {
+            "firstModel": "daxter-highres-lod0",
+            "sha256": "c2f186c113e3dd56759be711d8e55befdf18b4e6f94ff6dc6b0d36281675e9a7"
+          },
+          "out/jak3/fr3/citycast.fr3": {
+            "firstModel": "daxter-highres-lod0",
+            "sha256": "7d6c3ec8f8dc3d61488495afc1ab9303851aa2a33f58fc369340dd6a5ec092f2"
+          },
+          "out/jak3/fr3/desboss2.fr3": {
+            "firstModel": "daxter-highres-lod0",
+            "sha256": "5b5a68e967ce1921d1231077b380f8ec343f023e49e5a1a84d54a13981af88f4"
+          },
+          "out/jak3/fr3/factoryd.fr3": {
+            "firstModel": "kg-grunt-lod0",
+            "sha256": "21ab329390541494e41c70f6570627615d85fd4b62d6b06e47493357ad967081"
+          },
+          "out/jak3/fr3/ltorn.fr3": {
+            "firstModel": "torn-highres-lod0",
+            "sha256": "41906964e89caf289a304ddf5dd538ec349e3293f365df2806f4ce85aef95792"
+          },
+          "out/jak3/fr3/mhctycst.fr3": {
+            "firstModel": "daxter-highres-lod0",
+            "sha256": "c8ec77460b432c6e65190358feaeeabe44e09e2258ba6e6f73b2a7833cb47b78"
+          }
+        }
+      }
+    }
+  }
+}

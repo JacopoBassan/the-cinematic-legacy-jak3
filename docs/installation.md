@@ -1,8 +1,8 @@
 # Install Jak 3: The Cinematic Legacy
 
-Use the Jak 3 **Features > Mods > Add from File** button in OpenGOAL Launcher. Select this game's Windows x64 ZIP or Apple Silicon TAR.GZ without unpacking it. Setup builds the models from your own installed files.
+Use the Jak 3 **Features > Mods > Add from File** button in OpenGOAL Launcher. Select this game's Windows x64 ZIP, Apple Silicon TAR.GZ or experimental Linux x64 TAR.GZ without unpacking it. Setup builds the models from your own installed files.
 
-Use official OpenGOAL tooling **v0.3.9**. The launcher protocol was checked with **v2.11.2**. Windows 10 or newer on x64 and Apple Silicon macOS are the target platforms. Intel Macs and Linux are unsupported.
+Use official OpenGOAL tooling **v0.3.9**. The launcher protocol was checked with **v2.11.2**. Windows 10 or newer on x64 and Apple Silicon macOS are the tested platforms. Linux x64 is experimental. Real Linux launcher import, model conversion and gameplay are not yet validated. Intel Macs are unsupported.
 
 | Region | Supported disc |
 | --- | --- |
@@ -26,4 +26,4 @@ Keep the local archive filename unchanged when updating. Launcher v2.11.2 uses t
 - **Failed conversion:** keep the logs in `OpenGOAL-Cinematic-Builds` beside the OpenGOAL installation. Report the error, disc revision and tooling version. Do not upload extracted assets or saves.
 - **Interrupted install:** preserve the reported recovery file, stage and backup. Do not remove a lock while its process is running.
 
-See [Mac support](macos.md) and [verification](verification.md) for the checked scope.
+See [Mac support](macos.md), [experimental Linux support](linux.md) and [verification](verification.md) for the checked scope.

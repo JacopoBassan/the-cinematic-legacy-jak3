@@ -169,7 +169,7 @@ def verify_mod_path(mod,game_config=None):
 
 
 def require_game_closed():
-    if sys.platform == 'darwin':
+    if sys.platform in ('darwin', 'linux'):
         result = subprocess.run(['/bin/ps', '-axo', 'comm='], capture_output=True, text=True)
         if result.returncode or not result.stdout.strip():
             raise ValueError('Could not verify that OpenGOAL is closed')
@@ -177,7 +177,7 @@ def require_game_closed():
             raise ValueError('Close the running OpenGOAL game before installing')
         return
     if os.name != 'nt':
-        raise ValueError('This release supports Windows and macOS only')
+        raise ValueError('This release supports Windows, macOS and Linux only')
     command = "@(Get-CimInstance Win32_Process -Filter \"Name = 'gk.exe'\" -ErrorAction Stop).Count"
     result = subprocess.run(['powershell.exe','-NoProfile','-NonInteractive','-Command',command],capture_output=True,text=True)
     if result.returncode or not result.stdout.strip().isdigit():
@@ -189,7 +189,7 @@ def require_game_closed():
 def metadata(mod,game_config=None,previous=None):
     selected = games.validate(game_config) if game_config is not None else games.load(ROOT)
     previous = previous if isinstance(previous,dict) else {}
-    prefix = 'asset://localhost/' if selected.get('platform') == 'macos-arm64' else 'https://asset.localhost/'
+    prefix = 'https://asset.localhost/' if selected.get('platform', 'windows-x64') == 'windows-x64' else 'asset://localhost/'
     image = prefix+quote(str(mod/'thumbnail.png'),safe='')
     description = selected['description']
     result = dict(previous)
@@ -232,9 +232,11 @@ def put_metadata(target,final_path,manifest,game_config=None):
 def install(payload,mod,backup=None,base_data=None,tools=None,*,game_config=None,build_module=None,build_config=None):
     # Keep legacy caller arguments for updates; creation belongs to the launcher adapter.
     selected = games.validate(game_config) if game_config is not None else games.load(ROOT)
+    if selected.get('platform') == 'linux-x64' and platform_tools.host_platform() != 'linux-x64':
+        raise ValueError('Run the Linux installer on Linux x64')
     verify_mod_path(mod,selected)
     if not mod.exists():
-        archive = 'archive' if selected.get('platform') == 'macos-arm64' else 'ZIP'
+        archive = 'ZIP' if selected.get('platform', 'windows-x64') == 'windows-x64' else 'archive'
         raise ValueError(f'For a new mod, import the matching launcher {archive} through OpenGOAL Launcher > '
                          'Features > Mods > Add from File. It includes the installer required for rebuilds.')
     with mod_lock(mod):
@@ -290,9 +292,17 @@ def _install_locked(payload, mod, backup, selected, game_config):
     expected_hashes.update({name:sha(stage/name) for name in metadata_files})
     touched = []
     marker = mod/'.cinematic-transaction.json'
-    atomic_bytes(marker, json.dumps({'schemaVersion':1, 'backup':str(backup.resolve()),
-                                   'mod':str(mod.resolve())},indent=2).encode('utf-8'))
+    marker_data = json.dumps({'schemaVersion':1, 'backup':str(backup.resolve()),
+                              'mod':str(mod.resolve()), 'token':uuid.uuid4().hex},indent=2).encode('utf-8')
+    def remove_marker(*, missing_ok=False):
+        reject_reparse(marker)
+        if missing_ok and not marker.exists():
+            return
+        if marker.read_bytes() != marker_data:
+            raise ValueError(f'Transaction marker changed; preserve {marker} and backup {backup}')
+        marker.unlink()
     try:
+        atomic_bytes(marker, marker_data)
         for name in names:
             target = mod/name
             target.parent.mkdir(parents=True,exist_ok=True)
@@ -319,7 +329,7 @@ def _install_locked(payload, mod, backup, selected, game_config):
                 failures.append(rollback_error)
         if not failures:
             try:
-                marker.unlink()
+                remove_marker(missing_ok=not touched)
             except BaseException as cleanup_error:
                 failures.append(cleanup_error)
         if failures:
@@ -327,7 +337,7 @@ def _install_locked(payload, mod, backup, selected, game_config):
             raise BaseExceptionGroup(f'Installation failed and rollback was incomplete. Preserve backup {backup} '
                                      f'and recovery marker {marker}. {details}', [original_error, *failures]) from None
         raise
-    marker.unlink()
+    remove_marker()
 
 
 def main():

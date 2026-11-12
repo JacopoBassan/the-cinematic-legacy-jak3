@@ -8,6 +8,7 @@ import shutil
 import signal
 import sys
 import tempfile
+import uuid
 import platform_tools
 import runtime_utils as builder
 import game_config as games
@@ -115,7 +116,8 @@ def _install_generated(payload, mod, data, tools, job, game_config=None, build_m
     originals = stage/'previous'
     rollback_failed = False
     transaction = mod/'.cinematic-transaction.json'
-    transaction_created = False
+    transaction_data = json.dumps({'schemaVersion': 1, 'stage': str(stage),
+                                   'files': names, 'token': uuid.uuid4().hex}).encode('utf-8')
     try:
         originals.mkdir()
         for name in selected['runtimeFolders']:
@@ -138,11 +140,9 @@ def _install_generated(payload, mod, data, tools, job, game_config=None, build_m
         if (mod/'data').exists():
             raise ValueError('An incomplete data folder exists. Remove and re-import this mod in the launcher.')
         installer.reject_reparse(transaction)
-        with transaction.open('x', encoding='utf-8') as stream:
-            transaction_created = True
-            json.dump({'schemaVersion': 1, 'stage': str(stage), 'files': names}, stream)
-            stream.flush()
-            os.fsync(stream.fileno())
+        if transaction.exists():
+            raise ValueError(f'An interrupted update requires recovery. Preserve {transaction} and {stage}.')
+        installer.atomic_bytes(transaction, transaction_data)
         for name in names:
             target = mod/name
             installer.reject_reparse(target)
@@ -176,7 +176,10 @@ def _install_generated(payload, mod, data, tools, job, game_config=None, build_m
         original_error = sys.exception()
         if not rollback_failed:
             try:
-                if transaction_created:
+                installer.reject_reparse(transaction)
+                if transaction.exists():
+                    if transaction.read_bytes() != transaction_data:
+                        raise ValueError(f'Transaction marker changed; preserve {transaction} and {stage}')
                     transaction.unlink()
                 if (stage.exists() and stage.parent == job and stage.name == 'installation'
                         and stage.resolve().is_relative_to(job.resolve())):
@@ -193,6 +196,8 @@ def execute(mod, iso, phase, game_config=None):
     if phase not in ('decompile', 'compile'):
         raise ValueError('Unsupported launcher installation phase.')
     selected = selected_config(game_config)
+    if selected.get('platform') == 'linux-x64' and platform_tools.host_platform() != 'linux-x64':
+        raise ValueError('Run the Linux installer on Linux x64')
     data, _ = locations(mod, iso, selected)
     verify_bundle(mod, selected)
     module = games.builder(selected)
@@ -233,10 +238,10 @@ def execute(mod, iso, phase, game_config=None):
 
 
 def install_signal_handlers():
-    # The Mac entry point creates a private session before starting any tools.
+    # The POSIX entry point creates a private session before starting any tools.
     # Normal SIGTERM can therefore stop its children and still run rollback.
     # SIGKILL/power loss cannot execute cleanup; the lock then refuses reuse.
-    if sys.platform == 'darwin' and os.getpgrp() == os.getpid():
+    if sys.platform in ('darwin', 'linux') and os.getpgrp() == os.getpid():
         def terminate(signum, frame):
             signal.signal(signal.SIGTERM, signal.SIG_IGN)
             os.killpg(os.getpgrp(), signal.SIGTERM)

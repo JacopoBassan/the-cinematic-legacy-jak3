@@ -21,7 +21,7 @@ python tools/verify_mod_repository.py
 python tools/run_tests.py
 ```
 
-The suite contains 46 tests for this game. Windows also runs 13 native filesystem fixtures. On macOS, `TMPDIR=/private/tmp python tools/run_tests.py` uses a temporary directory with no path alias.
+The suite runs asset-free checks for this game. Windows also runs 13 native filesystem fixtures. On macOS, `TMPDIR=/private/tmp python tools/run_tests.py` uses a temporary directory with no path alias.
 
 ## Local conversion
 
@@ -31,7 +31,7 @@ Use an original supported Jak 3 installation and official tooling v0.3.9. Replac
 python builder/build.py --game-data "<OpenGOAL>/active/jak3/data" --tools "<OpenGOAL>/versions/official/v0.3.9" --work "<new-work-directory>" --output "<new-payload-directory>"
 ```
 
-The builder selects the native platform. `--platform windows-x64` or `--platform macos-arm64` selects it explicitly. Run `python builder/build.py --help` for the supported options. Review [current verification](verification.md) before release.
+The builder selects the native platform. `--platform windows-x64`, `--platform macos-arm64` or `--platform linux-x64` selects it explicitly. Linux conversion is experimental and has not been validated with real game data. Run `python builder/build.py --help` for the supported options. Review [current verification](verification.md) before release.
 
 ## Installer packages
 
@@ -40,14 +40,15 @@ Run each command on its matching operating system. The helper downloads and veri
 ```sh
 python tools/build_mod_installer.py --platform windows-x64 --output dist/input
 python tools/build_mod_installer.py --platform macos-arm64 --output dist/input
+python tools/build_mod_installer.py --platform linux-x64 --output dist/input
 ```
 
-Collect both resulting archives in `dist/input` on one machine. Then use a new output directory:
+Collect all three resulting archives in `dist/input` on one machine. Then use a new output directory:
 
 ```sh
 python tools/prepare_mod_release.py --input dist/input --output dist/release
 ```
 
-Version `0.3.0-rc.1` produces `windows-v0.3.0-rc.1.zip`, `macos-arm64-v0.3.0-rc.1.tar.gz`, `source-v0.3.0-rc.1.zip`, `metadata.json`, `release-manifest.json` and `SHA256SUMS.txt`. Metadata declares only `jak3`.
+Version `0.3.0-rc.1` produces `windows-v0.3.0-rc.1.zip`, `macos-arm64-v0.3.0-rc.1.tar.gz`, `linux-v0.3.0-rc.1.tar.gz`, `source-v0.3.0-rc.1.zip`, `metadata.json`, `release-manifest.json` and `SHA256SUMS.txt`. Metadata declares only `jak3`.
 
-The manual **Cut Mod Release** workflow builds both platforms, verifies the assets, and creates or refreshes a draft. Publication requires a separate approval. Original mod code uses [MOD-LICENSE](../MOD-LICENSE). Third-party code and bundled dependencies retain their own licence notices.
+The manual **Cut Mod Release** workflow builds all three platforms, verifies the assets, and creates or refreshes a draft. On Ubuntu 24.04 x64, it also runs the [asset-free Linux installer checks](linux.md#developer-checks) against the final archive. Publication requires a separate approval. Original mod code uses [MOD-LICENSE](../MOD-LICENSE). Third-party code and bundled dependencies retain their own licence notices.

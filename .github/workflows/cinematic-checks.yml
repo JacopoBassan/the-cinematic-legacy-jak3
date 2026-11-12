@@ -10,7 +10,17 @@ permissions:
   contents: read
 jobs:
   verify:
-    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: windows-x64
+            runner: windows-latest
+          - platform: macos-arm64
+            runner: macos-15
+          - platform: linux-x64
+            runner: ubuntu-24.04
+    runs-on: ${{ matrix.runner }}
     steps:
       - uses: actions/checkout@v7.0.1
         with:
@@ -27,3 +37,16 @@ jobs:
       - run: python -m pip install -r builder/requirements.txt
       - run: python tools/verify_mod_repository.py
       - run: python tools/run_tests.py
+      - name: Package pinned Linux installer
+        if: matrix.platform == 'linux-x64'
+        run: python tools/build_mod_installer.py --platform linux-x64 --output dist/input
+      - name: Verify final Linux installer with asset-free fixtures
+        if: matrix.platform == 'linux-x64'
+        run: python tools/check_linux_installer.py --game jak3 --archive dist/input/*-linux-x64.tar.gz --output dist/verification/linux-installer.json
+      - uses: actions/upload-artifact@v7.0.2
+        if: always() && matrix.platform == 'linux-x64'
+        with:
+          name: verification-linux-x64
+          path: dist/verification/linux-installer.json
+          if-no-files-found: error
+          retention-days: 7

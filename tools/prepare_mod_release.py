@@ -35,7 +35,7 @@ def prepare(inputs,output,version=None):
     if output.exists():raise ValueError('Use a new release output directory')
     if inputs==output or output.is_relative_to(inputs):raise ValueError('Keep input and output separate')
     records=[];verified=[]
-    for platform,prefix,extension in (('windows-x64','windows','zip'),('macos-arm64','macos-arm64','tar.gz')):
+    for platform,(prefix,extension) in shared.PLATFORMS.items():
         ordinary=inputs/f'{game}-cinematic-models-{platform}.{extension}'
         standard=inputs/f'{prefix}-v{version}.{extension}'
         source=ordinary if ordinary.is_file() else standard
@@ -68,16 +68,17 @@ def prepare(inputs,output,version=None):
     (output/'SHA256SUMS.txt').write_text(''.join(shared.file_sha(output/name)+'  '+name+'\n' for name in names))
     base='https://github.com/'+config['repository']
     notes=(f"{config['displayName']} {version}\n\n{config['description']}\n\n"
-           'Windows x64 and Apple Silicon macOS. Requires OpenGOAL v0.3.9 and a supported EU or USA game installation. '
+           'Windows x64, Apple Silicon macOS, and experimental Linux x64. Requires OpenGOAL v0.3.9 and a supported EU or USA game installation. '
            +('Jak 1 also requires vanilla Jak II in the same launcher. ' if game=='jak1' else '')+
-           '\n\nDownload the Windows ZIP or Mac TAR.GZ. In OpenGOAL Launcher, select the game and open Features > Mods > Add from File. '
+           '\n\nDownload the Windows ZIP, Mac TAR.GZ, or Linux TAR.GZ. In OpenGOAL Launcher, select the game and open Features > Mods > Add from File. '
            'The installer builds the models from your own installed games. No game models or textures are included. Mod saves are separate from vanilla saves.\n\n'
+           'Linux support is experimental. Asset-free installer checks do not validate model conversion or gameplay with real game data. Linux has not been validated in game.\n\n'
            f'Comparisons: {base}/blob/main/docs/comparisons/{game}.md\n'
            f'Compatibility: {base}/blob/main/docs/verification.md\n'
            f'Source commit: {commit}\n\nDeveloped by @jacopobassan\nhttps://jacopobassan.me\n')
     (output/'RELEASE-NOTES.md').write_text(notes)
     # Check the one-download-per-platform contract used by JakMods.
-    selected={'windows':None,'macos':None};meta=[]
+    selected={'windows':None,'macos':None,'linux':None};meta=[]
     for name in names:
         if name.startswith('windows-'):
             if selected['windows']:raise ValueError('Ambiguous Windows downloads')
@@ -85,6 +86,9 @@ def prepare(inputs,output,version=None):
         elif name.startswith('macos-'):
             if selected['macos']:raise ValueError('Ambiguous Mac downloads')
             selected['macos']=name
+        elif name.startswith('linux-'):
+            if selected['linux']:raise ValueError('Ambiguous Linux downloads')
+            selected['linux']=name
         elif name=='metadata.json':meta.append(name)
     if None in selected.values() or len(meta)!=1:raise ValueError('Incomplete JakMods release')
     result=dict(passed=True,game=game,version=version,sourceCommit=commit,

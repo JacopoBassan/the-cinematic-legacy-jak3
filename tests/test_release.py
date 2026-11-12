@@ -35,7 +35,7 @@ class PublicBundleTests(unittest.TestCase):
         for source, target in ((selected['thumbnail'], 'thumbnail.png'), ('CREDITS.txt', 'CREDITS.txt'),
                                (selected['installGuide'], 'INSTALL.txt')):
             files[target] = developer[source]
-        if platform == 'macos-arm64':
+        if platform in ('macos-arm64', 'linux-x64'):
             files.update({'extractor': developer['LauncherExtractor.sh'],
                           '.builder/python/bin/python3.11': b'test native runtime'})
         else:
@@ -52,17 +52,17 @@ class PublicBundleTests(unittest.TestCase):
         manifest = {'schemaVersion': 1, 'game': game, 'platform': platform,
                     'openGoalVersion': json.loads(sources[selected['compatibilityFile']])['openGoalVersion'],
                     'dependencies': dependencies, 'gameAssetsIncluded': False, 'version': '1.0.0', 'files': records}
-        if platform == 'macos-arm64':
-            manifest['pythonRuntime'] = json.loads(sources['platforms/macos-arm64.json'])['pythonRuntime']
+        if platform in ('macos-arm64', 'linux-x64'):
+            manifest['pythonRuntime'] = json.loads(sources['platforms/'+platform+'.json'])['pythonRuntime']
         else:
             manifest['pythonRuntime'] = json.loads(developer['platforms/windows-x64.json'])['pythonRuntime']
         if platform == 'windows-x64':
             manifest['adapterSourceSha256'] = release.sha(developer['LauncherExtractor.cs'])
         manifest.update(manifest_changes or {})
         files['bundle-manifest.json'] = json.dumps(manifest).encode()
-        extension = 'tar.gz' if platform == 'macos-arm64' else 'zip'
+        extension = 'tar.gz' if platform in ('macos-arm64', 'linux-x64') else 'zip'
         path = self.root / f'{game}-cinematic-models-{platform}.{extension}'
-        if platform == 'macos-arm64':
+        if platform in ('macos-arm64', 'linux-x64'):
             with tarfile.open(path, 'w:gz') as archive:
                 for name, data in files.items():
                     item = tarfile.TarInfo(name)

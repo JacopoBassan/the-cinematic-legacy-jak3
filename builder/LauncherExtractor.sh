@@ -1,10 +1,16 @@
 #!/bin/sh
 set -eu
+# Keep bundled Python independent of the launcher's runtime paths.
+unset LD_LIBRARY_PATH LD_PRELOAD PYTHONHOME PYTHONPATH \
+    DYLD_LIBRARY_PATH DYLD_FALLBACK_LIBRARY_PATH \
+    DYLD_FRAMEWORK_PATH DYLD_FALLBACK_FRAMEWORK_PATH DYLD_INSERT_LIBRARIES \
+    DYLD_VERSIONED_LIBRARY_PATH DYLD_VERSIONED_FRAMEWORK_PATH \
+    DYLD_ROOT_PATH DYLD_IMAGE_SUFFIX DYLD_SHARED_REGION
 export PYTHONDONTWRITEBYTECODE=1
 root=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd -P)
 python="$root/.builder/python/bin/python3.11"
 if [ ! -x "$python" ] || [ ! -f "$root/.builder/source/launcher_install.py" ]; then
-    echo 'Cinematic installer: Import the complete Mac archive through OpenGOAL.' >&2
+    echo 'Cinematic installer: Import the complete native archive through OpenGOAL.' >&2
     exit 1
 fi
 cd "$root"

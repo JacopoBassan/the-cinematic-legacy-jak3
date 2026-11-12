@@ -7,7 +7,7 @@ import platform
 import sys
 
 ROOT = Path(__file__).resolve().parent
-PLATFORMS = ('windows-x64', 'macos-arm64')
+PLATFORMS = ('windows-x64', 'macos-arm64', 'linux-x64')
 
 
 def host_platform():
@@ -16,16 +16,18 @@ def host_platform():
         return 'windows-x64'
     if sys.platform == 'darwin' and machine == 'arm64':
         return 'macos-arm64'
-    raise ValueError('This builder supports Windows x64 and Apple Silicon macOS')
+    if sys.platform == 'linux' and machine in ('amd64', 'x86_64'):
+        return 'linux-x64'
+    raise ValueError('This builder supports Windows x64, Apple Silicon macOS and Linux x64')
 
 
 def select(config, target=None):
     target = target or host_platform()
     if target == 'windows-x64' and config.get('platform') == target:
         return dict(config)
-    if target != 'macos-arm64' or config.get('game', 'jak3') != 'jak3':
-        raise ValueError('Unsupported native Mac game')
-    profile = json.loads((ROOT/'platforms/macos-arm64.json').read_text())
+    if target not in ('macos-arm64', 'linux-x64') or config.get('game', 'jak3') != 'jak3':
+        raise ValueError('Unsupported native game platform')
+    profile = json.loads((ROOT/'platforms'/f'{target}.json').read_text())
     if profile['openGoalVersion'] != config['openGoalVersion']:
         raise ValueError('Native tools and game compatibility versions differ')
     regions = profile.pop('gameProfiles', {}).get(config.get('game', 'jak3'))

@@ -27,9 +27,9 @@ def verify():
     actual = {p.relative_to(builder).as_posix() for p in builder.rglob('*') if p.is_file()
               and '__pycache__' not in p.parts and p.suffix != '.pyc'}
     assert actual == set(source_names), sorted(actual.symmetric_difference(source_names))
-    forbidden_runtime = {'package_source.py', 'package_launcher.py', 'package_macos.py',
+    forbidden_runtime = {'package_source.py', 'package_launcher.py', 'package_posix.py',
                          'LauncherExtractor.cs', 'LauncherExtractor.sh', 'README.md',
-                         'LAUNCHER-INSTALL.txt', 'LAUNCHER-INSTALL-MAC.txt'}
+                         'LAUNCHER-INSTALL.txt', 'LAUNCHER-INSTALL-MAC.txt', 'LAUNCHER-INSTALL-LINUX.txt'}
     assert not forbidden_runtime.intersection(runtime_names)
     for other in {'jak1', 'jak2', 'jak3'}-{game}:
         assert not (builder/other).exists(), other
@@ -40,8 +40,9 @@ def verify():
     canonical = json.loads((builder/f'game-configs/{game}.json').read_text())
     assert selected == canonical and selected['game'] == game
     assert (ROOT/'artwork/thumbnail.png').read_bytes() == (builder/selected['thumbnail']).read_bytes()
-    mac = json.loads((builder/'platforms/macos-arm64.json').read_text())
-    assert set(mac['gameProfiles']) == {game}
+    for platform in ('macos-arm64', 'linux-x64'):
+        native = json.loads((builder/f'platforms/{platform}.json').read_text())
+        assert native['platform'] == platform and set(native['gameProfiles']) == {game}
     compatibility = json.loads((builder/selected['compatibilityFile']).read_text())
     assert compatibility['version'] == config['version']
     provenance = json.loads((ROOT/'mod-source-provenance.json').read_text())

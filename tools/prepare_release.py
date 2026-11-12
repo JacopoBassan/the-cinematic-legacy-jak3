@@ -15,7 +15,8 @@ MOD = json.loads((ROOT/'mod-release.json').read_text())
 GAME = MOD['game']
 GAMES = {GAME: MOD['displayName']}
 FORBIDDEN = {'.fr3', '.cgo', '.dgo', '.glb', '.gltf', '.go', '.iso', '.o', '.gc', '.asm', '.sav', '.blend'}
-PLATFORMS = {'windows-x64': ('windows', 'zip'), 'macos-arm64': ('macos', 'tar.gz')}
+PLATFORMS = {'windows-x64': ('windows', 'zip'), 'macos-arm64': ('macos-arm64', 'tar.gz'),
+             'linux-x64': ('linux', 'tar.gz')}
 
 
 def sha(data):
@@ -69,9 +70,10 @@ def selected_sources(game, platform):
         raise ValueError('Unsupported game or platform')
     sources = runtime_files()
     selected = json.loads(sources[f'game-configs/{game}.json'])
-    if platform == 'macos-arm64':
-        selected.update(platform=platform, modName=game + '-cinematic-models-macos-arm64',
-                        installGuide='LAUNCHER-INSTALL-MAC.txt')
+    if platform in ('macos-arm64', 'linux-x64'):
+        guide = {'macos-arm64': 'LAUNCHER-INSTALL-MAC.txt', 'linux-x64': 'LAUNCHER-INSTALL-LINUX.txt'}
+        selected.update(platform=platform, modName=game + '-cinematic-models-' + platform,
+                        installGuide=guide[platform])
     sources['game-config.json'] = (json.dumps(selected, indent=2) + '\n').encode()
     return sources, selected
 
@@ -118,7 +120,7 @@ def read_archive(path, platform=None):
         else:
             actual[name] = hashlib.file_digest(source, 'sha256').hexdigest()
 
-    if platform == 'macos-arm64':
+    if platform in ('macos-arm64', 'linux-x64'):
         with tarfile.open(path, 'r|gz') as archive:
             for member in archive:
                 if not member.isfile() or member.mode & 0o7000:
@@ -166,14 +168,14 @@ def verify_bundle(path, game, version, platform='windows-x64'):
     python = '.builder/python/python.exe' if platform == 'windows-x64' else '.builder/python/bin/python3.11'
     if python not in actual:
         raise ValueError('Missing portable Python runtime')
-    if platform == 'macos-arm64':
-        config = json.loads(sources['platforms/macos-arm64.json'])
+    if platform in ('macos-arm64', 'linux-x64'):
+        config = json.loads(sources[f'platforms/{platform}.json'])
         if manifest.get('pythonRuntime') != config['pythonRuntime'] or manifest['openGoalVersion'] != config['openGoalVersion']:
-            raise ValueError('Incorrect pinned Mac runtime/tooling')
+            raise ValueError(f'Incorrect pinned {platform} runtime/tooling')
         if actual.get('extractor') != sha(resources['LauncherExtractor.sh']):
-            raise ValueError('Incorrect Mac launcher adapter')
+            raise ValueError('Incorrect POSIX launcher adapter')
         if any(not modes[name] & stat.S_IXUSR for name in ('extractor', python)):
-            raise ValueError('Mac archive lost executable permissions')
+            raise ValueError(f'{platform} archive lost executable permissions')
     elif 'extractor.exe' not in actual:
         raise ValueError('Missing Windows launcher adapter')
     elif manifest.get('pythonRuntime') != json.loads(resources['platforms/windows-x64.json'])['pythonRuntime']:

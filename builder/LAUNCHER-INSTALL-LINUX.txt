@@ -1,0 +1,6 @@
+Jak 3: The Cinematic Legacy
+Experimental Linux x64 installer.
+
+Use official OpenGOAL v0.3.9 and a supported EU or USA installation. Import this TAR.GZ through the game’s Features > Mods > Add from File menu. Leave the archive packed. Python and dependencies are included.
+
+Linux gameplay has not been validated. Please report whether it works for you, or anything that needs fixing. Keep your original saves.
