@@ -5,7 +5,7 @@
     "SCES-52460",
     "SCUS-97330"
   ],
-  "version": "0.3.0-rc.1",
+  "version": "0.3.0",
   "tools": {
     "extractor.exe": "bc2d0718894c48f63e6bfcfe2535cf96401542286b1572aa1dbf4a90ff8f5cc9",
     "gk.exe": "ae8a107d6ecaaa7e83948b5c9c01fabf43a0117fd82a3305ae084114c54da45d",
