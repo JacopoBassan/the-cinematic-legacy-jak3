@@ -2,7 +2,7 @@
 
 Use the Apple Silicon TAR.GZ installer with official OpenGOAL tooling **v0.3.9**. The launcher flow was checked with **v2.11.2**. Intel Macs are unsupported.
 
-Install a supported local Jak 3 game first. Then select the TAR.GZ in **Jak 3 > Features > Mods > Add from File**. Leave the archive packed. Setup includes Python and its dependencies.
+Install a supported local Jak 3 game first. Follow the [source install steps](../README.md#install), or select the TAR.GZ in **Jak 3 > Features > Mods > Add from File**. Leave the archive packed. Setup includes Python and its dependencies.
 
 The checked launcher requires TAR.GZ for local Mac imports. Use the Mac package; Windows executables and generated game code are platform-specific.
 

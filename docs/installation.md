@@ -1,6 +1,8 @@
 # Install Jak 3: The Cinematic Legacy
 
-Use the Jak 3 **Features > Mods > Add from File** button in OpenGOAL Launcher. Select this game's Windows x64 ZIP, Apple Silicon TAR.GZ or experimental Linux x64 TAR.GZ without unpacking it. Setup builds the models from your own installed files.
+Install vanilla Jak 3 in OpenGOAL Launcher, then follow the [source install steps](../README.md#install). Add the shared source once to see all three games. Setup builds the models from your own installed files.
+
+For a manual install, use **Jak 3 > Features > Mods > Add from File**. Select this game’s Windows x64 ZIP, Apple Silicon TAR.GZ or experimental Linux x64 TAR.GZ without unpacking it.
 
 Use official OpenGOAL tooling **v0.3.9**. The launcher protocol was checked with **v2.11.2**. Windows 10 or newer on x64 and Apple Silicon macOS are the tested platforms. Linux x64 is experimental. Real Linux launcher import, model conversion and gameplay are not yet validated. Intel Macs are unsupported.
 
@@ -14,9 +16,9 @@ The installer includes Python and its dependencies. No terminal, Blender or sepa
 
 ## Saves and updates
 
-Each mod has its own save folder. Vanilla saves stay in place and are not copied automatically. To continue an existing save, close the games and use the launcher's save-folder controls to copy it into the mod's save folder. Keep the original save. [Copy guide with screenshots](https://github.com/JacopoBassan/the-cinematic-legacy-jak1/blob/main/docs/copy-saves.md).
+Each mod has its own save folder. Vanilla saves stay in place and are not copied automatically. To continue an existing save, close the games and use the launcher's save-folder controls to copy it into the mod's save folder. Keep the original save. [Copy guide with screenshots](https://github.com/JacopoBassan/the-cinematic-legacy/blob/main/docs/copy-saves.md).
 
-Keep the local archive filename unchanged when updating. Launcher v2.11.2 uses that name to identify local imports. Use TAR.GZ on macOS; the checked launcher version cannot complete local Mac imports from ZIP.
+If you used **Add from File**, keep the local archive filename unchanged when updating. Launcher v2.11.2 uses that name to identify local imports. Use TAR.GZ on macOS; the checked launcher version cannot complete local Mac imports from ZIP.
 
 ## Troubleshooting
 

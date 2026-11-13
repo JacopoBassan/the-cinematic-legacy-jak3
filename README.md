@@ -2,11 +2,11 @@
 
 Play Jak 3 with the cinematic character models. Includes Jak, Daxter, transformations, selected NPCs and air transport.
 
-Other games: [Jak and Daxter](https://github.com/JacopoBassan/the-cinematic-legacy-jak1) · [Jak II](https://github.com/JacopoBassan/the-cinematic-legacy-jak2)
+[Trilogy hub](https://github.com/JacopoBassan/the-cinematic-legacy) · Other games: [Jak and Daxter](https://github.com/JacopoBassan/the-cinematic-legacy-jak1) · [Jak II](https://github.com/JacopoBassan/the-cinematic-legacy-jak2)
 
 [![Original and Cinematic comparison](docs/comparisons/jak3/jak-0.webp)](docs/comparisons/jak3.md)
 
-[All comparisons](docs/comparisons/jak3.md) · [Behind the scenes](https://github.com/JacopoBassan/the-cinematic-legacy-jak1/blob/main/docs/behind-the-scenes.md)
+[All comparisons](docs/comparisons/jak3.md) · [Behind the scenes](https://github.com/JacopoBassan/the-cinematic-legacy/blob/main/docs/behind-the-scenes.md)
 
 ## Why I made this
 
@@ -20,7 +20,7 @@ It took quite a bit of work, but here we are! These are Naughty Dog’s original
 
 I’ve put a lot of care into checking these models, though full playthroughs still need testing. If I’ve missed anything, just let me know and I’ll get it fixed! I might already be working on a few little touch-ups here and there.
 
-[A look behind the scenes](https://github.com/JacopoBassan/the-cinematic-legacy-jak1/blob/main/docs/behind-the-scenes.md)
+[A look behind the scenes](https://github.com/JacopoBassan/the-cinematic-legacy/blob/main/docs/behind-the-scenes.md)
 
 ## Models and forms
 
@@ -50,15 +50,12 @@ I’ve put a lot of care into checking these models, though full playthroughs st
 
 ## Install
 
-*Coming to JakMods · WIP*
-
 <table>
 <thead><tr><th scope="col">Platform</th><th scope="col">Launcher install</th><th scope="col">Gameplay checks</th></tr></thead>
 <tbody>
 <tr><th scope="row">Windows x64</th><td>✅ Tested</td><td>✅ Tested</td></tr>
 <tr><th scope="row">macOS · Apple Silicon</th><td>✅ Tested</td><td>✅ Tested</td></tr>
-<tr><th scope="row">Linux x64</th><td>Experimental</td><td>Not tested</td></tr>
-<tr><th scope="row">macOS · Intel</th><td>Not supported</td><td>Not tested</td></tr>
+<tr><th scope="row">Linux x64</th><td>🧪 Experimental</td><td>➖ Not tested</td></tr>
 </tbody>
 </table>
 
@@ -67,13 +64,20 @@ Gameplay checks cover selected scenes and animations. Linux launcher import, mod
 Requires official OpenGOAL **v0.3.9** and a supported EU or USA game installation.
 
 1. Install vanilla Jak 3 in [OpenGOAL Launcher](https://opengoal.dev), then close the game.
-2. Download the **Windows ZIP**, **Mac TAR.GZ** or experimental **Linux TAR.GZ** from [Releases](https://github.com/JacopoBassan/the-cinematic-legacy-jak3/releases).
-3. In the launcher, select the game, open **Features > Mods > Add from File**, and select the archive without unpacking it.
-4. Wait for setup, then press **Play**.
+2. Open **Settings > Mods**, paste this source URL, and press **Add**:
+
+   ```text
+   https://raw.githubusercontent.com/JacopoBassan/the-cinematic-legacy/main/docs/mods.json
+   ```
+
+3. Return to **Jak 3 > Features > Mods** and select **Jak 3: The Cinematic Legacy**.
+4. Press **Install**, wait for setup, then press **Play**.
+
+For a manual install, download the **Windows ZIP**, **Mac TAR.GZ** or experimental **Linux TAR.GZ** from [Releases](https://github.com/JacopoBassan/the-cinematic-legacy-jak3/releases), then use **Features > Mods > Add from File**. Leave the archive packed.
 
 The installer builds the replacements from your installed game files. No game models or textures are included. Python is included.
 
-**Saves:** Vanilla OpenGOAL saves are not imported automatically. You can copy your existing progress into the mod’s save folder and keep the original. This has been tested on Windows. [How to copy your saves](https://github.com/JacopoBassan/the-cinematic-legacy-jak1/blob/main/docs/copy-saves.md).
+**Saves:** Vanilla OpenGOAL saves are not imported automatically. You can copy your existing progress into the mod’s save folder and keep the original. [How to copy your saves](https://github.com/JacopoBassan/the-cinematic-legacy/blob/main/docs/copy-saves.md).
 
 [Compatibility and tested coverage](docs/verification.md) · [Mac support](docs/macos.md) · [Experimental Linux](docs/linux.md) · [Build from source](docs/building.md)
 
