@@ -9,7 +9,7 @@ This repository contains only the Jak 3 builder and its required helpers. It use
 - `sourceFiles`: the complete developer ZIP, including package tools and guides.
 - `runtimeFiles`: the smaller source set embedded in the installer. It excludes package tools, compiler source and developer guides.
 
-Both sets include only this game's code and required resources. [`mod-source-provenance.json`](../mod-source-provenance.json) records their file hashes and source history. Code licences do not cover game assets. Generated models and extracted data must stay local.
+Both sets include only this game's code and required resources. [`mod-source-provenance.json`](../mod-source-provenance.json) records their file hashes and source history. Code licenses do not cover game assets. Generated models and extracted data must stay local.
 
 ## Checks
 
@@ -49,6 +49,6 @@ Collect all three resulting archives in `dist/input` on one machine. Then use a 
 python tools/prepare_mod_release.py --input dist/input --output dist/release
 ```
 
-Version `0.3.0` produces `windows-v0.3.0.zip`, `macos-arm64-v0.3.0.tar.gz`, `linux-v0.3.0.tar.gz`, `source-v0.3.0.zip`, `metadata.json`, `release-manifest.json` and `SHA256SUMS.txt`. Metadata declares only `jak3`.
+Version `0.3.1` produces `windows-v0.3.1.zip`, `macos-arm64-v0.3.1.tar.gz`, `linux-v0.3.1.tar.gz`, `source-v0.3.1.zip`, `metadata.json`, `release-manifest.json` and `SHA256SUMS.txt`. Metadata declares only `jak3`.
 
-The manual **Cut Mod Release** workflow builds all three platforms, verifies the assets, and creates or refreshes a draft. On Ubuntu 24.04 x64, it also runs the [asset-free Linux installer checks](linux.md#developer-checks) against the final archive. Publication requires a separate approval. Original mod code uses [MOD-LICENSE](../MOD-LICENSE). Third-party code and bundled dependencies retain their own licence notices.
+The manual **Cut Mod Release** workflow builds all three platforms, verifies the assets, and creates or refreshes a draft. On Ubuntu 24.04 x64, it also runs the [asset-free Linux installer checks](linux.md#developer-checks) against the final archive. The draft can be checked before publication. Original mod code uses [MOD-LICENSE](../MOD-LICENSE). Third-party code and bundled dependencies retain their own license notices.

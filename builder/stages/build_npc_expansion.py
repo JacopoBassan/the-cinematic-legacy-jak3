@@ -188,6 +188,64 @@ def torn_hand_transform(target, anchor, ls, hs):
     return out
 
 
+def fit_rider_arm_weights(source, low_name, ls, lm, li, lv, lt, ht, selections, used):
+    """Carry the native sleeve bend field onto the cinematic rider's arm skin."""
+    from scipy.spatial import cKDTree
+    dst=source.view('<f4').reshape(-1,16)
+    native=np.frombuffer(lv,'<f4').reshape(-1,16)
+    nb=np.frombuffer(lv,'u1').reshape(-1,64)
+    groups=[j['id'] for n,j in ls.items() if re.fullmatch('[LR](shoulder|elbow|ArmorB?)',n)]
+    influence=np.sum(dst[:,8:11]*np.isin(source[:,60:63],groups),axis=1)
+    body=[]
+    for material in ('klever-arm','klever-undershirt','klever-chest'):
+        for effect in lm['effects']:
+            for d in map(DRAW.unpack,effect['draws']):
+                if lt[d[1]]['name']==material:
+                    ids=li[d[3]:d[3]+d[4]]
+                    body.append(ids.reshape(-1,3) if d[6] else triangles(ids))
+    faces=np.concatenate(body);tri=native[faces,:3].astype(float)
+    tree=cKDTree(tri.mean(1));report=[]
+    for material,threshold,max_distance in [('klever-arm',0.0,256.0),('klever-undershirt',0.01,256.0)]:
+        ids=[ix[ix!=0xffffffff] for _,d,ix in selections if ht[d[1]]['name']==material]
+        if not ids:continue
+        rows=np.searchsorted(used,np.unique(np.concatenate(ids)))
+        rows=rows[influence[rows]>threshold]
+        if not len(rows):continue
+        _,near=tree.query(dst[rows,:3].astype(float),k=min(32,len(tri)))
+        if near.ndim==1:near=near[:,None]
+        t=tri[near];p=dst[rows,None,:3].astype(float)
+        a,b,c=t[:,:,0],t[:,:,1],t[:,:,2];ab=b-a;ac=c-a;ap=p-a
+        dot=lambda x,y:np.sum(x*y,axis=-1)
+        aa,cc,dd=dot(ab,ab),dot(ab,ac),dot(ac,ac);det=aa*dd-cc*cc
+        u=np.divide(dd*dot(ap,ab)-cc*dot(ap,ac),det,out=np.zeros_like(det),where=abs(det)>1e-12)
+        v=np.divide(aa*dot(ap,ac)-cc*dot(ap,ab),det,out=np.zeros_like(det),where=abs(det)>1e-12)
+        bary=np.stack([1-u-v,u,v],axis=-1);q=a+u[:,:,None]*ab+v[:,:,None]*ac
+        dist=np.where((bary>=0).all(-1)&(abs(det)>1e-12),dot(q-p,q-p),np.inf)
+        for x,y,ix,iy in [(a,b,0,1),(a,c,0,2),(b,c,1,2)]:
+            edge=y-x;den=dot(edge,edge)
+            f=np.clip(np.divide(dot(p-x,edge),den,out=np.zeros_like(den),where=den>1e-12),0,1)
+            q=x+f[:,:,None]*edge;d=dot(q-p,q-p);better=d<dist
+            edge_bary=np.zeros_like(bary);edge_bary[:,:,ix]=1-f;edge_bary[:,:,iy]=f
+            bary=np.where(better[:,:,None],edge_bary,bary);dist=np.minimum(dist,d)
+        choice=dist.argmin(1);rr=np.arange(len(rows));distance=np.sqrt(dist[rr,choice])
+        if np.max(distance)>max_distance:raise ValueError((low_name,material,'arm surface correspondence too distant'))
+        for row,face,factors in zip(rows,faces[near[rr,choice]],bary[rr,choice]):
+            combined={}
+            for vi,factor in zip(face,factors):
+                for jid,weight in zip(nb[vi,60:63],native[vi,8:11]):
+                    if weight*factor>1e-8:
+                        combined[int(jid)]=combined.get(int(jid),0)+float(weight*factor)
+            chosen=sorted(combined.items(),key=lambda item:-item[1])[:3]
+            total=sum(weight for _,weight in chosen)
+            source[row,60:63]=0;dst[row,8:11]=0
+            for k,(jid,weight) in enumerate(chosen):
+                source[row,60+k]=jid;dst[row,8+k]=weight/total
+        report.append(dict(material=material,vertices=len(rows),
+                           nativeSurfaceDistanceMax=float(np.max(distance)),
+                           nativeSurfaceDistanceMedian=float(np.median(distance))))
+    return report
+
+
 def fit_torn_hand_weights(source, original_joints, hs, ls, lm, li, lv):
     """Transfer the native knuckle bend field onto the fitted cinematic hands."""
     from scipy.spatial import cKDTree
@@ -418,6 +476,7 @@ def build_one(low_name, high_name, *, source_dir=None, submit_all_joints=False,
             sf[sword_rows,4:7]=beforenorm[sword_rows]@rotation.T
             torso_fit['swordAttachment']='rigid fit to native chest-mounted handle'
         hand_fit=fit_torn_hand_weights(source,original_joints,hs,ls,lm,li,lv) if low_name=='bt-torn-lod0' else None
+        rider_arm_fit=fit_rider_arm_weights(source,low_name,ls,lm,li,lv,lt,ht,selections,used) if low_name=='kleever-rider-lod0' else None
         assert np.all(np.isfinite(sf[:,:3])) and np.all(np.isfinite(sf[:,4:7]))
         # Catch accidental matrix-ID remapping collisions or unit errors before
         # a staged asset can be accepted for a runtime test.
@@ -522,12 +581,61 @@ def build_one(low_name, high_name, *, source_dir=None, submit_all_joints=False,
         report['eye_surface_transfer']=eye_report
         report['torso_fit']=torso_fit
         report['hand_fit']=hand_fit
+        report['rider_arm_fit']=rider_arm_fit
         report['static_eye_layers']=['iris','pupil'] if static_eye_pupil else None
         report['requires_full_joint_submission']=submit_all_joints
         report['matrix_ids_within_original_submission']=not submit_all_joints
         reports.append(report)
         print(filename,low_name,report['triangles'],'triangles',native_kept,'native preserved triangles',removed_tris,'staff triangles removed')
     return reports
+
+def fit_sig_rider_garment(generated_path, native_path, output_path):
+    """Keep Sig's native rider garment under the cinematic shoulder armor."""
+    generated_path, native_path, output_path = map(Path, (generated_path, native_path, output_path))
+    if output_path.resolve() in (generated_path.resolve(), native_path.resolve()) or output_path.exists():
+        raise ValueError('Sig garment output must be a new file separate from its inputs')
+    name = 'sig-rider-lod0'
+    raw, native_raw = decompress(generated_path), decompress(native_path)
+    current, native = model(raw, name), model(native_raw, name)
+    _, indices, _, vertices = buffers(raw, name)
+    _, native_indices, _, native_vertices = buffers(native_raw, name)
+    tx, _ = textures(raw)
+    native_tx, _ = textures(native_raw)
+    if (vertices[:len(native_vertices)] != native_vertices or
+            not np.array_equal(indices[:len(native_indices)], native_indices) or
+            len(tx) < len(native_tx) or
+            any(texture_bytes(a) != texture_bytes(z) for a, z in zip(tx, native_tx))):
+        raise ValueError('Sig native vertex, index or texture prefix does not match')
+
+    def find_draw(mesh, texture_list, texture_name):
+        return [(ei, di, draw) for ei, effect in enumerate(mesh['effects'])
+                for di, draw in enumerate(effect['draws'])
+                if texture_list[DRAW.unpack(draw)[1]]['name'] == texture_name]
+
+    current_draw = find_draw(current, tx, 'sig-undergarments')
+    native_draw = find_draw(native, native_tx, 'sig2-undergarments')
+    if len(current_draw) != 1 or len(native_draw) != 1 or current_draw[0][0] != 2 or native_draw[0][0] != 2:
+        raise ValueError('Unexpected Sig rider garment draw layout')
+    fitted = copy.deepcopy(current)
+    ei, di, _ = current_draw[0]
+    fitted['effects'][ei]['draws'][di] = native_draw[0][2]
+    result = raw[:current['start']] + serialize(fitted) + raw[current['end']:]
+    checked = model(result, name)
+    _, checked_indices, _, checked_vertices = buffers(result, name)
+    checked_tx, _ = textures(result)
+    if (checked_vertices != vertices or not np.array_equal(checked_indices, indices) or
+            len(checked_tx) != len(tx) or
+            any(texture_bytes(a) != texture_bytes(z) for a, z in zip(checked_tx, tx)) or
+            serialize(checked) != serialize(fitted) or
+            raw[:current['start']] != result[:checked['start']] or
+            raw[current['end']:] != result[checked['end']:]):
+        raise ValueError('Sig garment replacement changed unrelated packed content')
+    compress(output_path, result)
+    if decompress(output_path) != result:
+        raise ValueError('Sig garment output failed round-trip validation')
+    return {'model': name, 'nativeDraw': 'sig2-undergarments',
+            'cinematicDraw': 'sig-undergarments', 'effect': ei}
+
 
 def build(data_dir=None,output_dir=None,metadata_path=None,report_path=None,animated_eyes=False):
     global CINEMATIC_EYES

@@ -308,6 +308,12 @@ def build(data,tools,work,output,config):
     eye_source=work/'cinematic-eyes.gc'
     eye_report=generate_eyes(data,eye_source,npc_output)
     (work/'cinematic-eyes-report.json').write_text(json.dumps(eye_report,indent=2))
+    from build_npc_expansion import fit_sig_rider_garment
+    sig_path=npc_output/'lwassig.fr3'
+    sig_fitted=work/'lwassig-garment-fit.fr3'
+    sig_report=fit_sig_rider_garment(sig_path,data/'out/jak3/fr3/lwassig.fr3',sig_fitted)
+    os.replace(sig_fitted,sig_path)
+    (work/'sig-garment-validation.json').write_text(json.dumps(sig_report,indent=2))
     drawable_source=project/'goal_src/jak3/engine/process-drawable/process-drawable.gc'
     drawable_source.write_text(patch_eye_dispatch(drawable_source.read_text()))
     (work/'npc-validation.json').write_text(json.dumps(npc_reports,indent=2))

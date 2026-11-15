@@ -10,11 +10,13 @@ Play Jak 3 with the cinematic character models. Includes Jak, Daxter, transforma
 
 ## Why I made this
 
-Jak and Daxter is probably my favourite trilogy of all time, and I spent countless hours playing these games when they first came out on PS2. I was already replaying them through PCSX2 when I found out about OpenGOAL, so you can imagine how happy I was.
+Jak and Daxter is probably my favorite trilogy of all time, and I spent countless hours playing these games when they first came out on PS2. I was already replaying them through PCSX2 when I found out about OpenGOAL, so you can imagine how happy I was.
 
 Seeing the games in widescreen and at higher resolutions got me wondering what they would look like with the more detailed cutscene models during normal gameplay. I first asked about this on the OpenGOAL Discord [on 2 August 2024](https://discord.com/channels/756287461377703987/949828064026714174/1268810551509909575), and the replies explained why it wouldn’t be a simple swap: different skeletons, missing eye and facial animation, and a model importer that couldn’t bring over the facial blend shapes.
 
 Two years later, I finally decided to have a go at making it work myself, and there turned out to be quite a bit more to it than swapping the models. I had to adapt them to the gameplay skeletons, fit their facial shapes to the games’ existing expression controls and rebuild the model data needed to make those deformations work. Eyes, jaw and brow movement, hands and clothing needed their own attention too.
+
+For some characters, I combined cinematic models with gameplay parts or textures where I felt it better preserved their in-game appearance.
 
 It took quite a bit of work, but here we are! These are Naughty Dog’s original models from the games, adapted for gameplay, and I hope you enjoy them as much as I do.
 
@@ -83,13 +85,13 @@ The installer builds the replacements from your installed game files. No game mo
 
 ## Development
 
-Based on [OG-Mod-Base](https://github.com/OpenGOAL-Mods/OG-Mod-Base) and [OpenGOAL](https://github.com/open-goal/jak-project). The template release metadata and licences are retained; the game uses the official installed engine and tools. Model conversion is in `builder/`; the mod uses the pinned official runtime.
+Based on [OG-Mod-Base](https://github.com/OpenGOAL-Mods/OG-Mod-Base) and [OpenGOAL](https://github.com/open-goal/jak-project). The template release metadata and licenses are retained; the game uses the official installed engine and tools. Model conversion is in `builder/`; the mod uses the pinned official runtime.
 
 Run `python tools/verify_mod_repository.py` and `python tools/run_tests.py` for verification. On macOS, use `TMPDIR=/private/tmp` when running the regression suite.
 
 The **Cut Mod Release** action builds the Windows, Apple Silicon and experimental Linux x64 packages. It uses the template metadata format and leaves the release as a draft for review.
 
-Original mod code: [MOD-LICENSE](MOD-LICENSE). Upstream code keeps its own licences.
+Original mod code: [MOD-LICENSE](MOD-LICENSE). Upstream code keeps its own licenses.
 
 Developed by [@jacopobassan](https://jacopobassan.me)
 

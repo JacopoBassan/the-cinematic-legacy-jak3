@@ -78,9 +78,15 @@ def free_space_check(mod, data, scratch, game_config=None, minimum_bytes=1024**3
 
 
 def scratch_parent(mod):
-    parent = mod.parents[4].parent/'OpenGOAL-Cinematic-Builds'
+    override = os.environ.get('CINEMATIC_WORK_ROOT')
+    if override:
+        parent = Path(override)
+        if not parent.is_absolute():
+            raise ValueError('CINEMATIC_WORK_ROOT must be an absolute directory path.')
+    else:
+        parent = mod.parents[4].parent/'OpenGOAL-Cinematic-Builds'
     installer.reject_reparse(parent)
-    parent.mkdir(exist_ok=True)
+    parent.mkdir(parents=True, exist_ok=True)
     return parent
 
 

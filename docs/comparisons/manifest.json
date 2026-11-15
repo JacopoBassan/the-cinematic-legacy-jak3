@@ -162,14 +162,37 @@
           "view": "Driving, front",
           "path": "jak3/kleiver-0.webp",
           "dimensions": [
-            1076,
-            878
+            1072,
+            868
           ],
-          "sha256": "fb30a37a35c675c8e28e48da6d5f06201394b7165b8a891b9bddf9876b699dc8",
-          "losslessCompression": {
-            "sourceSha256": "d6ebfcb6ae065ba803c0fd38fdad3021e67d49f954e052b2d62f24bd7158c141",
-            "decodedRgbSha256": "c0013f6a33b481ec301516b4fc551458fc98fe952c5ab947f6da5de0818711a9",
-            "method": "cwebp lossless exact z9"
+          "sha256": "2a88d3e89a7e8eab784352e1ef3ffedafe7f5813bf78b3582c087ffd61a7e57a",
+          "framing": {
+            "sourceDimensions": [
+              1920,
+              1080
+            ],
+            "sharedCrop": [
+              750,
+              120,
+              1280,
+              940
+            ],
+            "sourceImagesResized": false,
+            "sourcePixelEdits": false,
+            "sourceCaptureSha256": {
+              "original": "3cb00c4342619503dd64552575c65981b5de92c0f698a8009c953a509715f8fc",
+              "cinematic": "6ccc1ba401c4377db1260ef3b1836d31f6b1e83be8bcf8ab984f72c3dafd3685"
+            },
+            "outputEncoding": {
+              "format": "WebP",
+              "lossless": true,
+              "decodedPixelsPreserved": true
+            },
+            "outputLayout": {
+              "header": 48,
+              "gap": 12,
+              "margin": 0
+            }
           }
         },
         {
@@ -177,14 +200,37 @@
           "view": "Driving, side",
           "path": "jak3/kleiver-1.webp",
           "dimensions": [
-            1676,
+            1492,
             668
           ],
-          "sha256": "52fc78a9b41db22ca3b1d92eeaf18d573b4ae158a1951d5d61f9a9d51a845624",
-          "losslessCompression": {
-            "sourceSha256": "d3b7eca39e69ce1944dd63036ebe54cc0be5289028121451a149588f11d96a5a",
-            "decodedRgbSha256": "27a8cc499ccb57673ec786e204cb287ba3ea9e5b65ab987ec90a4e59809c9014",
-            "method": "cwebp lossless exact z9"
+          "sha256": "34ef20f191150dfdceabe54e4ad5095274a2dfeb6c156fb5e9d29b4a937299a7",
+          "framing": {
+            "sourceDimensions": [
+              1920,
+              1080
+            ],
+            "sharedCrop": [
+              580,
+              180,
+              1320,
+              800
+            ],
+            "sourceImagesResized": false,
+            "sourcePixelEdits": false,
+            "sourceCaptureSha256": {
+              "original": "65b2f5980431980e219f1c6890bc264449474c60cb7d61bee6fd43219c96a476",
+              "cinematic": "28c86a89d21c7254550302b19acda8662edb1f5d82ba0b84b87d86b262041099"
+            },
+            "outputEncoding": {
+              "format": "WebP",
+              "lossless": true,
+              "decodedPixelsPreserved": true
+            },
+            "outputLayout": {
+              "header": 48,
+              "gap": 12,
+              "margin": 0
+            }
           }
         },
         {
@@ -238,45 +284,37 @@
           "view": "Seated, front",
           "path": "jak3/sig-0.webp",
           "dimensions": [
-            1156,
-            778
+            1312,
+            788
           ],
-          "sha256": "61c144ced143e45ddb2a8825d217a92e14fa653c4f9e6ed3f390897c2abcf44f",
+          "sha256": "4f8e432212c7e246f595e0f6a1700fa4cdcb24f22453db113e1bd1f2c1179ee2",
           "framing": {
             "sourceDimensions": [
               1920,
               1080
             ],
             "sharedCrop": [
-              780,
-              350,
-              1340,
-              1030
+              750,
+              200,
+              1400,
+              940
             ],
             "sourceImagesResized": false,
             "sourcePixelEdits": false,
             "sourceCaptureSha256": {
-              "original": "0fd06ed11a80b5a30bd5740998dbb97f71c672fdf89f46327e061105465a821b",
-              "cinematic": "7b26c84943680685dce721cd4bc15f0623f1ba2dbdceb785e7d6cb1a3dd2a3e0"
+              "original": "f126eb7cee52a59a58eb59bd35e002fb9b700c8681ba99ba55b4b9b5b9c01ca6",
+              "cinematic": "d15ce32aa7f16b634741d0dcdb68579907fc5d788627e6dce3b1013e72d90ee7"
             },
             "outputEncoding": {
-              "format": "PNG",
-              "mode": "RGB",
+              "format": "WebP",
               "lossless": true,
-              "optimize": true
+              "decodedPixelsPreserved": true
             },
             "outputLayout": {
-              "header": 82,
+              "header": 48,
               "gap": 12,
-              "marginX": 12,
-              "marginTop": 0,
-              "marginBottom": 16
+              "margin": 0
             }
-          },
-          "losslessCompression": {
-            "sourceSha256": "b49dcef63b5712e50bbfa7dad1949a9d2f10c2aabd80e19fc14f491b966c6ce1",
-            "decodedRgbSha256": "14167d94c6c69eec4cfd54575177cc93f53780ea1b043916db5686b36125408f",
-            "method": "cwebp lossless exact z9"
           }
         },
         {
@@ -284,45 +322,37 @@
           "view": "Seated, side",
           "path": "jak3/sig-1.webp",
           "dimensions": [
-            1436,
-            828
+            1732,
+            678
           ],
-          "sha256": "6ddc5fdefa4be6b3ce8ef8412e1b0f6ded8398c093ba269d5dfb2ee92b2f6180",
+          "sha256": "efff438390226bb3b83396bf72042d5617758a71a66d7cb33df429583426ca32",
           "framing": {
             "sourceDimensions": [
               1920,
               1080
             ],
             "sharedCrop": [
-              650,
-              350,
-              1350,
-              1080
+              550,
+              220,
+              1410,
+              850
             ],
             "sourceImagesResized": false,
             "sourcePixelEdits": false,
             "sourceCaptureSha256": {
-              "original": "cecf3ba9809f2e7a5e9af0ace3088e53e61d86779144cd9018c562aba8feeda1",
-              "cinematic": "1bb80af4127a6fa18e3afb77fb55ac49a31af5f7b2470bc977d18624b9553022"
+              "original": "b63f15c898a53c6e9a14ab8742cf6cd42e21b785fe3553d34185b919b6d4ee34",
+              "cinematic": "b4dfd010a54503f4baaf14ad0e0c80aa2b9e361014c5c729a68e92ae2f5b5689"
             },
             "outputEncoding": {
-              "format": "PNG",
-              "mode": "RGB",
+              "format": "WebP",
               "lossless": true,
-              "optimize": true
+              "decodedPixelsPreserved": true
             },
             "outputLayout": {
-              "header": 82,
+              "header": 48,
               "gap": 12,
-              "marginX": 12,
-              "marginTop": 0,
-              "marginBottom": 16
+              "margin": 0
             }
-          },
-          "losslessCompression": {
-            "sourceSha256": "8873fa312a335c1712bbfa08596626e58a2076803d32a7cbd8421d676a7688ee",
-            "decodedRgbSha256": "32f09a696771358cc59463255b3c882feb37ec1309df52661473bebdc6286d31",
-            "method": "cwebp lossless exact z9"
           }
         },
         {
@@ -508,12 +538,5 @@
         }
       ]
     }
-  },
-  "losslessCompression": {
-    "sourceCommit": "7c6e5a873ec171d1f5f55fe1bb40dffc7acef8d1",
-    "decodedPixelsPreserved": true,
-    "dimensionsPreserved": true,
-    "beforeBytes": 26350747,
-    "afterBytes": 22031032
   }
 }

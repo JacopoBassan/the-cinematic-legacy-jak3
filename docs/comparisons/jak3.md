@@ -72,6 +72,8 @@ Original left, Cinematic right. In-game screenshots.
 
 ## Sig
 
+Rider Sig keeps his gameplay undergarment beneath the cinematic armor.
+
 **Seated, front**
 
 ![Sig, Seated, front: Original left, Cinematic right](jak3/sig-0.webp)
