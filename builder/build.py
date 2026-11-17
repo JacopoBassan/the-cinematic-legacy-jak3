@@ -315,7 +315,8 @@ def build(data,tools,work,output,config):
     os.replace(sig_fitted,sig_path)
     (work/'sig-garment-validation.json').write_text(json.dumps(sig_report,indent=2))
     drawable_source=project/'goal_src/jak3/engine/process-drawable/process-drawable.gc'
-    drawable_source.write_text(patch_eye_dispatch(drawable_source.read_text()))
+    from npc_runtime import patch_jinx_shoulders
+    drawable_source.write_text(patch_jinx_shoulders(patch_eye_dispatch(drawable_source.read_text())))
     (work/'npc-validation.json').write_text(json.dumps(npc_reports,indent=2))
     air_reports=build_air(data_dir=data,output_dir=air_output,report_path=work/'air-validation.json')
     for name,relative in [('foreground','engine/gfx/foreground/foreground.gc'),('texture-anim','engine/gfx/texture/texture-anim.gc')]:

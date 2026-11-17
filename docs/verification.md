@@ -1,18 +1,18 @@
 # Jak 3 verification
 
-Release `0.3.1` targets Windows x64, [Apple Silicon macOS](macos.md) and [experimental Linux x64](linux.md) with official OpenGOAL **v0.3.9**. The launcher protocol was checked with **v2.11.2**. Intel Macs are unsupported. Real Linux launcher import, model conversion and gameplay are not yet validated.
+The mod targets Windows x64, [Apple Silicon macOS](macos.md) and [experimental Linux x64](linux.md) with official OpenGOAL **v0.3.9**. The launcher protocol was checked with **v2.11.2**. Intel Macs are unsupported. Real Linux launcher import, model conversion and gameplay are not yet validated.
 
 ## Source checks
 
 On 2026-11-11, the game-specific suite completed 46 tests on Apple Silicon: 42 passed and four Windows-only cases were skipped. Twelve portable filesystem fixtures also passed on this Mac.
 
-On Windows, all 46 tests and 13 installer filesystem checks passed on 2026-11-15.
+On Windows, all 46 tests and 13 installer filesystem checks passed on 2026-11-17.
 
 Coverage includes wrong-game inputs, corrupt packages, source inventories, staged writes, rollback, interrupted transactions, hardlinks and lock ownership. The Windows checks also cover junctions, paths and child-process cleanup. These source checks are separate from player testing.
 
 [`builder/source-files.json`](../builder/source-files.json) separates the complete `sourceFiles` developer ZIP from the smaller `runtimeFiles` installer source set. Package checks verify each manifest against its own file set. They also check pinned dependencies, runtime versions, Windows adapter provenance and Mac/Linux executable modes. Game models and textures are excluded from distributable source and installer archives.
 
-The fresh per-game layout has not had a new full player session. Historical coverage follows.
+The Windows installer archive and its source and runtime inventories were checked. The pinned Windows Python runtime also passed a SciPy sparse-factorization smoke test. Player checks cover representative scenes and poses, not a full campaign.
 
 ## Linux package and installer checks
 
@@ -29,6 +29,10 @@ Release assembly passed with both builder and standard archive names. Checks cov
 The builder covers sixteen replacement placements across twelve model names. It retains the original convoy Torn. Checks cover geometry, morphs, textures, Dark shader changes and scoped archive changes. Native text, minimap and speedrun fixes remain part of the original installation.
 
 The 0.3.1 rider corrections were checked with Windows EU v0.3.9: Kleiver uses the native sleeve bend weights on his cinematic arms, and Sig retains the original rider garment beneath cinematic armor. Matched front and side captures and representative rider poses were inspected. A complete EU conversion reproduced the tested Sig garment and accepted Kleiver model data. The Sig garment stage also passed structural checks against the available USA model data; a complete new USA conversion and USA gameplay were not verified. These corrections have not had a new macOS or Linux gameplay session.
+
+Jinx uses cinematic arm and band geometry retargeted to the gameplay rig's limb directions and lengths. A model-specific shoulder correction reduces the excess torso gap while retaining the fuller arms and leaving elbow and hand matrices unchanged. A complete Windows EU conversion, four standing views and four controlled native idle and walking poses were checked on 2026-11-17. The elbow and hand matrices matched the reference exactly at all four sampled phases. The generated model data, joint weights, UVs, textures, eye routing and morph data are unchanged by the runtime correction. Separate EU and USA model rebuilds reproduced their regional outputs; a complete new USA conversion and USA gameplay were not verified. No new macOS or Linux gameplay checks were performed for this change.
+
+Windows EU player checks on 2026-11-16 cover normal, Dark and Light forms, five armor stages, and sampled native walking and jumping in normal and Light forms. Four cinematic pants vertices are fitted to the original front waist surface to preserve sash clearance; cloth geometry, UVs, weights and visibility controls are unchanged. Scoped USA geometry checks produced the same affected vertex data.
 
 The builder checks original tools, disc revisions and consumed assets before conversion. It validates the generated model data and records payload checksums. Earlier conversions covered the supported EU and USA profiles.
 

@@ -87,14 +87,65 @@
           "view": "Front",
           "path": "jak3/lightjak-0.webp",
           "dimensions": [
-            1256,
-            958
+            1572,
+            1178
           ],
-          "sha256": "aa7e656e5f68db10974fe58198712d10514a5a967f71f57dfc0b15dd88ed0681",
-          "losslessCompression": {
-            "sourceSha256": "208e35f1f893dccb323f6c2ec77285028b962b066e7a60fd5b6aefb11f7ed9b9",
-            "decodedRgbSha256": "2f4c5adb5928592d0e0d54dfaf20d57b30d6f2659e615140f89eccacc9c9b611",
-            "method": "cwebp lossless exact z9"
+          "sha256": "0b2b6f70a14fecd201b3da379024be4038d9f96dd150efc9f35b4fb5b94b39c3",
+          "framing": {
+            "sourceDimensions": [
+              1920,
+              1080
+            ],
+            "sharedCrop": [
+              576,
+              0,
+              1344,
+              1080
+            ],
+            "sourceImagesResized": false,
+            "sourcePixelEdits": false,
+            "sourceCaptureSha256": {
+              "original": "6ed8264ce9381a714201d028a0ba0796027590ee08808237b9be8f082f0ae8b6",
+              "cinematic": "6d4e5fccf9b37535f74fa5e3b74ec35e852a2b212151798539438f1db7145c33"
+            },
+            "outputEncoding": {
+              "format": "WebP",
+              "lossless": true,
+              "decodedPixelsPreserved": true
+            },
+            "outputLayout": {
+              "header": 82,
+              "gap": 12,
+              "margin": 12,
+              "footer": 16
+            }
+          },
+          "captureBuild": {
+            "openGoalVersion": "v0.3.9",
+            "platform": "windows-x64",
+            "region": "EU",
+            "originalGameFr3Sha256": "38a84f49eeca0301f7ef2f52aafa8abe8cca3d9e6e3a79b4623af7634251a987",
+            "originalGameCgoSha256": "2e92da6318292ac3b2d7fc339a289b042dfebeb8b8f121afa0af2949af0768a7",
+            "originalMerc2VertexShaderSha256": "cd5f5e182bccf0b8a4d084e0843a49d7452e20d8cdee2a2ec793188bf3277d32",
+            "cinematicGameFr3Sha256": "5caa258a003511b6cc0802b798b4c32c8e7f7a843d2591db30b40883a3a83519",
+            "cinematicGameCgoSha256": "8d81f4ee1d3a3db3b9add422e6ad92a480263bb4cd03c975cb2f98fb670b670c",
+            "cinematicMerc2VertexShaderSha256": "677389fa8e19c5846f782e6fcb6aee23f20c563035cad41afd9c6fe147e18f70",
+            "baseCinematicManifestSha256": "ac1fac6d5d49cc44e3f2a96b241c71ff34189bf076bc18e9cefdec2a49e0570c"
+          },
+          "capturePose": {
+            "jakAnimation": "jakb-lightjak-stance",
+            "jakFrame": 8.625,
+            "daxterAnimation": "daxter-lightjak-stance",
+            "daxterFrame": 5.5,
+            "daxterOverrideActive": false,
+            "lightJakInterpolation": 1.0,
+            "daxterFrameInterpolationBits": "3f666668"
+          },
+          "captureLighting": {
+            "worldLightingHeldFixed": true,
+            "actorYawDeltaDegrees": 180,
+            "actorTurnVerified": true,
+            "timeOfDay": "12:00"
           }
         },
         {
@@ -102,14 +153,65 @@
           "view": "Side",
           "path": "jak3/lightjak-1.webp",
           "dimensions": [
-            1256,
-            958
+            1572,
+            1178
           ],
-          "sha256": "171244c76be600f121237fea969531d62c099ee17958e4d6e66373b7d00f31ed",
-          "losslessCompression": {
-            "sourceSha256": "3fff0ff04ba58832d1d2b890ed322ce25438937dba7123de9a52f114e0a8f911",
-            "decodedRgbSha256": "0cb3a3025d78d6af83a5eca187971bac854118230d3aec960784f364915814a5",
-            "method": "cwebp lossless exact z9"
+          "sha256": "097bddecd919dade893491b987fe8723d3a0cdbfff12854d57ff811153bc35f5",
+          "framing": {
+            "sourceDimensions": [
+              1920,
+              1080
+            ],
+            "sharedCrop": [
+              576,
+              0,
+              1344,
+              1080
+            ],
+            "sourceImagesResized": false,
+            "sourcePixelEdits": false,
+            "sourceCaptureSha256": {
+              "original": "999bfe472c901f01bb42a9927f4aae07eac9a6926e6296b8f63eda1dd8394a8f",
+              "cinematic": "28afffde79f8d55287cb456d9e4d7ec8ecafd2a879ceabcf4c5c1ee65181c5cf"
+            },
+            "outputEncoding": {
+              "format": "WebP",
+              "lossless": true,
+              "decodedPixelsPreserved": true
+            },
+            "outputLayout": {
+              "header": 82,
+              "gap": 12,
+              "margin": 12,
+              "footer": 16
+            }
+          },
+          "captureBuild": {
+            "openGoalVersion": "v0.3.9",
+            "platform": "windows-x64",
+            "region": "EU",
+            "originalGameFr3Sha256": "38a84f49eeca0301f7ef2f52aafa8abe8cca3d9e6e3a79b4623af7634251a987",
+            "originalGameCgoSha256": "2e92da6318292ac3b2d7fc339a289b042dfebeb8b8f121afa0af2949af0768a7",
+            "originalMerc2VertexShaderSha256": "cd5f5e182bccf0b8a4d084e0843a49d7452e20d8cdee2a2ec793188bf3277d32",
+            "cinematicGameFr3Sha256": "5caa258a003511b6cc0802b798b4c32c8e7f7a843d2591db30b40883a3a83519",
+            "cinematicGameCgoSha256": "8d81f4ee1d3a3db3b9add422e6ad92a480263bb4cd03c975cb2f98fb670b670c",
+            "cinematicMerc2VertexShaderSha256": "677389fa8e19c5846f782e6fcb6aee23f20c563035cad41afd9c6fe147e18f70",
+            "baseCinematicManifestSha256": "ac1fac6d5d49cc44e3f2a96b241c71ff34189bf076bc18e9cefdec2a49e0570c"
+          },
+          "capturePose": {
+            "jakAnimation": "jakb-lightjak-stance",
+            "jakFrame": 8.625,
+            "daxterAnimation": "daxter-lightjak-stance",
+            "daxterFrame": 5.5,
+            "daxterOverrideActive": false,
+            "lightJakInterpolation": 1.0,
+            "daxterFrameInterpolationBits": "3f666668"
+          },
+          "captureLighting": {
+            "worldLightingHeldFixed": true,
+            "actorYawDeltaDegrees": 180,
+            "actorTurnVerified": true,
+            "timeOfDay": "12:00"
           }
         },
         {
@@ -406,14 +508,45 @@
           "view": "Front",
           "path": "jak3/jinx-0.webp",
           "dimensions": [
-            936,
-            908
+            912,
+            838
           ],
-          "sha256": "a97065dd1510a3b8abd690bb97b7ffb1d340472113768370b09d0e6e61138bcb",
-          "losslessCompression": {
-            "sourceSha256": "3a44343153fd2836a3a28ba0e993e7d65c8a280c76a5ec965a28d82d52c7fd6a",
-            "decodedRgbSha256": "c31353a06263be2be2a70675c6ae9edd1672b5fb184d01e4410dd275a01a0720",
-            "method": "cwebp lossless exact z9"
+          "sha256": "85d289f280ba67312b22bd666b2924b049a81efc68017daa72b3254238a9e140",
+          "framing": {
+            "sourceDimensions": [
+              1920,
+              1080
+            ],
+            "sharedCrop": [
+              740,
+              130,
+              1190,
+              920
+            ],
+            "sourceImagesResized": false,
+            "sourcePixelEdits": false,
+            "sourceCaptureSha256": {
+              "original": "ecff9a42f6180756ac741f9c1e1bd0bca58befd623b970df3ef6142358e35ab0",
+              "cinematic": "eebee90a1aacacb2a2890aad7c38b1ede1f15a8714dcf774df010f1591b99658"
+            },
+            "outputEncoding": {
+              "format": "WebP",
+              "lossless": true,
+              "decodedPixelsPreserved": true
+            },
+            "outputLayout": {
+              "header": 48,
+              "gap": 12,
+              "margin": 0
+            }
+          },
+          "captureBuild": {
+            "platform": "windows-x64",
+            "openGoalVersion": "v0.3.9",
+            "cinematicFr3Sha256": "5b107b70a2faf060669ed029fd6259b14b90f253ed4765fa9c1f248b7765699f",
+            "region": "EU",
+            "cinematicGameCgoSha256": "8a4f69a498fa9b8dabe89d5e8c8c48b6423cb4f665e1c3e08faee01a3c1fff89",
+            "cinematicManifestSha256": "04ee0eab46c81b11847cfc166ad7199793ac7813971a1bf86fa4afb579693f00"
           }
         },
         {
@@ -421,14 +554,45 @@
           "view": "Side",
           "path": "jak3/jinx-1.webp",
           "dimensions": [
-            936,
-            908
+            912,
+            838
           ],
-          "sha256": "4b14bf354a5a1b54737452d45dda7b27f1a0f2ae7ff1af89ce190f53f90c24ad",
-          "losslessCompression": {
-            "sourceSha256": "a2cdb12603023a4d29275690ed2fb75a71bc22f9a46e86db85757bd231165d86",
-            "decodedRgbSha256": "2b198a8c85d02879b2ff866c6f6e7fea5636854a480a40383cd8dc7b944df0a7",
-            "method": "cwebp lossless exact z9"
+          "sha256": "6c351a23eaf0c7cd5e8e7c43c200b4402d81f8a04d5ff46a127d19d1169a6629",
+          "framing": {
+            "sourceDimensions": [
+              1920,
+              1080
+            ],
+            "sharedCrop": [
+              740,
+              130,
+              1190,
+              920
+            ],
+            "sourceImagesResized": false,
+            "sourcePixelEdits": false,
+            "sourceCaptureSha256": {
+              "original": "24b0382b745fc71e989d03de055773db010dfcbcea6abaa089051c63e6b612b7",
+              "cinematic": "900b6ccd7ce21d8555843c28bcf43771e4ad2d5025aa522c3dc5d50f0925ef8f"
+            },
+            "outputEncoding": {
+              "format": "WebP",
+              "lossless": true,
+              "decodedPixelsPreserved": true
+            },
+            "outputLayout": {
+              "header": 48,
+              "gap": 12,
+              "margin": 0
+            }
+          },
+          "captureBuild": {
+            "openGoalVersion": "v0.3.9",
+            "region": "EU",
+            "cinematicFr3Sha256": "5b107b70a2faf060669ed029fd6259b14b90f253ed4765fa9c1f248b7765699f",
+            "platform": "windows-x64",
+            "cinematicGameCgoSha256": "8a4f69a498fa9b8dabe89d5e8c8c48b6423cb4f665e1c3e08faee01a3c1fff89",
+            "cinematicManifestSha256": "04ee0eab46c81b11847cfc166ad7199793ac7813971a1bf86fa4afb579693f00"
           }
         },
         {

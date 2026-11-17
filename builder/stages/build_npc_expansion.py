@@ -132,7 +132,7 @@ def triangles(indices):
         if len(set(tri))==3:result.append(tri)
     return np.array(result,dtype='<u4').reshape(-1,3)
 
-def jinx_anatomical_transform(target, anchor, ls, hs, torso=False):
+def jinx_anatomical_transform(target, anchor, ls, hs, torso=False, fit_lengths=False):
     """Align anatomical segment directions, avoiding incompatible joint roll.
 
     Jinx's native main/chest local frames are rolled 180 degrees relative to
@@ -149,17 +149,23 @@ def jinx_anatomical_transform(target, anchor, ls, hs, torso=False):
     for side in 'LR':
         next_name.update({side+'shoulder':side+'elbow',side+'elbow':side+'hand',side+'hand':side+'middleA',side+'middleA':side+'middleB',side+'thumbA':side+'thumbB',side+'thigh':side+'knee',side+'knee':side+'ankle',side+'ankle':side+'ball'})
     rotation=np.eye(3)
+    length_scale=1.0
     if target in next_name:
         end=next_name[target];a=hp[end]-hp[anchor];b=lp[end]-lp[target]
     elif target.endswith('middleB') or target.endswith('thumbB'):
         parent=target[:-1]+'A';a=hp[anchor]-hp[parent];b=lp[target]-lp[parent]
     else:a=b=None
     if a is not None:
+        if fit_lengths and re.fullmatch('[LR](shoulder|elbow)',target):
+            length_scale=np.linalg.norm(b)/np.linalg.norm(a)
         a=a/np.linalg.norm(a);b=b/np.linalg.norm(b);cross=np.cross(a,b);c=float(a@b)
         assert c>-0.9999,(target,'opposed anatomical direction')
         k=np.array([[0,-cross[2],cross[1]],[cross[2],0,-cross[0]],[-cross[1],cross[0],0]])
         rotation=np.eye(3)+k+k@k/(1+c)
-    out=np.eye(4);out[:3,:3]=rotation;out[:3,3]=lp[target]-rotation@hp[anchor]
+    linear=rotation
+    if length_scale!=1.0:
+        linear=rotation@(np.eye(3)+(length_scale-1.0)*np.outer(a,a))
+    out=np.eye(4);out[:3,:3]=linear;out[:3,3]=lp[target]-linear@hp[anchor]
     return out
 
 
@@ -403,7 +409,7 @@ def build_one(low_name, high_name, *, source_dir=None, submit_all_joints=False,
                 name=byid[int(joint)];target,anchor=choose_map(name,supported,low_name)
                 assert target in supported and anchor in hs
                 matrix=np.linalg.inv(ls[target]['inv_bind'])@hs[anchor]['inv_bind']
-                if low_name=='jinx-lod0' or anatomical:matrix=jinx_anatomical_transform(target,anchor,ls,hs,torso=low_name=='bt-torn-lod0')
+                if low_name=='jinx-lod0' or anatomical:matrix=jinx_anatomical_transform(target,anchor,ls,hs,torso=low_name=='bt-torn-lod0',fit_lengths=low_name=='jinx-lod0')
                 if low_name=='bt-torn-lod0' and re.fullmatch('[LR](hand|middle[AB]|thumb[AB])',target):
                     matrix=torn_hand_transform(target,anchor,ls,hs)
                 normal_matrix=np.linalg.inv(matrix[:3,:3]).T

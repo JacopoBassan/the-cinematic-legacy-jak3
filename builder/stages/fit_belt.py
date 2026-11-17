@@ -85,6 +85,170 @@ def selected(draws,indices,vb,tx,materials=MATERIALS):
             if all(inside):result.update(int(i) for i in tri)
     return result
 
+def fit_sash_pants_clearance(raw, base):
+    """Fit only protruding front waist pants to original local game geometry."""
+    from scipy.sparse import coo_matrix
+    from scipy.sparse.csgraph import connected_components
+    import build_npc_expansion as npc
+    def get(raw, material):
+        m = npc.model(raw, 'jakb-c-lod0')
+        _, indices, start, vertices = npc.buffers(raw, 'jakb-c-lod0')
+        buf = np.frombuffer(vertices, 'u1').reshape(-1, 64)
+        val = buf.view('<f4').reshape(-1, 16)
+        textures, _ = npc.textures(raw)
+        pieces, remaining = [], np.ones(len(indices), dtype=bool)
+        for effect in m['effects']:
+            for draw in map(npc.DRAW.unpack, effect['draws']):
+                if draw[1] >= 0 and textures[draw[1]]['name'] == material:
+                    ids = indices[draw[3]:draw[3] + draw[4]]
+                    pieces.append(ids.reshape(-1, 3) if draw[6] else npc.triangles(ids))
+                    remaining[draw[3]:draw[3] + draw[4]] = False
+        if len(pieces) != 1: raise ValueError('Unexpected pants draw layout')
+        return m, indices, start, vertices, buf, val, np.concatenate(pieces), remaining
+
+    before, native_raw = raw, base
+    model, indices, start, vertices, buf, val, faces, remaining = get(before, 'jakchires-pants')
+    _, _, _, _, _, nv, nfaces, _ = get(native_raw, 'jakc-pants')
+    if len(faces) != 498 or len(nfaces) != 222: raise ValueError('Unexpected pants topology')
+    textures, _ = npc.textures(before)
+    modifiable, fixed = [], []
+    for effect in model['effects']:
+        reader = npc.Reader(effect['mod'])
+        for destination, draws in ((modifiable, reader.draws()), (fixed, reader.draws())):
+            destination.extend(d for d in map(npc.DRAW.unpack, draws)
+                               if d[1] >= 0 and textures[d[1]]['name'] == 'jakchires-pants')
+    if modifiable or len(fixed) != 1:
+        raise ValueError('Unexpected modifiable or fixed pants draw layout')
+    fixed_draw = fixed[0]
+    fixed_ids = indices[fixed_draw[3]:fixed_draw[3]+fixed_draw[4]]
+    fixed_faces = fixed_ids.reshape(-1,3) if fixed_draw[6] else npc.triangles(fixed_ids)
+    if not np.array_equal(fixed_faces, faces):
+        raise ValueError('Fixed pants draw does not use the checked global vertices')
+    native_tri = nv[nfaces, :3].astype(float) / 4096
+    native_normals = nv[nfaces, 4:7].astype(float)
+    xy = native_tri[:, :, :2]
+    cross = lambda a, b: a[:, 0]*b[:, 1] - a[:, 1]*b[:, 0]
+    def front_z(x, y, candidate_normal):
+        a, b, c = xy[:, 0], xy[:, 1], xy[:, 2]
+        u, v, w = b-a, c-a, np.array([x, y])-a
+        det = cross(u, v); ok = np.abs(det) > 1e-12
+        bu = np.divide(cross(w, v), det, out=np.zeros_like(det), where=ok)
+        bv = np.divide(cross(u, w), det, out=np.zeros_like(det), where=ok)
+        hit = ok & (bu >= -1e-7) & (bv >= -1e-7) & (bu+bv <= 1+1e-7)
+        z = native_tri[:, 0, 2] + bu*(native_tri[:, 1, 2]-native_tri[:, 0, 2]) + bv*(native_tri[:, 2, 2]-native_tri[:, 0, 2])
+        # The authored normal is reliable across alternating strip winding.
+        # Require both an outward-facing native surface and agreement with the
+        # corresponding cinematic normal, rather than selecting a back face.
+        normal = (native_normals[:,0] + bu[:,None]*(native_normals[:,1]-native_normals[:,0])
+                  + bv[:,None]*(native_normals[:,2]-native_normals[:,0]))
+        hit &= (z > 0) & (normal[:,2] > 1e-6) & (normal @ candidate_normal > 0)
+        if np.count_nonzero(hit)>1 and np.ptp(z[hit])>1e-4:
+            raise ValueError('Ambiguous overlapping native front pants surfaces')
+        return float(z[hit].max()) if np.any(hit) else None
+
+    ids = np.unique(faces); points = val[ids, :3].astype(float)
+    # Weld only exact geometric seams; keep every UV, color, weight and ID unchanged.
+    pairs = np.array(list(cKDTree(points).query_pairs(.01)), dtype=int).reshape(-1, 2)
+    graph = coo_matrix((np.ones(2*len(pairs)), (np.r_[pairs[:,0], pairs[:,1]], np.r_[pairs[:,1], pairs[:,0]])), shape=(len(ids),len(ids)))
+    count, groups = connected_components(graph, directed=False)
+    sizes = np.bincount(groups, minlength=count)
+    grouped = np.column_stack([np.bincount(groups, weights=points[:,j], minlength=count)/sizes for j in range(3)])
+    inverse = np.full(len(buf), -1, int); inverse[ids] = np.arange(len(ids)); gfaces = groups[inverse[faces]]
+    edges = np.vstack((gfaces[:,[0,1]], gfaces[:,[1,2]], gfaces[:,[2,0]])); edges = np.unique(np.sort(edges,axis=1),axis=0); edges = edges[edges[:,0]!=edges[:,1]]
+    neighbors = [[] for _ in range(count)]
+    for a,b in edges: neighbors[a].append(b); neighbors[b].append(a)
+    smooth = lambda x: np.clip(x,0,1)**2*(3-2*np.clip(x,0,1))
+    group_normals = np.column_stack([np.bincount(groups,weights=val[ids,4+j],minlength=count)/sizes
+                                     for j in range(3)])
+    lengths = np.linalg.norm(group_normals,axis=1)
+    if np.any(lengths < 1e-8):
+        raise ValueError('Invalid cinematic pants normal')
+    group_normals /= lengths[:,None]
+    central = [i for i,pos in enumerate(grouped/4096)
+               if abs(pos[0])<1e-5 and 1.245<pos[1]<1.295 and pos[2]>.10]
+    if len(central) != 2:
+        raise ValueError('Unexpected central front pants topology')
+    native_z = [front_z(*(grouped[i,:2]/4096),group_normals[i]) for i in central]
+    if any(z is None for z in native_z):
+        raise ValueError('Native central pants reference is incomplete')
+    clear = [(grouped[i,2]/4096)-z <= 1e-6 for i,z in zip(central,native_z)]
+    if any(clear) and not all(clear):
+        raise ValueError('Partially fitted central pants input')
+    target = grouped.copy(); changes = []
+    for i, pos in enumerate(grouped/4096):
+        x,y,z = pos
+        if not (abs(x)<.055 and 1.23<y<1.44 and z>.10): continue
+        original_z = front_z(x,y,group_normals[i])
+        if original_z is None: raise ValueError('Missing matching native front pants surface')
+        correction = max(z-original_z, 0.0)
+        weight = smooth((.055-abs(x))/.02)*smooth((y-1.23)/.015)*smooth((1.44-y)/.01)
+        if correction > 1e-6 and weight > 0:
+            target[i,2] -= correction*weight*4096
+            changes.append({'group':i,'xyzMetres':pos.tolist(),'nativeFrontMetres':original_z,'inwardMm':correction*weight*1000,'weight':weight})
+    if all(clear):
+        if changes:
+            raise ValueError('Already or partially fitted pants have remaining front protrusions')
+        return raw, {'positionsChanged':0, 'normalsReoriented':0,
+                     'maxInwardMm':0.0, 'alreadyClear':True,
+                     'modifiablePantsDraws':len(modifiable), 'fixedPantsDraws':len(fixed)}
+    if not changes: raise ValueError('No front waist correction found')
+    if max(c['inwardMm'] for c in changes) > 31:
+        raise ValueError('Correction exceeded the measured 31 mm front-surface bound')
+    changed_groups = np.array([c['group'] for c in changes]); changed_pos = ids[np.isin(groups, changed_groups)]
+    if not np.all(np.isin(changed_pos, fixed_ids)):
+        raise ValueError('Changed pants vertices are not all in the fixed pants draw')
+    if np.any(np.isin(indices[remaining], changed_pos)): raise ValueError('Selected pants vertices referenced by other global index ranges')
+
+    # Reorient the original authored normals by each welded one-ring's best proper
+    # rotation. This preserves their original smooth shading rather than averaging
+    # disparate UV/material normals or introducing a reflection.
+    normal_groups = set(map(int, changed_groups))
+    for g in changed_groups: normal_groups.update(neighbors[int(g)])
+    rot = np.repeat(np.eye(3)[None,:,:],count,axis=0)
+    for i in normal_groups:
+        ns = np.asarray(neighbors[i],int)
+        if len(ns)<2: continue
+        x, y = grouped[i]-grouped[ns], target[i]-target[ns]
+        u, _, vh = np.linalg.svd(y.T@x)
+        rot[i] = u@np.diag([1,1,np.linalg.det(u@vh)])@vh
+    out = buf.copy(); values = out.view('<f4').reshape(-1,16)
+    values[changed_pos,:3] = target[groups[np.isin(ids, changed_pos)]].astype('<f4')
+    normal_rows = ids[np.isin(groups,list(normal_groups))]
+    normal_idx = inverse[normal_rows]
+    normals = np.einsum('nij,nj->ni',rot[groups[normal_idx]],val[normal_rows,4:7])
+    lengths = np.linalg.norm(normals,axis=1)
+    if np.any(lengths < 1e-12): raise ValueError('Invalid normal')
+    values[normal_rows,4:7] = (normals/lengths[:,None]).astype('<f4')
+    if not np.all(np.isfinite(values[np.r_[changed_pos,normal_rows],:7])):
+        raise ValueError('Non-finite corrected position or normal')
+    if not np.all(np.isfinite(values[changed_pos,8:11])) or not np.allclose(values[changed_pos,8:11].sum(1),1,atol=.01):
+        raise ValueError('Invalid original pants skin weights')
+
+    oldtri = points[inverse[faces]]; newtri = values[faces,:3].astype(float)
+    face_normal = lambda x: np.cross(x[:,1]-x[:,0],x[:,2]-x[:,0])
+    oldn,newn = face_normal(oldtri),face_normal(newtri)
+    ol,nl = np.linalg.norm(oldn,axis=1),np.linalg.norm(newn,axis=1)
+    valid = ol>1e-5
+    if np.any(valid & (nl<=1e-5)) or np.any(np.einsum('ij,ij->i',oldn[valid],newn[valid])<=0):
+        raise ValueError('Correction collapsed or inverted a pants triangle')
+    cosines = np.divide(np.einsum('ij,ij->i', oldn, newn), ol*nl, out=np.ones_like(ol), where=ol*nl>1e-10)
+    max_face_rotation = float(np.degrees(np.arccos(np.clip(cosines,-1,1))).max())
+    if max_face_rotation > 45:
+        raise ValueError('Excessive pants face rotation')
+    changed = np.flatnonzero(np.any(out!=buf,axis=1)); allowed = np.zeros(buf.shape,bool)
+    allowed[changed_pos,:12] = True; allowed[normal_rows,16:28] = True
+    if np.any((out!=buf)&~allowed) or np.any(np.isin(indices[remaining],changed)):
+        raise ValueError('Change escaped exclusively owned pants geometry')
+    if not np.allclose(np.linalg.norm(values[normal_rows,4:7],axis=1),1,atol=1e-4):
+        raise ValueError('Non-unit corrected normal')
+    packed = before[:start+8] + out.tobytes() + before[start+8+len(vertices):]
+    if packed[:start+8]!=before[:start+8] or packed[start+8+len(vertices):]!=before[start+8+len(vertices):]:
+        raise ValueError('Unexpected non-vertex change')
+    return packed, {'positionsChanged':len(changed_pos), 'normalsReoriented':len(normal_rows),
+                    'maxInwardMm':float(max(c['inwardMm'] for c in changes)),
+                    'maxFaceRotationDegrees':max_face_rotation,
+                    'modifiablePantsDraws':len(modifiable), 'fixedPantsDraws':len(fixed)}
+
 def fit_belt(source, native, output):
     source,native,output=map(Path,(source,native,output))
     if output.resolve() in (source.resolve(),native.resolve()):
@@ -204,12 +368,14 @@ def fit_belt(source, native, output):
     sm=serialize(m);assert len(sm)==m['end']-m['start']
     patched[m['start']:m['end']]=sm
     patched,join_report=native_skirt_join(bytes(patched),base)
+    patched,clearance_report=fit_sash_pants_clearance(patched,base)
     compress(output,patched)
     assert decompress(output)==patched
     report={'status':'static validation passed; runtime validation separate','verticalShiftMetres':dy/4096,'globalVertices':len(ids),'hemVertices':len(hem),'pantsVertices':len(pants),'modVertices':mods,'duplicateBeltAdded':False,'characterScaleChanged':False,'skinning':'native gameplay belt, jacket and pants weights from corresponding local surfaces'}
     report['sourceSha256']=hashlib.sha256(source.read_bytes()).hexdigest()
     report['maximumSkinTransferDistanceMetres']=maximum_transfer_distance/4096
     report['waistbandFit']=join_report
+    report['sashPantsClearance']=clearance_report
     report['leatherBeltFitScale']=belt_scale.tolist()
     report['outputSha256']=hashlib.sha256(output.read_bytes()).hexdigest()
     return report
