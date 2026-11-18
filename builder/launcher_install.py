@@ -46,6 +46,21 @@ def select_tools(root, config):
                      'Then install or rebuild the vanilla game using that version before retrying this mod.')
 
 
+def build_source_data(data, tools, config):
+    """Use the source shipped with the pinned Linux tools when available."""
+    if config.get('platform') == 'linux-x64':
+        source = tools/'data'
+        installer.reject_reparse(source)
+        if source.is_dir():
+            return source
+    return data
+
+
+def runtime_sources(data, source, selected):
+    return {name: (data if name.startswith('out/') else source)/name
+            for name in selected['runtimeFolders']}
+
+
 def verify_bundle(mod, selected):
     manifest = json.loads((mod/'bundle-manifest.json').read_text())
     if manifest.get('schemaVersion') != 1 or manifest.get('gameAssetsIncluded') is not False:
@@ -66,12 +81,12 @@ def verify_bundle(mod, selected):
     return manifest
 
 
-def free_space_check(mod, data, scratch, game_config=None, minimum_bytes=1024**3):
+def free_space_check(mod, data, scratch, game_config=None, minimum_bytes=1024**3, *, source=None):
     selected = selected_config(game_config)
     required = max(1024**3, minimum_bytes)
     if not platform_tools.tool_path(mod, 'gk', selected).exists():
-        required += sum(p.stat().st_size for name in selected['runtimeFolders']
-                        for p in (data/name).rglob('*') if p.is_file())
+        required += sum(p.stat().st_size for folder in runtime_sources(data, source or data, selected).values()
+                        for p in folder.rglob('*') if p.is_file())
         required += 128*1024**2
     if shutil.disk_usage(scratch).free < required:
         raise ValueError(f'Free at least {required/1024**3:.1f} GiB on this drive and retry installation.')
@@ -126,8 +141,9 @@ def _install_generated(payload, mod, data, tools, job, game_config=None, build_m
                                    'files': names, 'token': uuid.uuid4().hex}).encode('utf-8')
     try:
         originals.mkdir()
-        for name in selected['runtimeFolders']:
-            shutil.copytree(data/name, stage/'data'/name)
+        source = build_source_data(data, tools, config)
+        for name, folder in runtime_sources(data, source, selected).items():
+            shutil.copytree(folder, stage/'data'/name)
         for name in (runtime_name, compiler_name):
             shutil.copy2(tools/name, stage/name)
         for entry in manifest['files']:
@@ -209,6 +225,9 @@ def execute(mod, iso, phase, game_config=None):
     module = games.builder(selected)
     config = games.compatibility(builder.ROOT, selected)
     tools = select_tools(mod.parents[4], config)
+    source = build_source_data(data, tools, config)
+    if source != data:
+        config = {**config, 'sourceData': str(source)}
     installer.require_game_closed()
     print(f"Checking original {selected['displayName'].split(':')[0]} installation and pinned tooling {config['openGoalVersion']}", flush=True)
     # The builder independently verifies inputs at its own boundary. The first
@@ -216,7 +235,7 @@ def execute(mod, iso, phase, game_config=None):
     if phase == 'decompile':
         module.preflight(data, tools, config)
     parent = scratch_parent(mod)
-    free_space_check(mod, data, parent, selected, config.get('minimumFreeBytes', 1024**3))
+    free_space_check(mod, data, parent, selected, config.get('minimumFreeBytes', 1024**3), source=source)
     if phase == 'decompile':
         print('Inputs verified. Cinematic conversion runs during the next launcher step.', flush=True)
         return

@@ -46,14 +46,21 @@ def preflight(data,tools,config):
     import numpy,scipy,PIL,zstandard
     for name,expected in config['tools'].items():
         require_hash(tools/name,expected)
-    for name,expected in {**config['inputs'],**config['source']}.items():
+    source = Path(config.get('sourceData', data)).resolve()
+    for name,expected in config['source'].items():
+        require_hash(source/name,expected)
+    for name,expected in config['inputs'].items():
         require_hash(data/name,expected)
+    normalize_envmaps = config.get('platform') in ('macos-arm64', 'linux-x64')
     for name,expected in config['fr3Inputs'].items():
-        if fr3_asset_hash(data/name,expected['firstModel'],
-                          normalize_envmaps=config.get('platform') == 'macos-arm64') != expected['sha256']:
-            raise ValueError(f'Unsupported or modified graphics assets: {Path(name).name}')
+        actual = fr3_asset_hash(data/name, expected['firstModel'], normalize_envmaps=normalize_envmaps)
+        if actual != expected['sha256']:
+            raise ValueError(
+                f'Graphics fingerprint mismatch: {Path(name).name} ({config["selectedSerial"]}). '
+                f'Rebuild vanilla Jak 3 with OpenGOAL {config["openGoalVersion"]} and retry. '
+                f'If it still fails, share this installer log. Fingerprint: {actual}.')
     for name,expected in config['sourceTrees'].items():
-        if tree_hash(data/name) != expected:
+        if tree_hash(source/name) != expected:
             raise ValueError(f'Unsupported or modified source/configuration tree: {name}')
 
 
@@ -239,11 +246,12 @@ def build(data,tools,work,output,config):
     print('Verifying supported local inputs',flush=True)
     config = regional_config(data, config)
     preflight(data,tools,config)
+    source = Path(config.get('sourceData', data)).resolve()
     territory_setup = f'(seval (set! *default-territory* {config["defaultTerritory"]}))'
     for target in (work,output):
         if target.exists():
             raise ValueError(f'Use a new empty destination: {target}')
-        if target == data or data.is_relative_to(target) or target.is_relative_to(data):
+        if any(target.is_relative_to(root) or root.is_relative_to(target) for root in (data, source)):
             raise ValueError('Build destinations must be outside the game installation')
     if output.is_relative_to(work) or work.is_relative_to(output):
         raise ValueError('Build and output folders must be separate')
@@ -257,7 +265,7 @@ def build(data,tools,work,output,config):
     project.mkdir()
     env = dict(os.environ,CINEMATIC_BUILD_WORK=str(work))
     for folder in ('goal_src','decompiler','game'):
-        shutil.copytree(data/folder,project/folder)
+        shutil.copytree(source/folder,project/folder)
     for folder,expected in config['sourceTrees'].items():
         if tree_hash(project/folder) != expected:
             raise ValueError('Copied source tree changed during build preparation')

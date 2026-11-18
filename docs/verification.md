@@ -20,6 +20,10 @@ Original input checks passed for the supported EU and USA discs with the pinned 
 
 The Linux workflow uses Ubuntu 24.04 x64. It builds the final TAR.GZ and checks archive hashes, executable modes, source files, the bundled Python runtime and native dependency operations.
 
+Linux builds use the source tree shipped with the pinned OpenGOAL version when it is installed. The installer continues to check the player’s disc and generated game files.
+
+A clean Jak 3 EU extraction with OpenGOAL v0.3.9 completed in Ubuntu 24.04 under Rosetta. The patched builder produced and verified all 16 payload files. The FR3 check accepted a fixture changed only in an unused environment-map ID and rejected a change to a checked byte. Launcher GUI and SteamOS gameplay still need testing.
+
 Asset-free installer fixtures cover first install, updates, input and save preservation, wrong-game and running-game refusal, cancellation, rollback, child-process cleanup and retry. They use synthetic files and do not drive the real launcher or convert real game assets. They also check transaction marker ownership and inherited runtime settings. The workflow stores a `verification-linux-x64` receipt.
 
 Release assembly passed with both builder and standard archive names. Checks covered one download per platform, metadata, source files and release checksums. Missing Linux input and a changed Linux runtime pin were rejected before output was written. These archive fixtures use synthetic runtime files.

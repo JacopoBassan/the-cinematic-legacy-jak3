@@ -1,10 +1,10 @@
 # Jak 3 on Linux
 
-Linux x64 support is experimental. Real Linux launcher import, model conversion and gameplay are not yet validated.
+Linux x64 support is experimental. A complete Jak 3 EU conversion passed on Ubuntu with the official Linux x64 tools. SteamOS launcher import and gameplay still need testing.
 
-Use `linux-v0.3.2.tar.gz` from [Releases](https://github.com/JacopoBassan/the-cinematic-legacy-jak3/releases) with official OpenGOAL **v0.3.9**. Python and its dependencies are included.
+Use `linux-v0.3.3.tar.gz` from [Releases](https://github.com/JacopoBassan/the-cinematic-legacy-jak3/releases) with official OpenGOAL **v0.3.9**. Python and its dependencies are included.
 
-Supported EU and USA disc revisions are listed in [installation](installation.md). Setup checks the exact tools and consumed files.
+Supported EU and USA disc revisions are listed in [installation](installation.md). The installer uses the verified source files shipped with OpenGOAL and checks the disc and graphics files from your active game install.
 
 To try the package, select the TAR.GZ in **Jak 3 > Features > Mods > Add from File**. Leave the archive packed.
 
