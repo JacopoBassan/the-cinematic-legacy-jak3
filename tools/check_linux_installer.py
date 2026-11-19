@@ -82,8 +82,13 @@ FIRST_INSTALL = """
 import game_config as games, launcher_install
 launcher_install.install_signal_handlers()
 selected = games.load(source)
-launcher_install.install_generated(Path(sys.argv[1]), Path(sys.argv[2]), Path(sys.argv[3]),
-                                 Path(sys.argv[4]), Path(sys.argv[5]), selected)
+mod = Path(sys.argv[2])
+job = Path(sys.argv[5])
+if not job.is_dir():
+    assert launcher_install.scratch_parent(mod, selected) == job.parent
+    job.mkdir()
+launcher_install.install_generated(Path(sys.argv[1]), mod, Path(sys.argv[3]),
+                                   Path(sys.argv[4]), job, selected)
 print('synthetic first install complete')
 """
 CANCEL_INSTALL = """
@@ -353,9 +358,16 @@ def check_first_install(root, package, python, selected, env):
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_bytes(('Synthetic original '+folder+'\n').encode())
     originals = snapshot(fixture.data)
-    job = fixture.root/'job'; job.mkdir()
-    run(command(python, fixture.source, FIRST_INSTALL, fixture.payload, fixture.mod,
-                fixture.data, fixture.tools, job), env)
+    job = fixture.mod.parents[4]/'OpenGOAL-Cinematic-Builds'/f'{fixture.game}-first-install'
+    parent_mode = fixture.root.stat().st_mode & 0o777
+    fixture.root.chmod(parent_mode & ~0o222)
+    try:
+        run(command(python, fixture.source, FIRST_INSTALL, fixture.payload, fixture.mod,
+                    fixture.data, fixture.tools, job), env)
+    finally:
+        fixture.root.chmod(parent_mode)
+    require(not (fixture.root/'OpenGOAL-Cinematic-Builds').exists(),
+            'Installer wrote outside the selected drive folder')
     for entry in fixture.entries:
         require(sha(fixture.mod/entry['path']) == entry['sha256'], 'First-install payload mismatch')
     require(sha(fixture.mod/'gk') == fixture.config['tools']['gk'], 'First-install runtime mismatch')
@@ -372,6 +384,12 @@ def check_first_install(root, package, python, selected, env):
 def check_update(root, package, python, selected, env):
     fixture = Fixture(root/'update', package, selected)
     old = snapshot(fixture.mod)
+    fixture.backup = fixture.mod.parents[4]/'unrelated-job'/'previous-release'
+    run(fixture.args(python), env, success=False, contains='Backup must be outside')
+    require(not fixture.backup.exists() and snapshot(fixture.mod) == old,
+            'Installer accepted a backup in an unrelated launcher folder')
+    fixture.backup = (fixture.mod.parents[4]/'OpenGOAL-Cinematic-Builds'
+                      /f'{fixture.game}-update'/'previous-release')
     run(fixture.args(python), env)
     for entry in fixture.entries:
         require(sha(fixture.mod/entry['path']) == entry['sha256'], 'Published payload mismatch')
@@ -622,6 +640,7 @@ def check(archive, output, expected_game=None):
                    'XDG_CONFIG_HOME': str(home/'config'), 'XDG_DATA_HOME': str(home/'data'),
                    'XDG_CACHE_HOME': str(home/'cache'), 'PYTHONDONTWRITEBYTECODE': '1',
                    'OPENBLAS_NUM_THREADS': '1', 'OMP_NUM_THREADS': '1'}
+            env.pop('CINEMATIC_WORK_ROOT', None)
             for name in tuple(env):
                 if name in ('LD_LIBRARY_PATH', 'LD_PRELOAD') or name.startswith('DYLD_'):
                     env.pop(name)
@@ -636,6 +655,7 @@ def check(archive, output, expected_game=None):
             receipt['checks'].append('extractor-clears-inherited-loader-and-python-environment')
             check_first_install(root, package, python, selected, env)
             receipt['checks'].append('synthetic-first-install-input-and-save-preservation')
+            receipt['checks'].append('first-install-with-read-only-parent-of-launcher-root')
             check_update(root, package, python, selected, env)
             receipt['checks'].append('synthetic-update-backup-save-preservation')
             check_rejections(root, package, python, selected, env)

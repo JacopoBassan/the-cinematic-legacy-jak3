@@ -25,7 +25,7 @@ If you used **Add from File**, keep the local archive filename unchanged when up
 - **Tooling mismatch:** select v0.3.9, rebuild the vanilla game with it, then retry. Installing the tools alone does not update an older extraction.
 - **Game running:** close all OpenGOAL games before setup or rebuild.
 - **Insufficient space:** free the amount shown by setup, then retry.
-- **Failed conversion:** keep the logs in `OpenGOAL-Cinematic-Builds` beside the OpenGOAL installation. Report the error, disc revision and tooling version. Do not upload extracted assets or saves.
+- **Failed conversion:** keep the logs in `OpenGOAL-Cinematic-Builds` inside the launcher data folder on Linux, or beside it on Windows and macOS. Report the error, disc revision and tooling version. Do not upload extracted assets or saves.
 - **Interrupted install:** preserve the reported recovery file, stage and backup. Do not remove a lock while its process is running.
 
 See [Mac support](macos.md), [experimental Linux support](linux.md) and [verification](verification.md) for the checked scope.

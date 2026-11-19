@@ -243,6 +243,10 @@ def install(payload,mod,backup=None,base_data=None,tools=None,*,game_config=None
         return _install_locked(payload, mod, backup, selected, game_config)
 
 
+def launcher_workspace(mod):
+    return mod.parents[4]/'OpenGOAL-Cinematic-Builds'
+
+
 def _install_locked(payload, mod, backup, selected, game_config):
     manifest = verify_payload(payload) if game_config is None else verify_payload(payload,selected)
     require_game_closed()
@@ -257,7 +261,12 @@ def _install_locked(payload, mod, backup, selected, game_config):
         raise ValueError('Updating an installed mod requires a new --backup folder outside OpenGOAL')
     install_root = mod.parents[4]
     if backup.is_relative_to(install_root) or install_root.is_relative_to(backup):
-        raise ValueError('Backup must be outside the OpenGOAL installation')
+        managed_backup = (selected.get('platform') == 'linux-x64'
+                          and backup.parent.parent == launcher_workspace(mod)
+                          and backup.parent.name.startswith(selected['game']+'-')
+                          and backup.name == 'previous-release')
+        if not managed_backup:
+            raise ValueError('Backup must be outside the OpenGOAL installation')
     if backup.is_relative_to(payload) or payload.is_relative_to(backup):
         raise ValueError('Backup and payload folders must be separate')
     names = [entry['path'] for entry in entries]+metadata_files

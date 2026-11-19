@@ -92,12 +92,15 @@ def free_space_check(mod, data, scratch, game_config=None, minimum_bytes=1024**3
         raise ValueError(f'Free at least {required/1024**3:.1f} GiB on this drive and retry installation.')
 
 
-def scratch_parent(mod):
+def scratch_parent(mod, config):
     override = os.environ.get('CINEMATIC_WORK_ROOT')
     if override:
         parent = Path(override)
         if not parent.is_absolute():
             raise ValueError('CINEMATIC_WORK_ROOT must be an absolute directory path.')
+    elif config.get('platform') == 'linux-x64':
+        # External and sandboxed launcher installs may only write inside this drive.
+        parent = installer.launcher_workspace(mod)
     else:
         parent = mod.parents[4].parent/'OpenGOAL-Cinematic-Builds'
     installer.reject_reparse(parent)
@@ -234,7 +237,7 @@ def execute(mod, iso, phase, game_config=None):
     # launcher phase performs the early check before its compile step is offered.
     if phase == 'decompile':
         module.preflight(data, tools, config)
-    parent = scratch_parent(mod)
+    parent = scratch_parent(mod, config)
     free_space_check(mod, data, parent, selected, config.get('minimumFreeBytes', 1024**3), source=source)
     if phase == 'decompile':
         print('Inputs verified. Cinematic conversion runs during the next launcher step.', flush=True)
