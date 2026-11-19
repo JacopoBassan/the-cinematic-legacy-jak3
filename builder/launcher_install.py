@@ -46,19 +46,19 @@ def select_tools(root, config):
                      'Then install or rebuild the vanilla game using that version before retrying this mod.')
 
 
-def build_source_data(data, tools, config):
-    """Use the source shipped with the pinned Linux tools when available."""
-    if config.get('platform') == 'linux-x64':
-        source = tools/'data'
-        installer.reject_reparse(source)
-        if source.is_dir():
-            return source
-    return data
+def build_source_data(data, tools):
+    """Prefer the pinned tool source over the launcher's merged active copy."""
+    source = tools/'data'
+    installer.reject_reparse(source)
+    return source if source.is_dir() else data
 
 
 def runtime_sources(data, source, selected):
-    return {name: (data if name.startswith('out/') else source)/name
-            for name in selected['runtimeFolders']}
+    folders = {name: (data if name.startswith('out/') else source)/name
+               for name in selected['runtimeFolders']}
+    if selected.get('platform') != 'linux-x64':
+        folders['custom_assets'] = data/'custom_assets'
+    return folders
 
 
 def verify_bundle(mod, selected):
@@ -144,7 +144,7 @@ def _install_generated(payload, mod, data, tools, job, game_config=None, build_m
                                    'files': names, 'token': uuid.uuid4().hex}).encode('utf-8')
     try:
         originals.mkdir()
-        source = build_source_data(data, tools, config)
+        source = build_source_data(data, tools)
         for name, folder in runtime_sources(data, source, selected).items():
             shutil.copytree(folder, stage/'data'/name)
         for name in (runtime_name, compiler_name):
@@ -228,7 +228,7 @@ def execute(mod, iso, phase, game_config=None):
     module = games.builder(selected)
     config = games.compatibility(builder.ROOT, selected)
     tools = select_tools(mod.parents[4], config)
-    source = build_source_data(data, tools, config)
+    source = build_source_data(data, tools)
     if source != data:
         config = {**config, 'sourceData': str(source)}
     installer.require_game_closed()

@@ -49,6 +49,6 @@ Collect all three resulting archives in `dist/input` on one machine. Then use a 
 python tools/prepare_mod_release.py --input dist/input --output dist/release
 ```
 
-Version `0.3.5` produces `windows-v0.3.5.zip`, `macos-arm64-v0.3.5.tar.gz`, `linux-v0.3.5.tar.gz`, `source-v0.3.5.zip`, `metadata.json`, `release-manifest.json` and `SHA256SUMS.txt`. Metadata declares only `jak3`.
+Version `0.3.6` produces `windows-v0.3.6.zip`, `macos-arm64-v0.3.6.tar.gz`, `linux-v0.3.6.tar.gz`, `source-v0.3.6.zip`, `metadata.json`, `release-manifest.json` and `SHA256SUMS.txt`. Metadata declares only `jak3`.
 
 The manual **Cut Mod Release** workflow builds all three platforms, verifies the assets, and creates or refreshes a draft. On Ubuntu 24.04 x64, it also runs the [asset-free Linux installer checks](linux.md#developer-checks) against the final archive. The draft can be checked before publication. Original mod code uses [MOD-LICENSE](../MOD-LICENSE). Third-party code and bundled dependencies retain their own license notices.
