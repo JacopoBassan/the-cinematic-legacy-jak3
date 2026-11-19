@@ -25,7 +25,12 @@ def require_hash(path,expected):
         raise ValueError(f'Unsupported or modified input: {path.name}. Use an original OpenGOAL installation matching this package\'s compatibility.json.')
 
 
-def preflight(data,tools,config):
+FR3_DIRECTORY = Path('out/jak3/fr3')
+
+
+def preflight(data, tools, config, *, allow_texture_pack=False):
+    from texture_packs import has_replacements, replacement_folder
+
     config = regional_config(data, config)
     if sys.flags.optimize:
         raise ValueError('Python optimization disables required validation. Run without -O.')
@@ -52,9 +57,14 @@ def preflight(data,tools,config):
     for name,expected in config['inputs'].items():
         require_hash(data/name,expected)
     normalize_envmaps = config.get('platform') in ('macos-arm64', 'linux-x64')
+    mismatches = {}
+    can_check_pack = allow_texture_pack and has_replacements(replacement_folder(data, 'jak3'))
     for name,expected in config['fr3Inputs'].items():
         actual = fr3_asset_hash(data/name, expected['firstModel'], normalize_envmaps=normalize_envmaps)
         if actual != expected['sha256']:
+            mismatches[name] = actual
+            if can_check_pack:
+                continue
             raise ValueError(
                 f'Graphics fingerprint mismatch: {Path(name).name} ({config["selectedSerial"]}). '
                 f'Rebuild vanilla Jak 3 with OpenGOAL {config["openGoalVersion"]} and retry. '
@@ -62,6 +72,7 @@ def preflight(data,tools,config):
     for name,expected in config['sourceTrees'].items():
         if tree_hash(source/name) != expected:
             raise ValueError(f'Unsupported or modified source/configuration tree: {name}')
+    return mismatches
 
 
 def regional_config(data, config):
@@ -200,23 +211,59 @@ def run(command,log,env):
         raise RuntimeError(f'{log.name} failed ({result.returncode}):\n{tail}')
 
 
-def extract(data,tools,project,rip,env,log,native_config):
+def extract(data,tools,project,rip,env,log,native_config, *, levels=()):
     config = {'rip_levels':rip,'dump_objs':False,'process_game_text':False,
               'process_game_count':False,'process_part_group_table':False,'extract_collision':False}
     if rip:
         config['dgo_names'] = ['CGO/KERNEL.CGO','CGO/GAME.CGO','DGO/ARENACST.DGO','DGO/TEMA.DGO']
     else:
-        # GAME holds globally required named render textures. Load the complete
-        # object/texture database, but export only common GAME graphics.
+        # Load the full texture database for GAME and any selected levels.
         source = (project/'decompiler/config/jak3/ntsc_v1/inputs.jsonc').read_text()
         inputs = json.loads(re.sub(r'//[^\n]*','',source))
-        inputs['levels_to_extract'] = []
+        if missing := set(levels).difference(inputs['levels_to_extract']):
+            raise ValueError(f'Unsupported graphics archives: {sorted(missing)}')
+        inputs['levels_to_extract'] = list(levels)
         path = project/'decompiler/config/jak3/release-inputs.json'
         path.write_text(json.dumps(inputs))
         config['inputs_file'] = 'decompiler/config/jak3/release-inputs.json'
     run([platform_tools.tool_path(tools,'extractor',native_config),'--folder','--game','jak3','--proj-path',project,
          '--decompile','--decomp-config-override',json.dumps(config),'--disable-ansi',
          *platform_tools.compiler_options(native_config),data/'iso_data/jak3'],log,env)
+
+
+def clean_graphics(data, tools, work, project, env, config, mismatches):
+    """Rebuild stock inputs only for archives whose checked assets differ."""
+    from texture_packs import Fr3, replacement_folder, texture_changes
+
+    names = {Path(relative).stem for relative in mismatches} - {'GAME'}
+    dgos = {'rublcst': 'RBCT', 'ltowerb': 'LTOWB', 'lpattack': 'LPATK',
+            'forestb': 'FRSTB', 'desertb': 'DESB', 'ctyport': 'CPO',
+            'rubblea': 'RUBA', 'factoryd': 'FACD'}
+    levels = sorted(dgos.get(name, name.upper()) + '.DGO' for name in names)
+    extract(data, tools, project, False, env, work/'00-stock-graphics.log', config, levels=levels)
+    stock = work/'stock-graphics'
+    stock.mkdir()
+    changes = {}
+    normalize_envmaps = config.get('platform') in ('macos-arm64', 'linux-x64')
+    for relative, expected in config['fr3Inputs'].items():
+        original = data/relative
+        staged = stock/original.name
+        if relative not in mismatches:
+            try:
+                os.link(original, staged)
+            except OSError:
+                shutil.copy2(original, staged)
+            continue
+        rebuilt = project/relative
+        if fr3_asset_hash(rebuilt, expected['firstModel'], normalize_envmaps) != expected['sha256']:
+            raise ValueError(f'Rebuilt stock graphics did not match {original.name}.')
+        clean, active = Fr3(rebuilt), Fr3(original)
+        changes[original.name] = texture_changes(clean, active, replacement_folder(data, 'jak3'),
+                                                  expected['firstModel'], normalize_envmaps)
+        # Keep the user's native backgrounds and collision. Only normalize the
+        # texture records for the builders that expect a stock input.
+        active.write_with_textures(staged, (texture.record for texture in clean.textures))
+    return stock, changes
 
 
 def pack_code(original,replacements,output):
@@ -248,7 +295,7 @@ def pack_code(original,replacements,output):
 def build(data,tools,work,output,config):
     print('Verifying supported local inputs',flush=True)
     config = regional_config(data, config)
-    preflight(data,tools,config)
+    mismatches = preflight(data, tools, config, allow_texture_pack=True)
     source = Path(config.get('sourceData', data)).resolve()
     territory_setup = f'(seval (set! *default-territory* {config["defaultTerritory"]}))'
     for target in (work,output):
@@ -272,12 +319,17 @@ def build(data,tools,work,output,config):
     for folder,expected in config['sourceTrees'].items():
         if tree_hash(project/folder) != expected:
             raise ValueError('Copied source tree changed during build preparation')
+    fr3 = data/FR3_DIRECTORY
+    texture_pack_changes = {}
+    if mismatches:
+        print('Checking active texture pack against a stock graphics rebuild', flush=True)
+        fr3, texture_pack_changes = clean_graphics(data, tools, work, project, env, config, mismatches)
     (work/'models').mkdir()
     (work/'prototype').mkdir()
     extract(data,tools,project,True,env,work/'01-extract.log',config)
     for name,folder in [('jakb-c-lod0','common'),('daxter-lod0','common'),('jakc-highres-lod0','arenacst'),('daxter-highres-lod0','arenacst')]:
         shutil.copy2(project/'decompiler_out/jak3/levels'/folder/f'{name}.glb',work/'models'/f'{name}.glb')
-    shutil.copy2(data/'out/jak3/fr3/GAME.fr3',work/'prototype/GAME-baseline.fr3')
+    shutil.copy2(fr3/'GAME.fr3',work/'prototype/GAME-baseline.fr3')
     run([sys.executable,ROOT/'retarget_glb.py',work],work/'02-retarget.log',env)
     shutil.copytree(work/'prototype/merc_replacements',project/'custom_assets/jak3/merc_replacements')
     extract(data,tools,project,False,env,work/'03-import.log',config)
@@ -294,7 +346,6 @@ def build(data,tools,work,output,config):
     (work/'belt-validation.json').write_text(json.dumps(belt_report,indent=2))
     os.replace(belt_path,work/'prototype/GAME-transformations.fr3')
     from cinematic_forms import add_models as add_cinematic_forms, REPLACEMENT
-    fr3 = data/'out/jak3/fr3'
     dark_path = work/'prototype/GAME-dedicated-dark.fr3'
     dark_report = add_cinematic_forms(work/'prototype/GAME-transformations.fr3',
                                fr3/'arenacst.fr3', fr3/'mhctycst.fr3',
@@ -309,23 +360,23 @@ def build(data,tools,work,output,config):
     print('Building NPCs and air transport',flush=True)
     npc_output=work/'expansion-npcs'
     air_output=work/'expansion-air'
-    npc_reports=build_npcs(data_dir=data,output_dir=npc_output,report_path=work/'npc-validation.json',animated_eyes=True)
-    npc_reports.extend(build_additional_npcs(data_dir=data,output_dir=npc_output))
+    npc_reports=build_npcs(data_dir=data,output_dir=npc_output,report_path=work/'npc-validation.json',animated_eyes=True,native_graphics=fr3)
+    npc_reports.extend(build_additional_npcs(data_dir=data,output_dir=npc_output,native_graphics=fr3))
     from cinematic_eyes import generate as generate_eyes, patch_source as patch_eye_dispatch
     eye_source=work/'cinematic-eyes.gc'
-    eye_report=generate_eyes(data,eye_source,npc_output)
+    eye_report=generate_eyes(data,eye_source,npc_output,native_graphics=fr3)
     (work/'cinematic-eyes-report.json').write_text(json.dumps(eye_report,indent=2))
     from build_npc_expansion import fit_sig_rider_garment
     sig_path=npc_output/'lwassig.fr3'
     sig_fitted=work/'lwassig-garment-fit.fr3'
-    sig_report=fit_sig_rider_garment(sig_path,data/'out/jak3/fr3/lwassig.fr3',sig_fitted)
+    sig_report=fit_sig_rider_garment(sig_path,fr3/'lwassig.fr3',sig_fitted)
     os.replace(sig_fitted,sig_path)
     (work/'sig-garment-validation.json').write_text(json.dumps(sig_report,indent=2))
     drawable_source=project/'goal_src/jak3/engine/process-drawable/process-drawable.gc'
     from npc_runtime import patch_jinx_shoulders
     drawable_source.write_text(patch_jinx_shoulders(patch_eye_dispatch(drawable_source.read_text())))
     (work/'npc-validation.json').write_text(json.dumps(npc_reports,indent=2))
-    air_reports=build_air(data_dir=data,output_dir=air_output,report_path=work/'air-validation.json')
+    air_reports=build_air(data_dir=data,output_dir=air_output,report_path=work/'air-validation.json',native_graphics=fr3)
     for name,relative in [('foreground','engine/gfx/foreground/foreground.gc'),('texture-anim','engine/gfx/texture/texture-anim.gc')]:
         path = project/'goal_src/jak3'/relative
         source = apply_patch(path.read_text(),(ROOT/'patches'/f'{name}.patch').read_text())
@@ -399,6 +450,14 @@ def build(data,tools,work,output,config):
             relative_files.append(relative)
     if {name.casefold() for name in relative_files} != {name.casefold() for name in config['payloadPaths']}:
         raise ValueError('Build output file set does not match the release definition')
+    if texture_pack_changes:
+        from texture_packs import apply_texture_changes
+
+        for relative in relative_files:
+            destination = output/relative
+            copied = apply_texture_changes(destination, texture_pack_changes.get(destination.name, {}))
+            if copied:
+                print(f'Kept {copied} texture pack replacements in {destination.name}', flush=True)
     manifest = {'schemaVersion':1,'game':'jak3','version':config['version'],'openGoalVersion':config['openGoalVersion'],'platform':config['platform'],
                 'displayName':'Jak 3: The Cinematic Legacy','author':'@jacopobassan',
                 'website':'https://jacopobassan.me','runtimeSha256':config['tools'][platform_tools.tool_path(tools,'gk',config).name],
@@ -418,7 +477,8 @@ def build(data,tools,work,output,config):
     shutil.copy2(work/'npc-validation.json',output/'npc-validation.json')
     shutil.copy2(work/'air-validation.json',output/'air-validation.json')
     (output/'DO-NOT-PUBLISH.txt').write_text('This locally generated payload contains game assets from your installation. Distribute the asset-free builder source archive instead.\n')
-    preflight(data,tools,config)
+    if preflight(data, tools, config, allow_texture_pack=True) != mismatches:
+        raise ValueError('Active game graphics changed during installation. Retry the build.')
     temporary_manifest=output/'manifest.json.new'
     temporary_manifest.write_text(json.dumps(manifest,indent=2))
     os.replace(temporary_manifest,output/'manifest.json')

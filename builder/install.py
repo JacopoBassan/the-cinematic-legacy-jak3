@@ -240,14 +240,52 @@ def install(payload,mod,backup=None,base_data=None,tools=None,*,game_config=None
         raise ValueError(f'For a new mod, import the matching launcher {archive} through OpenGOAL Launcher > '
                          'Features > Mods > Add from File. It includes the installer required for rebuilds.')
     with mod_lock(mod):
-        return _install_locked(payload, mod, backup, selected, game_config)
+        return _install_locked(payload, mod, backup, selected, game_config, base_data=base_data)
 
 
 def launcher_workspace(mod):
     return mod.parents[4]/'OpenGOAL-Cinematic-Builds'
 
 
-def _install_locked(payload, mod, backup, selected, game_config):
+def changed_native_graphics(base_data, mod, selected, manifest):
+    """Refresh levels the cinematic payload leaves under vanilla ownership."""
+    if base_data is None:
+        return {}
+    game = selected['game']
+    base_data = Path(base_data).absolute()
+    if base_data != mod.parents[4] / 'active' / game / 'data':
+        raise ValueError('Unexpected original game location for the launcher update')
+    previous = mod / 'cinematic-release.json'
+    reject_reparse(previous)
+    if not previous.is_file() or not manifest.get('sourceDiscSerial'):
+        return {}
+    serial = json.loads(previous.read_text(encoding='utf-8')).get('sourceDiscSerial')
+    if serial != manifest['sourceDiscSerial']:
+        raise ValueError('Install a new mod entry after switching to a different game disc.')
+    folder = Path('out') / game / 'fr3'
+    reject_reparse(base_data / folder)
+    owned = {entry['path'].casefold() for entry in manifest['files']}
+    changed = {}
+    for source in sorted((base_data / folder).glob('*.fr3')):
+        relative = ('data' / folder / source.name).as_posix()
+        if relative.casefold() in owned:
+            continue
+        target = mod / relative
+        for path in (source, target):
+            reject_reparse(path)
+        if not source.is_file():
+            continue
+        if target.is_file():
+            a, b = source.stat(), target.stat()
+            if (a.st_size, a.st_mtime_ns) == (b.st_size, b.st_mtime_ns):
+                continue
+        digest = sha(source)
+        if not target.is_file() or digest != sha(target):
+            changed[relative] = source, digest
+    return changed
+
+
+def _install_locked(payload, mod, backup, selected, game_config, *, base_data=None):
     manifest = verify_payload(payload) if game_config is None else verify_payload(payload,selected)
     require_game_closed()
     if payload.is_relative_to(mod) or mod.is_relative_to(payload):
@@ -269,7 +307,8 @@ def _install_locked(payload, mod, backup, selected, game_config):
             raise ValueError('Backup must be outside the OpenGOAL installation')
     if backup.is_relative_to(payload) or payload.is_relative_to(backup):
         raise ValueError('Backup and payload folders must be separate')
-    names = [entry['path'] for entry in entries]+metadata_files
+    graphics = changed_native_graphics(base_data, mod, selected, manifest)
+    names = [entry['path'] for entry in entries]+list(graphics)+metadata_files
     for name in names:
         reject_reparse(mod/name)
     reject_reparse(backup)
@@ -295,9 +334,14 @@ def _install_locked(payload, mod, backup, selected, game_config):
         target = stage/entry['path']
         target.parent.mkdir(parents=True,exist_ok=True)
         shutil.copy2(payload/entry['path'],target)
+    for name, (source, digest) in graphics.items():
+        target = stage/name
+        target.parent.mkdir(parents=True, exist_ok=True)
+        atomic_copy(source, target, digest)
     if game_config is None:put_metadata(stage,mod,manifest)
     else:put_metadata(stage,mod,manifest,selected)
     expected_hashes = {entry['path']:entry['sha256'] for entry in entries}
+    expected_hashes.update({name:digest for name, (_, digest) in graphics.items()})
     expected_hashes.update({name:sha(stage/name) for name in metadata_files})
     touched = []
     marker = mod/'.cinematic-transaction.json'

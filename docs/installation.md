@@ -14,6 +14,10 @@ Use official OpenGOAL tooling **v0.3.9**. The launcher protocol was checked with
 Setup checks the executable revision and consumed file hashes. A matching disc serial alone is insufficient.
 The installer includes Python and its dependencies. No terminal, Blender or separate Python installation is needed. Setup calculates required disk space before copying. Allow room for the installed mod and temporary conversion files.
 
+## Texture packs
+
+Enable Refreshed HUD under **Features > Texture Packs** and click **Apply Texture Changes** before running The Cinematic Legacy setup. Run setup again on the same mod entry after changing the pack selection.
+
 ## Saves and updates
 
 Each mod has its own save folder. Vanilla saves stay in place and are not copied automatically. To continue an existing save, close the games and use the launcher's save-folder controls to copy it into the mod's save folder. Keep the original save. [Copy guide with screenshots](https://github.com/JacopoBassan/the-cinematic-legacy/blob/main/docs/copy-saves.md).

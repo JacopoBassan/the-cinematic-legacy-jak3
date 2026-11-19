@@ -236,11 +236,14 @@ def execute(mod, iso, phase, game_config=None):
     # The builder independently verifies inputs at its own boundary. The first
     # launcher phase performs the early check before its compile step is offered.
     if phase == 'decompile':
-        module.preflight(data, tools, config)
+        pending_graphics = module.preflight(data, tools, config, allow_texture_pack=True)
     parent = scratch_parent(mod, config)
     free_space_check(mod, data, parent, selected, config.get('minimumFreeBytes', 1024**3), source=source)
     if phase == 'decompile':
-        print('Inputs verified. Cinematic conversion runs during the next launcher step.', flush=True)
+        if pending_graphics:
+            print('The next step checks the rebuilt stock graphics and active texture pack before conversion.', flush=True)
+        else:
+            print('Inputs verified. Cinematic conversion runs during the next launcher step.', flush=True)
         return
     with installer.mod_lock(mod):
         job = Path(tempfile.mkdtemp(prefix=selected['game']+'-', dir=parent))

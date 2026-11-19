@@ -49,10 +49,10 @@ def keep(model, index, texture, draw):
         return False
     return original_keep(model, index, texture, draw)
 
-def build(data_dir, output_dir, metadata_path=None, report_path=None):
+def build(data_dir, output_dir, metadata_path=None, report_path=None, *, native_graphics=None):
     OUT = Path(output_dir)
     metadata_path = metadata_path or Path(__file__).with_name('additional-npc-catalog.json')
-    builder.configure(data_dir, OUT, metadata_path)
+    builder.configure(data_dir, OUT, metadata_path, native_graphics=native_graphics)
     builder.choose_map = joint_map
     builder.donor_effect = effect
     builder.native_draw_kept = keep

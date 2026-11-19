@@ -21,13 +21,14 @@ CINEMATIC_EYES = False
 REPORT_PATH = BASE/'npc-expansion-build.json'
 EMPTY_MOD = struct.pack('<5QI2Q', 0,0,0,0,0,0,0,0)
 
-def configure(data_dir=None, output_dir=None, metadata_path=None, report_path=None):
+def configure(data_dir=None, output_dir=None, metadata_path=None, report_path=None, *, native_graphics=None):
     """Configure an extracted local data root and staging output, never install."""
     global ROOT, OUT, CAT, FULLCAT, REPORT_PATH
     if data_dir is None:
         raise ValueError('Pass the original extracted game data directory explicitly')
     data=Path(data_dir)
-    ROOT=data/'out/jak3/fr3';npc_rigs.RAW=data/'decompiler_out/jak3/raw_obj'
+    ROOT=Path(native_graphics) if native_graphics is not None else data/'out/jak3/fr3'
+    npc_rigs.RAW=data/'decompiler_out/jak3/raw_obj'
     OUT=Path(output_dir) if output_dir is not None else BASE/'prototype/expansion-npcs'
     meta=Path(metadata_path) if metadata_path is not None else Path(__file__).with_name('npc-build-catalog.json')
     catalog=json.loads(meta.read_text());assert catalog['schema']==1
@@ -643,11 +644,11 @@ def fit_sig_rider_garment(generated_path, native_path, output_path):
             'cinematicDraw': 'sig-undergarments', 'effect': ei}
 
 
-def build(data_dir=None,output_dir=None,metadata_path=None,report_path=None,animated_eyes=False):
+def build(data_dir=None,output_dir=None,metadata_path=None,report_path=None,animated_eyes=False, *, native_graphics=None):
     global CINEMATIC_EYES
     CINEMATIC_EYES = animated_eyes
-    if not CAT or any(x is not None for x in [data_dir,output_dir,metadata_path,report_path]):
-        configure(data_dir,output_dir,metadata_path,report_path)
+    if not CAT or any(x is not None for x in [data_dir,output_dir,metadata_path,report_path,native_graphics]):
+        configure(data_dir,output_dir,metadata_path,report_path,native_graphics=native_graphics)
     report=[]
     for low,high in [('king-rider-lod0','king-highres-lod0'),('ashelin-lod0','ashelin-highres-lod0'),('sig-rider-lod0','sig-highres-lod0'),('bt-sig-lod0','sig-highres-lod0'),('jinx-lod0','jinx-highres-lod0'),('crimson-guard-lod0','crimson-guard-highres-lod0')]:
         options={}

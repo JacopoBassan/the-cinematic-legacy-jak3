@@ -287,9 +287,11 @@ class LauncherTests(unittest.TestCase):
 
     def test_decompile_still_performs_full_early_preflight(self):
         module = Mock()
+        module.preflight.return_value = {}
         with self.execute_environment(module):
             adapter.execute(self.mod, self.data/f'iso_data/{GAME}', 'decompile')
         module.preflight.assert_called_once()
+        self.assertTrue(module.preflight.call_args.kwargs['allow_texture_pack'])
         module.build.assert_not_called()
 
 

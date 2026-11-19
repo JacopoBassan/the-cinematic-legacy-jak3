@@ -70,10 +70,11 @@ def eye_data(raw_path):
     return shaders, frames, label
 
 
-def generate(data_dir, output, fr3_dir):
+def generate(data_dir, output, fr3_dir, *, native_graphics=None):
     sys.path.insert(0, str(Path(__file__).parent/'stages'))
     import build_npc_expansion as b
     data_dir, output, fr3_dir = map(Path, (data_dir, output, fr3_dir))
+    native_graphics = Path(native_graphics) if native_graphics is not None else data_dir/'out/jak3/fr3'
     catalog = {}
     for filename in ('npc-build-catalog.json', 'additional-npc-catalog.json'):
         for m in json.loads((Path(__file__).parent/'stages'/filename).read_text())['models']:
@@ -92,7 +93,7 @@ def generate(data_dir, output, fr3_dir):
     dispatch = []
     for key, art, filename, iris, lid, actors in SPECS:
         si = TEXTURE_BANKS[key]
-        textures, _ = b.textures(b.decompress(data_dir/'out/jak3/fr3'/filename))
+        textures, _ = b.textures(b.decompress(native_graphics/filename))
         selected = [next(t for t in textures if t['name'] == n) for n in (iris, lid)]
         for texture in selected:
             if texture['width'] not in (64, 128) or texture['height'] not in (64, 128):

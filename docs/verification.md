@@ -2,6 +2,10 @@
 
 The mod targets Windows x64, [Apple Silicon macOS](macos.md) and [experimental Linux x64](linux.md) with official OpenGOAL **v0.3.9**. The launcher protocol was checked with **v2.11.2**. Intel Macs are unsupported. Linux launcher import and gameplay still need testing.
 
+## Refreshed HUD
+
+Refreshed HUD 1.1 texture preservation was verified with the supported PAL and USA discs on Windows using OpenGOAL v0.3.9. The same texture handling runs in the macOS and Linux installers.
+
 ## Source checks
 
 On 2026-11-11, the game-specific suite completed 46 tests on Apple Silicon: 42 passed and four Windows-only cases were skipped. Twelve portable filesystem fixtures also passed on this Mac.

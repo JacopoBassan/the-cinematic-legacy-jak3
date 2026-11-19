@@ -22,9 +22,10 @@ def used_indices(m,ix):
  ids=np.unique(np.concatenate([ix[d[3]:d[3]+d[4]] for e in m['effects'] for d in map(DRAW.unpack,e['draws'])]))
  return ids[ids!=0xffffffff]
 
-def build(data_dir, output_dir, report_path):
+def build(data_dir, output_dir, report_path, *, native_graphics=None):
  global ROOT,OUT
- ROOT=Path(data_dir)/'out/jak3/fr3';OUT=Path(output_dir)
+ ROOT=Path(native_graphics) if native_graphics is not None else Path(data_dir)/'out/jak3/fr3'
+ OUT=Path(output_dir)
  metadata=json.loads(Path(__file__).with_name('air-build-catalog.json').read_text())
  catalog=metadata['models']
  donor_raw=decompress(ROOT/catalog[HIGH]['files'][0]);donor=model(donor_raw,HIGH)
