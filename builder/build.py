@@ -204,7 +204,7 @@ def extract(data,tools,project,rip,env,log,native_config):
     config = {'rip_levels':rip,'dump_objs':False,'process_game_text':False,
               'process_game_count':False,'process_part_group_table':False,'extract_collision':False}
     if rip:
-        config['dgo_names'] = ['CGO/KERNEL.CGO','CGO/GAME.CGO','DGO/ARENACST.DGO']
+        config['dgo_names'] = ['CGO/KERNEL.CGO','CGO/GAME.CGO','DGO/ARENACST.DGO','DGO/TEMA.DGO']
     else:
         # GAME holds globally required named render textures. Load the complete
         # object/texture database, but export only common GAME graphics.
@@ -285,28 +285,24 @@ def build(data,tools,work,output,config):
     stages = ['group_armor_effects.py','dax_effects.py','restore_draw_modes.py','fix_faces.py','build_transformations.py','restore_authored.py']
     for number,name in enumerate(stages,4):
         run([sys.executable,ROOT/'stages'/name],work/f'{number:02}-{Path(name).stem}.log',env)
-    # Tag only authored hair/eyebrow padding after material restoration.
-    # The stage requires distinct input/output paths and audits all other bytes.
     os.environ['CINEMATIC_BUILD_WORK']=str(work)
     sys.path.insert(0,str(ROOT/'stages'))
-    from tag_dark_vertex_colors import patch_fr3,MARKER as VERTEX_MARKER
-    from dark_vertex_runtime import METADATA_INDEX,MARKER as SHADER_MARKER,validate_protocol
-    if VERTEX_MARKER != SHADER_MARKER:
-        raise ValueError('Dark palette marker protocol mismatch')
-    dark_path=work/'prototype/GAME-dark-colors.fr3'
-    dark_report=patch_fr3(work/'prototype/GAME-transformations.fr3',dark_path,METADATA_INDEX,work/'prototype/GAME-baseline.fr3')
-    dark_report['runtimeProtocol']=validate_protocol()
-    (work/'dark-color-validation.json').write_text(json.dumps(dark_report,indent=2))
-    os.replace(dark_path,work/'prototype/GAME-transformations.fr3')
     run([sys.executable,ROOT/'validate.py'],work/'08-validate.log',env)
     from fit_belt import fit_belt
     belt_path=work/'prototype/GAME-belt-fit.fr3'
     belt_report=fit_belt(work/'prototype/GAME-transformations.fr3',work/'prototype/GAME-baseline.fr3',belt_path)
     (work/'belt-validation.json').write_text(json.dumps(belt_report,indent=2))
     os.replace(belt_path,work/'prototype/GAME-transformations.fr3')
+    from cinematic_forms import add_models as add_cinematic_forms, REPLACEMENT
+    fr3 = data/'out/jak3/fr3'
+    dark_path = work/'prototype/GAME-dedicated-dark.fr3'
+    dark_report = add_cinematic_forms(work/'prototype/GAME-transformations.fr3',
+                               fr3/'arenacst.fr3', fr3/'mhctycst.fr3',
+                                       project/'out/jak3/fr3/templea.fr3',
+                                       work/'prototype/GAME-faces.fr3', dark_path)
+    (work/'transformation-model-validation.json').write_text(json.dumps(dark_report,indent=2))
+    os.replace(dark_path, work/'prototype/GAME-transformations.fr3')
     # These builders consume only the user's pinned local FR3 and rig objects.
-    os.environ['CINEMATIC_BUILD_WORK']=str(work)
-    sys.path.insert(0,str(ROOT/'stages'))
     from build_npc_expansion import build as build_npcs
     from build_additional_npcs import build as build_additional_npcs
     from build_air_transport import build as build_air
@@ -339,18 +335,16 @@ def build(data,tools,work,output,config):
             from npc_foreground import patch_source
             source = patch_source(source)
             from dark_vertex_runtime import patch_foreground
-            source = patch_foreground(source)
+            source = patch_foreground(source, REPLACEMENT)
             from dax_shadow import patch_source as patch_shadow
             source=patch_shadow(source)
         path.write_text(source)
-    from dark_vertex_runtime import patch_shader,gameplay_hair_texture_scale,gameplay_yellow_tip_scale
+    from dark_vertex_runtime import patch_eye, patch_shader
+    eye_renderer = project/'goal_src/jak3/engine/gfx/foreground/eye.gc'
+    eye_renderer.write_text(patch_eye(eye_renderer.read_text(), REPLACEMENT))
     shader_relative=Path('game/graphics/opengl_renderer/shaders/merc2.vert')
     shader_path=project/shader_relative
-    hair_tone=gameplay_hair_texture_scale(data/'out/jak3/fr3/GAME.fr3',data/'out/jak3/fr3/mhctycst.fr3')
-    hair_tone['yellowTips']=gameplay_yellow_tip_scale(data/'out/jak3/fr3/GAME.fr3',work/'prototype/GAME-transformations.fr3')
-    hair_tone['runtimeProtocol']=validate_protocol(hair_tone['scale'],hair_tone['yellowTips']['scale'])
-    (work/'dark-hair-tone-validation.json').write_text(json.dumps(hair_tone,indent=2))
-    shader_path.write_bytes(patch_shader(shader_path.read_bytes(),dark_report['palette'],hair_tone['scale'],hair_tone['yellowTips']['scale']))
+    shader_path.write_bytes(patch_shader(shader_path.read_bytes(), dark_report['transitionColors']))
     rider_source=project/'goal_src/jak3/levels/stadium/king-rider.gc'
     from npc_runtime import patch_source as patch_rider_source
     rider_source.write_text(patch_rider_source(rider_source.read_text()))
@@ -358,7 +352,7 @@ def build(data,tools,work,output,config):
     # alone. Load the common and vehicle definitions before king-rider.
     run([platform_tools.tool_path(tools,'goalc',config),'--game','jak3','--proj-path',project,'--disable-ansi',
          *platform_tools.compiler_options(config),
-         '--cmd','(begin '+territory_setup+' (make "$OUT/obj/foreground.o") (make "$OUT/obj/texture-anim.o") (make "$OUT/obj/process-drawable.o") (make "$OUT/obj/entity-debug.o") (make "$OUT/obj/vehicle-h.o") (make "$OUT/obj/target-pilot.o") (make "$OUT/obj/king-rider.o"))'],work/'09-compile.log',env)
+         '--cmd','(begin '+territory_setup+' (make "$OUT/obj/foreground.o") (make "$OUT/obj/texture-anim.o") (make "$OUT/obj/eye.o") (make "$OUT/obj/process-drawable.o") (make "$OUT/obj/entity-debug.o") (make "$OUT/obj/vehicle-h.o") (make "$OUT/obj/target-pilot.o") (make "$OUT/obj/king-rider.o"))'],work/'09-compile.log',env)
     # Obtain cloth geometry locally. Only the generator, never its generated
     # coordinates or object file, is included in the public source package.
     cloth_config = {'allowed_objects':['jakc-highres-ag'],
@@ -388,7 +382,7 @@ def build(data,tools,work,output,config):
     for relative in relative_files:
         (output/relative).parent.mkdir(parents=True,exist_ok=True)
     shutil.copy2(work/'prototype/GAME-transformations.fr3',output/relative_files[0])
-    pack_code(data/'out/jak3/iso/GAME.CGO',{name:project/'out/jak3/obj'/f'{name}.o' for name in ('foreground','texture-anim','process-drawable')},output/relative_files[1])
+    pack_code(data/'out/jak3/iso/GAME.CGO',{name:project/'out/jak3/obj'/f'{name}.o' for name in ('foreground','texture-anim','eye','process-drawable')},output/relative_files[1])
     append_object(output/relative_files[1],project/'out/jak3/obj/cinematic-skirt.o',output/relative_files[1])
     append_object(output/relative_files[1],project/'out/jak3/obj/cinematic-eyes.o',output/relative_files[1],'cinematic-eyes')
     pack_code(data/'out/jak3/iso/LPATK.DGO',{'king-rider':project/'out/jak3/obj/king-rider.o'},output/relative_files[2])
@@ -412,14 +406,14 @@ def build(data,tools,work,output,config):
                   'sourceDiscSerial':config['selectedSerial'],
                 'workingRevision':'native-convoy-torn-2026-10-29',
                 'features':{'jakAndDaxter':True,'npcModels':['Sig','Damas rider','Ashelin','Jinx','Crimson Guard','Cyber Errol','Kleiver rider'],
-                            'npcNewFacialAnimations':False,'airTransport':True,'darkVertexPalette':True,
+                            'npcNewFacialAnimations':False,'airTransport':True,'dedicatedDarkJak':True,'cinematicLightJakWings':True,
                             'cinematicSkirt':True,'animatedCinematicEyes':['Kleiver','Ashelin','Jinx','Sig'],
                             'convoyTorn':'original gameplay model, eyes, rig and mission props'},
                 'files':[
                     {'path':relative,'sha256':sha(output/relative),'bytes':(output/relative).stat().st_size}
                     for relative in relative_files]}
     shutil.copy2(work/'validation.json',output/'validation.json')
-    shutil.copy2(work/'dark-color-validation.json',output/'dark-color-validation.json')
+    shutil.copy2(work/'transformation-model-validation.json',output/'transformation-model-validation.json')
     shutil.copy2(work/'belt-validation.json',output/'belt-validation.json')
     shutil.copy2(work/'npc-validation.json',output/'npc-validation.json')
     shutil.copy2(work/'air-validation.json',output/'air-validation.json')

@@ -47,6 +47,7 @@
     "stages/build_air_transport.py",
     "stages/build_npc_expansion.py",
     "stages/build_transformations.py",
+    "stages/cinematic_forms.py",
     "stages/dax_effects.py",
     "stages/fit_belt.py",
     "stages/fix_faces.py",
@@ -59,7 +60,6 @@
     "stages/restore_authored.py",
     "stages/restore_draw_modes.py",
     "stages/static_eyes.py",
-    "stages/tag_dark_vertex_colors.py",
     "validate.py"
   ],
   "runtimeFiles": [
@@ -98,6 +98,7 @@
     "stages/build_air_transport.py",
     "stages/build_npc_expansion.py",
     "stages/build_transformations.py",
+    "stages/cinematic_forms.py",
     "stages/dax_effects.py",
     "stages/fit_belt.py",
     "stages/fix_faces.py",
@@ -110,7 +111,6 @@
     "stages/restore_authored.py",
     "stages/restore_draw_modes.py",
     "stages/static_eyes.py",
-    "stages/tag_dark_vertex_colors.py",
     "validate.py"
   ]
 }

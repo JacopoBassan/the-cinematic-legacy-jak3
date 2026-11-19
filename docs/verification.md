@@ -32,6 +32,8 @@ Release assembly passed with both builder and standard archive names. Checks cov
 
 ## Model checks
 
+Version 0.3.7 uses Dark Jak’s dedicated cutscene mesh with its original silver hair. Light Jak uses the cutscene wings and the existing cinematic body. Apple Silicon checks with the EU disc covered all five armor stages in both forms, the transformation into and out of each form, Dark Jak’s claw attack and jump, and Light Jak’s wing deployment, flight, landing and shield.
+
 The builder covers sixteen replacement placements across twelve model names. It retains the original convoy Torn. Checks cover geometry, morphs, textures, Dark shader changes and scoped archive changes. Native text, minimap and speedrun fixes remain part of the original installation.
 
 The 0.3.1 rider corrections were checked with Windows EU v0.3.9: Kleiver uses the native sleeve bend weights on his cinematic arms, and Sig retains the original rider garment beneath cinematic armor. Matched front and side captures and representative rider poses were inspected. A complete EU conversion reproduced the tested Sig garment and accepted Kleiver model data. The Sig garment stage also passed structural checks against the available USA model data; a complete new USA conversion and USA gameplay were not verified. These corrections have not had a new macOS or Linux gameplay session.
