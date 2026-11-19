@@ -31,7 +31,7 @@ Use an original supported Jak 3 installation and official tooling v0.3.9. Replac
 python builder/build.py --game-data "<OpenGOAL>/active/jak3/data" --tools "<OpenGOAL>/versions/official/v0.3.9" --work "<new-work-directory>" --output "<new-payload-directory>"
 ```
 
-The builder selects the native platform. `--platform windows-x64`, `--platform macos-arm64` or `--platform linux-x64` selects it explicitly. Linux conversion is experimental and has not been validated with real game data. Run `python builder/build.py --help` for the supported options. Review [current verification](verification.md) before release.
+The builder selects the native platform. `--platform windows-x64`, `--platform macos-arm64` or `--platform linux-x64` selects it explicitly. Linux support is experimental. Run `python builder/build.py --help` for the supported options. Review [current verification](verification.md) before release.
 
 ## Installer packages
 
@@ -49,6 +49,6 @@ Collect all three resulting archives in `dist/input` on one machine. Then use a 
 python tools/prepare_mod_release.py --input dist/input --output dist/release
 ```
 
-Version `0.3.3` produces `windows-v0.3.3.zip`, `macos-arm64-v0.3.3.tar.gz`, `linux-v0.3.3.tar.gz`, `source-v0.3.3.zip`, `metadata.json`, `release-manifest.json` and `SHA256SUMS.txt`. Metadata declares only `jak3`.
+Version `0.3.4` produces `windows-v0.3.4.zip`, `macos-arm64-v0.3.4.tar.gz`, `linux-v0.3.4.tar.gz`, `source-v0.3.4.zip`, `metadata.json`, `release-manifest.json` and `SHA256SUMS.txt`. Metadata declares only `jak3`.
 
 The manual **Cut Mod Release** workflow builds all three platforms, verifies the assets, and creates or refreshes a draft. On Ubuntu 24.04 x64, it also runs the [asset-free Linux installer checks](linux.md#developer-checks) against the final archive. The draft can be checked before publication. Original mod code uses [MOD-LICENSE](../MOD-LICENSE). Third-party code and bundled dependencies retain their own license notices.

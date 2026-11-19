@@ -1,6 +1,6 @@
 # Jak 3 verification
 
-The mod targets Windows x64, [Apple Silicon macOS](macos.md) and [experimental Linux x64](linux.md) with official OpenGOAL **v0.3.9**. The launcher protocol was checked with **v2.11.2**. Intel Macs are unsupported. Real Linux launcher import, model conversion and gameplay are not yet validated.
+The mod targets Windows x64, [Apple Silicon macOS](macos.md) and [experimental Linux x64](linux.md) with official OpenGOAL **v0.3.9**. The launcher protocol was checked with **v2.11.2**. Intel Macs are unsupported. Linux launcher import and gameplay still need testing.
 
 ## Source checks
 
@@ -23,6 +23,8 @@ The Linux workflow uses Ubuntu 24.04 x64. It builds the final TAR.GZ and checks 
 Linux builds use the source tree shipped with the pinned OpenGOAL version when it is installed. The installer continues to check the player’s disc and generated game files.
 
 A clean Jak 3 EU extraction with OpenGOAL v0.3.9 completed in Ubuntu 24.04 under Rosetta. The patched builder produced and verified all 16 payload files. The FR3 check accepted a fixture changed only in an unused environment-map ID and rejected a change to a checked byte. Launcher GUI and SteamOS gameplay still need testing.
+
+The `destrack.fr3` fingerprint uses fixed values for the two eye IDs that OpenGOAL emits for Kleiver’s driving model without an eye controller. The mod assigns those eyes from the cinematic model. The fingerprint still checks the texture IDs, model geometry and eye IDs for other actors. The full USA conversion passed on Ubuntu 24.04 under Rosetta with a fixture that reproduced the reported fingerprint.
 
 Asset-free installer fixtures cover first install, updates, input and save preservation, wrong-game and running-game refusal, cancellation, rollback, child-process cleanup and retry. They use synthetic files and do not drive the real launcher or convert real game assets. They also check transaction marker ownership and inherited runtime settings. The workflow stores a `verification-linux-x64` receipt.
 

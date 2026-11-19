@@ -103,7 +103,8 @@ def tree_hash(folder):
 def fr3_asset_hash(path,first_model,normalize_envmaps=False):
     """Fingerprint consumed assets independently of unused native Hfrag garbage.
 
-    Normal textures and the complete Merc model/index/vertex section are covered.
+    The fingerprint covers normal textures and the Merc model, index and
+    vertex data. It canonicalizes known undefined fields before hashing.
     Non-Merc geometry is preserved byte for byte from the user's local input by
     the builders, and is intentionally outside this asset compatibility digest.
     """
@@ -138,9 +139,11 @@ def fr3_asset_hash(path,first_model,normalize_envmaps=False):
     if first<cursor+8 or raw.find(needle,first+1)>=0:
         raise ValueError('Merc model section changed')
     merc = raw[first-8:]
-    if normalize_envmaps:
+    normalize_kleiver_eyes = path.name == 'destrack.fr3'
+    if normalize_envmaps or normalize_kleiver_eyes:
         from fr3_fingerprint import canonical_merc
-        merc = canonical_merc(merc)
+        merc = canonical_merc(merc, normalize_envmaps=normalize_envmaps,
+                              normalize_kleiver_eyes=normalize_kleiver_eyes)
     return hashlib.sha256(raw[:cursor]+merc).hexdigest()
 
 
