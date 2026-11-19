@@ -55,6 +55,8 @@ These checks were recorded before the 2026-11-11 repository split.
 
 The [gallery](comparisons/jak3.md) contains 25 matched comparisons for Jak 3. Lossless compression checks preserved the decoded RGB pixels and image dimensions. The [comparison manifest](comparisons/manifest.json) records file hashes and capture details.
 
+The three Dark Jak images compare vanilla gameplay with v0.3.7 in Spargus. Both runs captured Dark Jak standing at the same armor stage, in the same frames and from the same camera angles.
+
 Before-and-after images, including launcher thumbnails, must use unchanged screenshot pixels. Only cropping, placement and lossless compression are allowed. Do not use image generation, redraw details, retouch colors or upscale captures. Thumbnail source hashes and crop rectangles are recorded in [`mod-source-provenance.json`](../mod-source-provenance.json).
 
 ## Limits

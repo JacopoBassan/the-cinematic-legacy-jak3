@@ -18,15 +18,15 @@ Original left, Cinematic right. In-game screenshots.
 
 **Front**
 
-![Dark Jak, Front: Original left, Cinematic right](jak3/darkjak-0.webp)
+![Dark Jak, Front: Original left, Cinematic right](jak3/darkjak-front-v037.webp)
 
 **Side**
 
-![Dark Jak, Side: Original left, Cinematic right](jak3/darkjak-1.webp)
+![Dark Jak, Side: Original left, Cinematic right](jak3/darkjak-side-v037.webp)
 
 **Back**
 
-![Dark Jak, Back: Original left, Cinematic right](jak3/darkjak-2.webp)
+![Dark Jak, Back: Original left, Cinematic right](jak3/darkjak-back-v037.webp)
 
 ## Light Jak
 

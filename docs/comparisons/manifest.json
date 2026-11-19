@@ -40,46 +40,94 @@
         {
           "subject": "Dark Jak",
           "view": "Front",
-          "path": "jak3/darkjak-0.webp",
+          "path": "jak3/darkjak-front-v037.webp",
           "dimensions": [
-            1336,
-            963
+            1269,
+            728
           ],
-          "sha256": "6ac0684602f350a607ca55d20b1eaba6892c49e11e97c4bee015b56c37a8e9f2",
+          "sha256": "50e3f3a95979c15c693ccad2cc51db010c47dae3308fb26bf81ab95c67ba5daf",
           "losslessCompression": {
-            "sourceSha256": "a32aa05e56a35bb3cd4f7f11e9f811cb1ffec66a435fc298750653a153cbf057",
-            "decodedRgbSha256": "401b5a40fc031c3646a8efb09840ee1068253bc1e72ae6b8837b81a52c5a159b",
+            "sourceSha256": "e774a8db33c5dfa4f8ee027f44ab31dbd6e3eb9f63b15c0174bb8a1a7dce1d9b",
+            "decodedRgbSha256": "c27cbdaa48ea0d8a36527d71849dce75cac1a96be1a73fc4bdd79e18d51d04db",
             "method": "cwebp lossless exact z9"
+          },
+          "capture": {
+            "openGoalVersion": "v0.3.9",
+            "cinematicVersion": "v0.3.7",
+            "cinematicCommit": "338a484dbdaec8b2f447f2c294936878b03fb01f",
+            "discSerial": "SCES-52460",
+            "location": "Spargus",
+            "frame": 110,
+            "crop": [
+              650,
+              205,
+              1270,
+              865
+            ],
+            "originalSha256": "8c66ff15c0c5e9ab6b0ea40d24d1deed802cd2e5dc600eb45bc047eb4ef273dd",
+            "cinematicSha256": "c4decba9d06a9db92347098deb50e8f7cbef99ade3b55af5f3b11189dd6aee94"
           }
         },
         {
           "subject": "Dark Jak",
           "view": "Side",
-          "path": "jak3/darkjak-1.webp",
+          "path": "jak3/darkjak-side-v037.webp",
           "dimensions": [
-            1336,
-            963
+            1269,
+            728
           ],
-          "sha256": "33429631f04746f42f85ea9942b2e149ba4d37ba9d0ae5ff8150eca6fe3d590f",
+          "sha256": "f7d098c2d7686f5ef207c9be7a2b924ec82b841ab8848811082a5b2ef24b4f9b",
           "losslessCompression": {
-            "sourceSha256": "665a058049ca4def82787951c066f4ccec6978403b4581bb2196fd596c6d05d7",
-            "decodedRgbSha256": "9627fd2fdc9fca96e7d38a9e48f7b0a3f28ffe8562b7e994dda94d81586ac183",
+            "sourceSha256": "9056e921fb8df95edada24e842edae03ee4d505df68d2cb2251be73204d61352",
+            "decodedRgbSha256": "f7e438157d236b4682efb4f58e85f447f25c52bccc3bdac81e5128d876eb3111",
             "method": "cwebp lossless exact z9"
+          },
+          "capture": {
+            "openGoalVersion": "v0.3.9",
+            "cinematicVersion": "v0.3.7",
+            "cinematicCommit": "338a484dbdaec8b2f447f2c294936878b03fb01f",
+            "discSerial": "SCES-52460",
+            "location": "Spargus",
+            "frame": 128,
+            "crop": [
+              650,
+              205,
+              1270,
+              865
+            ],
+            "originalSha256": "4c7fcf74729e6e2a4c5fc9aec1c524e20c5dfae1f25ae7629cdcc17b5641ba51",
+            "cinematicSha256": "e6a363f36cb92aa86f87ff548aef65cc939bd3d190d4bedddc5fb3f8fa53dc62"
           }
         },
         {
           "subject": "Dark Jak",
           "view": "Back",
-          "path": "jak3/darkjak-2.webp",
+          "path": "jak3/darkjak-back-v037.webp",
           "dimensions": [
-            1336,
-            963
+            1269,
+            728
           ],
-          "sha256": "49a35fbf54338db581443272ec27ca5efa2faccbf80020ad3d3905f2998e7653",
+          "sha256": "7dcae66e53c952c60a10c38cae2572fd6df0ba8555151dbc6e5984778247ad4f",
           "losslessCompression": {
-            "sourceSha256": "910d4913063a098c6f6c5e5cc9744e25ee0bd069b916a588f62dcd5641190922",
-            "decodedRgbSha256": "8c4d74dbed9aafa48fdba8baefae82e45cf70fb00fe28a250f79327dd938c22b",
+            "sourceSha256": "e23a96c360fbe17d57979e5864fd811a64ee86958d865388968ff92296a2d11b",
+            "decodedRgbSha256": "f21b721a54c9aa1f746fd7a060f93ac97c7a27f575e85fe831aa278bb95f95ef",
             "method": "cwebp lossless exact z9"
+          },
+          "capture": {
+            "openGoalVersion": "v0.3.9",
+            "cinematicVersion": "v0.3.7",
+            "cinematicCommit": "338a484dbdaec8b2f447f2c294936878b03fb01f",
+            "discSerial": "SCES-52460",
+            "location": "Spargus",
+            "frame": 146,
+            "crop": [
+              650,
+              205,
+              1270,
+              865
+            ],
+            "originalSha256": "3e3a7fa6193cdf6d8045ffda6d6cd774bd7b04acb3a87375340cbb81da8438c9",
+            "cinematicSha256": "d03db6c67e680503085cdc6c6e54fe7c7b3a3e9888262187debe1108b63e9a43"
           }
         },
         {
