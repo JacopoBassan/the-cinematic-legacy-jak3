@@ -30,6 +30,8 @@ A clean Jak 3 EU extraction with OpenGOAL v0.3.9 completed in Ubuntu 24.04 under
 
 The `destrack.fr3` fingerprint uses fixed values for the two eye IDs that OpenGOAL emits for Kleiver’s driving model without an eye controller. The mod assigns those eyes from the cinematic model. The fingerprint still checks the texture IDs, model geometry and eye IDs for other actors. The full USA conversion passed on Ubuntu 24.04 under Rosetta with a fixture that reproduced the reported fingerprint.
 
+OpenGOAL writes the arena cutscene archive as `arenacst.fr3`. On a case-sensitive APFS volume, the v0.3.8 retarget command failed with a lowercase-only archive and synthetic GLBs. The patched command produced both replacement GLBs from the same inputs. A full Steam Deck install with this change still needs verification.
+
 Asset-free installer fixtures cover first install, updates, input and save preservation, wrong-game and running-game refusal, cancellation, rollback, child-process cleanup and retry. They use synthetic files and do not drive the real launcher or convert real game assets. They also check transaction marker ownership and inherited runtime settings. The workflow stores a `verification-linux-x64` receipt.
 
 Release assembly passed with both builder and standard archive names. Checks covered one download per platform, metadata, source files and release checksums. Missing Linux input and a changed Linux runtime pin were rejected before output was written. These archive fixtures use synthetic runtime files.

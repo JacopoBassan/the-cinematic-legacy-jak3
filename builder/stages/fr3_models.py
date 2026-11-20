@@ -30,7 +30,7 @@ def serialize(m):
     for e in m['effects']:b+=struct.pack('<Q',len(e['draws']))+b''.join(e['draws'])+e['mod']+e['tail']
     return b+m['tail']
 if __name__=='__main__':
-    for file,name in [('prototype/GAME-baseline.fr3','jakb-c-lod0'),('extraction/out/jak3/fr3/ARENACST.fr3','jakc-highres-lod0'),('prototype/GAME.fr3','jakb-c-lod0')]:
+    for file,name in [('prototype/GAME-baseline.fr3','jakb-c-lod0'),('extraction/out/jak3/fr3/arenacst.fr3','jakc-highres-lod0'),('prototype/GAME.fr3','jakb-c-lod0')]:
         raw=decompress(BASE/file);m=model(raw,name);assert serialize(m)==raw[m['start']:m['end']]
         print(file,name,'effects',len(m['effects']))
         for i,e in enumerate(m['effects']):print(i,[DRAW.unpack(d)[5] for d in e['draws']], 'env',e['tail'][8])

@@ -118,7 +118,7 @@ color_checks=[]
 for low,high in [('jakb-c-lod0','jakc-highres-lod0'),('daxter-lod0','daxter-highres-lod0')]:
     doc,acc=glb(BASE/'prototype/merc_replacements'/f'{low}.glb')
     source_doc,source_acc=glb(BASE/'models'/f'{high}.glb')
-    donor=decompress(BASE/'extraction/out/jak3/fr3/ARENACST.fr3')
+    donor=decompress(BASE/'extraction/out/jak3/fr3/arenacst.fr3')
     _,_,_,donor_vb=buffers(donor,high)
     donor_colors=np.frombuffer(donor_vb,'u1').reshape(-1,64)[:,56:60]
     draws=sorted([d for e in model(raw,low)['effects'] for d in e['draws']],key=lambda d:DRAW.unpack(d)[3])

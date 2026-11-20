@@ -15,7 +15,7 @@ def main():
     raw=decompress(BASE/'prototype/GAME.fr3')
     assert struct.unpack_from('<H',raw)[0]==43
     target=model(raw,'jakb-c-lod0');assert len(target['effects'])==2
-    cinematic=model(decompress(BASE/'extraction/out/jak3/fr3/ARENACST.fr3'),'jakc-highres-lod0')
+    cinematic=model(decompress(BASE/'extraction/out/jak3/fr3/arenacst.fr3'),'jakc-highres-lod0')
     glb=(BASE/'prototype/merc_replacements/jakb-c-lod0.glb').read_bytes()
     n=struct.unpack_from('<I',glb,12)[0];doc=json.loads(glb[20:20+n])
     binary=glb[28+n:]

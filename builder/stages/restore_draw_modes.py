@@ -5,7 +5,7 @@ from fr3_models import BASE,DRAW,decompress,compress,model,serialize
 def main():
     path=BASE/'prototype/GAME-armor.fr3'
     raw=decompress(path)
-    donor=decompress(BASE/'extraction/out/jak3/fr3/ARENACST.fr3')
+    donor=decompress(BASE/'extraction/out/jak3/fr3/arenacst.fr3')
     baseline=decompress(BASE/'prototype/GAME-baseline.fr3')
     updates=[]
     for low,high in [('jakb-c-lod0','jakc-highres-lod0'),('daxter-lod0','daxter-highres-lod0')]:

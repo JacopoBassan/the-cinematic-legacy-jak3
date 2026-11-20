@@ -51,7 +51,7 @@ if __name__=='__main__':
             corr=b@a/(np.linalg.norm(b,axis=1)*np.linalg.norm(a)+1e-20)
             top=np.argsort(-corr)[:4]
             print(i,'moving',relevant.sum(),'max',round(np.linalg.norm(delta,axis=1).max(),4),'best',[(int(t),round(float(corr[t]),3)) for t in top])
-    for file,name in [('prototype/GAME-baseline.fr3','jakb-c-lod0'),('extraction/out/jak3/fr3/ARENACST.fr3','jakc-highres-lod0'),('prototype/GAME-armor.fr3','jakb-c-lod0')]:
+    for file,name in [('prototype/GAME-baseline.fr3','jakb-c-lod0'),('extraction/out/jak3/fr3/arenacst.fr3','jakc-highres-lod0'),('prototype/GAME-armor.fr3','jakb-c-lod0')]:
         raw=decompress(BASE/file);m=model(raw,name);off,inds,vstart,verts=buffers(raw,name)
         print(file,'indices',len(inds),'vertices',len(verts)//64)
         for i,e in enumerate(m['effects']):

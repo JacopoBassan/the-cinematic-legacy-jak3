@@ -11,7 +11,7 @@ def main():
     target,end=textures(raw)
     baseline_raw=decompress(BASE/'prototype/GAME-baseline.fr3')
     baseline,baseline_end=textures(baseline_raw)
-    donors,_=textures(decompress(BASE/'extraction/out/jak3/fr3/ARENACST.fr3'))
+    donors,_=textures(decompress(BASE/'extraction/out/jak3/fr3/arenacst.fr3'))
     fixed=[]
     identity=lambda t:(t['name'],t['page'],t['width'],t['height'],t['combo'],t['flag'],hashlib.sha256(t['pixels']).digest())
     existing={identity(t) for t in target if t['page']!='custom-level'}

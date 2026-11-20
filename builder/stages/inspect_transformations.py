@@ -10,7 +10,7 @@ def textures(raw):
     return out,r.pos
 
 if __name__=='__main__':
-    for path,name in [('prototype/GAME-faces.fr3','jakb-c-lod0'),('prototype/GAME-baseline.fr3','jakb-c-lod0'),('extraction/out/jak3/fr3/ARENACST.fr3','jakc-highres-lod0'),('extraction/out/jak3/fr3/MHCTYCST.fr3','darkjak-highres-lod0')]:
+    for path,name in [('prototype/GAME-faces.fr3','jakb-c-lod0'),('prototype/GAME-baseline.fr3','jakb-c-lod0'),('extraction/out/jak3/fr3/arenacst.fr3','jakc-highres-lod0'),('extraction/out/jak3/fr3/mhctycst.fr3','darkjak-highres-lod0')]:
         raw=decompress(BASE/path);tex,_=textures(raw);m=model(raw,name)
         print('\n',path,name)
         for i,e in enumerate(m['effects']):

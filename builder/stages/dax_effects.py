@@ -111,7 +111,7 @@ def restore(raw, cinematic_raw, glb, *, name='daxter-lod0',
 def main():
     path = BASE / 'prototype/GAME-armor.fr3'
     raw = decompress(path)
-    cinematic = decompress(BASE / 'extraction/out/jak3/fr3/ARENACST.fr3')
+    cinematic = decompress(BASE / 'extraction/out/jak3/fr3/arenacst.fr3')
     glb = (BASE / 'prototype/merc_replacements/daxter-lod0.glb').read_bytes()
     fixed = restore(raw, cinematic, glb)
     compress(path, fixed)

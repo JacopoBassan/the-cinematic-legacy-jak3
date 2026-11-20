@@ -36,7 +36,7 @@ def retarget(low_path, high_path, output, *, donor_path=None, joint_aliases=None
     from fr3_models import decompress
     from inspect_faces import buffers
     donor = decompress(donor_path if donor_path is not None else
-                       high_path.parent.parent/'extraction/out/jak3/fr3/ARENACST.fr3')
+                       high_path.parent.parent/'extraction/out/jak3/fr3/arenacst.fr3')
     _,_,_,source_vertices = buffers(donor,high_path.stem)
     source_colors = np.frombuffer(source_vertices,'u1').reshape(-1,64)[:,56:60]
     source_positions = np.frombuffer(source_vertices,'<f4').reshape(-1,16)[:,:3]

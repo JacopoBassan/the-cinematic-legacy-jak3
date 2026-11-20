@@ -6,7 +6,7 @@ from inspect_transformations import textures
 raw=decompress(BASE/'prototype/GAME-faces.fr3')
 tex,_=textures(raw)
 m=model(raw,'jakb-c-lod0')
-original=model(decompress(BASE/'extraction/out/jak3/fr3/ARENACST.fr3'),'jakc-highres-lod0')
+original=model(decompress(BASE/'extraction/out/jak3/fr3/arenacst.fr3'),'jakc-highres-lod0')
 slots={}
 for effect,donor in zip(m['effects'],original['effects']):
     assert len(effect['draws'])==len(donor['draws'])
