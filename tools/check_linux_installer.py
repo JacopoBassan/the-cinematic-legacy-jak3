@@ -584,8 +584,13 @@ def check_cli(package, python, selected, env):
     other = 'jak2' if selected['game'] == 'jak1' else 'jak1'
     run([str(extractor), '/no-real-game-data', '--folder', '--game', other, '--decompile'],
         env, success=False, contains='invalid choice')
+    title = selected['displayName'].split(':', 1)[0]
+    install_guidance = f'Finish installing the original {title} from its game page in OpenGOAL Launcher'
     run([str(extractor), '/no-real-game-data', '--game', selected['game'], '--decompile'],
-        env, success=False, contains='Install the vanilla game')
+        env, success=False, contains=install_guidance)
+    run([str(extractor), '/no-real-game-data', '--extract', '--validate',
+         '--extract-path', '/unused-extraction-output', '--game', selected['game']],
+        env, success=False, contains=install_guidance)
     run([str(extractor), '/no-real-game-data', '--folder', '--game', selected['game']],
         env, success=False, contains='required')
     run([str(extractor), '/no-real-game-data', '--folder', '--game', selected['game'], '--decompile', '--compile'],
