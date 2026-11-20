@@ -6,7 +6,42 @@ Play Jak 3 with the cinematic character models. Includes Jak, Daxter, transforma
 
 [![Original and Cinematic comparison](docs/comparisons/jak3/jak-0.webp)](docs/comparisons/jak3.md)
 
-[All comparisons](docs/comparisons/jak3.md) · [Behind the scenes](https://github.com/JacopoBassan/the-cinematic-legacy/blob/main/docs/behind-the-scenes.md)
+[Install](#install) · [All comparisons](docs/comparisons/jak3.md) · [Behind the scenes](https://github.com/JacopoBassan/the-cinematic-legacy/blob/main/docs/behind-the-scenes.md)
+
+## Install
+
+Requires official OpenGOAL **v0.3.9** and a supported EU or USA game installation.
+
+1. Install vanilla Jak 3 in [OpenGOAL Launcher](https://opengoal.dev), then close the game.
+2. Open **Settings > Mods**, paste this source URL, and press **Add**:
+
+   ```text
+   https://raw.githubusercontent.com/JacopoBassan/the-cinematic-legacy/main/docs/mods.json
+   ```
+
+3. Return to **Jak 3 > Features > Mods** and select **Jak 3: The Cinematic Legacy**.
+4. Press **Install**, wait for setup, then press **Play**.
+
+For a manual install, download the **Windows ZIP**, **Mac TAR.GZ** or **Linux TAR.GZ** from [Releases](https://github.com/JacopoBassan/the-cinematic-legacy-jak3/releases), then use **Features > Mods > Add from File**. Leave the archive packed.
+
+The installer builds the replacements from your installed game files. No game models or textures are included. Python is included.
+
+### Compatibility
+
+<table>
+<thead><tr><th scope="col">Platform</th><th scope="col">Launcher install</th><th scope="col">Gameplay checks</th></tr></thead>
+<tbody>
+<tr><th scope="row">Windows x64</th><td>✅ Tested</td><td>✅ Tested</td></tr>
+<tr><th scope="row">macOS · Apple Silicon</th><td>✅ Tested</td><td>✅ Tested</td></tr>
+<tr><th scope="row">Linux x64</th><td>✅ Tested</td><td>✅ Tested</td></tr>
+</tbody>
+</table>
+
+Gameplay checks cover selected scenes and animations.
+
+**Saves:** Vanilla OpenGOAL saves are not imported automatically. You can copy your existing progress into the mod’s save folder and keep the original. [How to copy your saves](https://github.com/JacopoBassan/the-cinematic-legacy/blob/main/docs/copy-saves.md).
+
+[Compatibility and tested coverage](docs/verification.md) · [Mac support](docs/macos.md) · [Linux support](docs/linux.md) · [Build from source](docs/building.md)
 
 ## Why I made this
 
@@ -50,46 +85,13 @@ I’ve put a lot of care into checking these models, though full playthroughs st
 
 ¹ Jak II: stadium Samos and Keira. Their other scenes already use cinematic models. ² Jak 3: Sig’s rider and convoy models.
 
-## Install
-
-<table>
-<thead><tr><th scope="col">Platform</th><th scope="col">Launcher install</th><th scope="col">Gameplay checks</th></tr></thead>
-<tbody>
-<tr><th scope="row">Windows x64</th><td>✅ Tested</td><td>✅ Tested</td></tr>
-<tr><th scope="row">macOS · Apple Silicon</th><td>✅ Tested</td><td>✅ Tested</td></tr>
-<tr><th scope="row">Linux x64</th><td>🧪 Experimental</td><td>➖ Not tested</td></tr>
-</tbody>
-</table>
-
-Gameplay checks cover selected scenes and animations. Linux launcher import, model conversion and gameplay are not yet validated.
-
-Requires official OpenGOAL **v0.3.9** and a supported EU or USA game installation.
-
-1. Install vanilla Jak 3 in [OpenGOAL Launcher](https://opengoal.dev), then close the game.
-2. Open **Settings > Mods**, paste this source URL, and press **Add**:
-
-   ```text
-   https://raw.githubusercontent.com/JacopoBassan/the-cinematic-legacy/main/docs/mods.json
-   ```
-
-3. Return to **Jak 3 > Features > Mods** and select **Jak 3: The Cinematic Legacy**.
-4. Press **Install**, wait for setup, then press **Play**.
-
-For a manual install, download the **Windows ZIP**, **Mac TAR.GZ** or experimental **Linux TAR.GZ** from [Releases](https://github.com/JacopoBassan/the-cinematic-legacy-jak3/releases), then use **Features > Mods > Add from File**. Leave the archive packed.
-
-The installer builds the replacements from your installed game files. No game models or textures are included. Python is included.
-
-**Saves:** Vanilla OpenGOAL saves are not imported automatically. You can copy your existing progress into the mod’s save folder and keep the original. [How to copy your saves](https://github.com/JacopoBassan/the-cinematic-legacy/blob/main/docs/copy-saves.md).
-
-[Compatibility and tested coverage](docs/verification.md) · [Mac support](docs/macos.md) · [Experimental Linux](docs/linux.md) · [Build from source](docs/building.md)
-
 ## Development
 
 Based on [OG-Mod-Base](https://github.com/OpenGOAL-Mods/OG-Mod-Base) and [OpenGOAL](https://github.com/open-goal/jak-project). The template release metadata and licenses are retained; the game uses the official installed engine and tools. Model conversion is in `builder/`; the mod uses the pinned official runtime.
 
 Run `python tools/verify_mod_repository.py` and `python tools/run_tests.py` for verification. On macOS, use `TMPDIR=/private/tmp` when running the regression suite.
 
-The **Cut Mod Release** action builds the Windows, Apple Silicon and experimental Linux x64 packages. It uses the template metadata format and leaves the release as a draft for review.
+The **Cut Mod Release** action builds the Windows, Apple Silicon and Linux x64 packages. It uses the template metadata format and leaves the release as a draft for review.
 
 Original mod code: [MOD-LICENSE](MOD-LICENSE). Upstream code keeps its own licenses.
 
