@@ -289,12 +289,19 @@ def main():
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument('--decompile', action='store_true')
     group.add_argument('--compile', action='store_true')
+    # The launcher calls the mod's extractor when no base ISO folder exists.
+    group.add_argument('--extract', action='store_true', help=argparse.SUPPRESS)
+    parser.add_argument('--validate', action='store_true', help=argparse.SUPPRESS)
+    parser.add_argument('--extract-path', type=Path, help=argparse.SUPPRESS)
     args = parser.parse_args()
     selected = games.load(builder.ROOT)
     if args.game != selected['game']:
         raise ValueError(f"Import this archive under OpenGOAL Launcher > {selected['game']} > Mods.")
-    if not args.folder:
-        raise ValueError('Install the vanilla game in OpenGOAL before installing this mod.')
+    if args.extract or not args.folder:
+        title = selected['displayName'].split(':', 1)[0]
+        raise ValueError(f'Finish installing the original {title} from its game page in OpenGOAL Launcher, then retry mod setup.')
+    if args.validate or args.extract_path is not None:
+        parser.error('--validate and --extract-path are only valid for ISO extraction')
     mod = Path(__file__).resolve().parents[2]
     execute(mod, args.iso, 'decompile' if args.decompile else 'compile', selected)
 

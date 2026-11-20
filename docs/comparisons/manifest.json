@@ -747,6 +747,270 @@
             "decodedRgbSha256": "00535576b67f450b3e63372ca27a6fc37f762cf00ad1faca5f5e08a9acb2a78e",
             "method": "cwebp lossless exact z9"
           }
+        },
+        {
+          "subject": "Jak",
+          "view": "Smile",
+          "path": "jak3/expressions/jak-smile.webp",
+          "dimensions": [
+            628,
+            334
+          ],
+          "sha256": "435328e3d34eafa6728544d0333eb62f0d5f1624013c43cc26ee4211f8abcd69",
+          "bytes": 196766,
+          "framing": {
+            "sourceDimensions": [
+              1920,
+              1080
+            ],
+            "sharedCrop": [
+              774,
+              172,
+              1084,
+              478
+            ],
+            "sourceImagesResized": false,
+            "sourcePixelEdits": false,
+            "sourceCaptureSha256": {
+              "original": "dcc1ef735492f44bf685af4eb2fc59743f8abf56815df03185ad7320f9f00f08",
+              "cinematic": "206b3460c91005eb9df4c9389520c350cb68360f65f38fd9336623c76a49965f"
+            },
+            "outputEncoding": {
+              "format": "WebP",
+              "lossless": true,
+              "exact": true
+            },
+            "outputLayout": {
+              "header": 28,
+              "gap": 8,
+              "margin": 0
+            }
+          },
+          "matchedCapture": {
+            "channel": 9,
+            "weight": 8192,
+            "nativeEyeControlsMatched": true
+          }
+        },
+        {
+          "subject": "Jak",
+          "view": "Frown",
+          "path": "jak3/expressions/jak-frown.webp",
+          "dimensions": [
+            628,
+            334
+          ],
+          "sha256": "4b9665c93ffcd8fee11d33ad11a74a35ff3846184088fb3cca7fc2f165d97193",
+          "bytes": 196462,
+          "framing": {
+            "sourceDimensions": [
+              1920,
+              1080
+            ],
+            "sharedCrop": [
+              774,
+              172,
+              1084,
+              478
+            ],
+            "sourceImagesResized": false,
+            "sourcePixelEdits": false,
+            "sourceCaptureSha256": {
+              "original": "ed86871ff64ac6033551946fc27e18eed2b2146479c97b0c4b5f7964e8fd2014",
+              "cinematic": "1fb0abd3b8e215f1582b3be6824d38f996654eb4bb75ae9471961273ea598fc7"
+            },
+            "outputEncoding": {
+              "format": "WebP",
+              "lossless": true,
+              "exact": true
+            },
+            "outputLayout": {
+              "header": 28,
+              "gap": 8,
+              "margin": 0
+            }
+          },
+          "matchedCapture": {
+            "channel": 8,
+            "weight": 8576,
+            "nativeEyeControlsMatched": true
+          }
+        },
+        {
+          "subject": "Daxter",
+          "view": "Side grin",
+          "path": "jak3/expressions/daxter-side-grin.webp",
+          "dimensions": [
+            668,
+            315
+          ],
+          "sha256": "d1555b98035a33be9e023946dc42b79ed14e2b81eff7c86c762643d1d159b943",
+          "bytes": 212574,
+          "framing": {
+            "sourceDimensions": [
+              1920,
+              1080
+            ],
+            "sharedCrop": [
+              870,
+              280,
+              1200,
+              565
+            ],
+            "sourceImagesResized": false,
+            "sourcePixelEdits": false,
+            "sourceCaptureSha256": {
+              "original": "666a3112c36f5d4df138cca5bea4f19da3bd6c5ec16945a36f61d089ebfe0e70",
+              "cinematic": "8795786d3f2b58e529e3e6ec66ac187f272cebcaf37688e76fc492456a083d4c"
+            },
+            "outputEncoding": {
+              "format": "WebP",
+              "lossless": true,
+              "exact": true
+            },
+            "outputLayout": {
+              "header": 30,
+              "gap": 8,
+              "margin": 0
+            }
+          },
+          "matchedCapture": {
+            "channel": 2,
+            "weight": 8064,
+            "nativeEyeControlsMatched": true
+          }
+        },
+        {
+          "subject": "Daxter",
+          "view": "Eyes closed",
+          "path": "jak3/expressions/daxter-eyes-closed.webp",
+          "dimensions": [
+            668,
+            315
+          ],
+          "sha256": "ce2db7f2ad7cdef2da7f9d3e96b907bd19a688d70fbd041afb5e85fe3fe141bd",
+          "bytes": 220010,
+          "framing": {
+            "sourceDimensions": [
+              1920,
+              1080
+            ],
+            "sharedCrop": [
+              870,
+              280,
+              1200,
+              565
+            ],
+            "sourceImagesResized": false,
+            "sourcePixelEdits": false,
+            "sourceCaptureSha256": {
+              "original": "1551559f7e1103c9a8523dfb9ff98660cf2038ac2367aea99f324f000d8b38d1",
+              "cinematic": "5a34688dd331b1b434413b3685b8b702346e967f517eaa820e9003160749138e"
+            },
+            "outputEncoding": {
+              "format": "WebP",
+              "lossless": true,
+              "exact": true
+            },
+            "outputLayout": {
+              "header": 30,
+              "gap": 8,
+              "margin": 0
+            }
+          },
+          "matchedCapture": {
+            "channel": 6,
+            "weight": 9280,
+            "nativeEyeControlsMatched": true
+          }
+        },
+        {
+          "subject": "Daxter",
+          "view": "Wide clench",
+          "path": "jak3/expressions/daxter-wide-clench.webp",
+          "dimensions": [
+            534,
+            325
+          ],
+          "sha256": "1c127d5d4d7e31eec62f7981584f17a6635602536bfdf1e3ee5c6abf1d97ad66",
+          "bytes": 181734,
+          "framing": {
+            "sourceDimensions": [
+              1920,
+              1080
+            ],
+            "sharedCrop": [
+              899,
+              264,
+              1162,
+              565
+            ],
+            "sourceImagesResized": false,
+            "sourcePixelEdits": false,
+            "sourceCaptureSha256": {
+              "original": "7bc210718f8417c2eac59470ba9b772e76599a62ae63ef94b8b2cb161e9d5bf2",
+              "cinematic": "329d176e6f9b6b7aacdfd815c80d7c7d56b7e44faa7225a14c7eb69afc3aaefc"
+            },
+            "outputEncoding": {
+              "format": "WebP",
+              "lossless": true,
+              "exact": true
+            },
+            "outputLayout": {
+              "header": 24,
+              "gap": 8,
+              "margin": 0
+            }
+          },
+          "matchedCapture": {
+            "channel": 4,
+            "weight": 8192,
+            "nativeEyeControlsMatched": true
+          }
+        },
+        {
+          "subject": "Daxter",
+          "view": "One-sided grin",
+          "path": "jak3/expressions/daxter-one-sided-grin.webp",
+          "dimensions": [
+            534,
+            325
+          ],
+          "sha256": "ce6b02eba831b090902065717797c1ebb6cdf3dbfd214228c274b199c462b2a6",
+          "bytes": 187918,
+          "framing": {
+            "sourceDimensions": [
+              1920,
+              1080
+            ],
+            "sharedCrop": [
+              899,
+              264,
+              1162,
+              565
+            ],
+            "sourceImagesResized": false,
+            "sourcePixelEdits": false,
+            "sourceCaptureSha256": {
+              "original": "54dad2458df9788a7a096b880ccf5bee04f61d82b0ccddf36165ac6e4f0b831f",
+              "cinematic": "057e91257e3fc1bb4d6d65da1fb9a9b78e56ae142b975378184b97f2d03c13e9"
+            },
+            "outputEncoding": {
+              "format": "WebP",
+              "lossless": true,
+              "exact": true
+            },
+            "outputLayout": {
+              "header": 24,
+              "gap": 8,
+              "margin": 0
+            }
+          },
+          "matchedCapture": {
+            "channel": 5,
+            "weight": 8192,
+            "nativeEyeControlsMatched": true
+          }
         }
       ]
     }

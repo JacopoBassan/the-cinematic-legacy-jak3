@@ -20,7 +20,6 @@
     "dax_foreground.py",
     "dax_shadow.py",
     "fr3_fingerprint.py",
-    "texture_packs.py",
     "game-config.json",
     "game-configs/jak3.json",
     "game_config.py",
@@ -50,6 +49,7 @@
     "stages/build_transformations.py",
     "stages/cinematic_forms.py",
     "stages/dax_effects.py",
+    "stages/daxter_expression_fit.py",
     "stages/fit_belt.py",
     "stages/fix_faces.py",
     "stages/fr3_models.py",
@@ -61,6 +61,7 @@
     "stages/restore_authored.py",
     "stages/restore_draw_modes.py",
     "stages/static_eyes.py",
+    "texture_packs.py",
     "validate.py"
   ],
   "runtimeFiles": [
@@ -76,7 +77,6 @@
     "dax_foreground.py",
     "dax_shadow.py",
     "fr3_fingerprint.py",
-    "texture_packs.py",
     "game-config.json",
     "game-configs/jak3.json",
     "game_config.py",
@@ -102,6 +102,7 @@
     "stages/build_transformations.py",
     "stages/cinematic_forms.py",
     "stages/dax_effects.py",
+    "stages/daxter_expression_fit.py",
     "stages/fit_belt.py",
     "stages/fix_faces.py",
     "stages/fr3_models.py",
@@ -113,6 +114,7 @@
     "stages/restore_authored.py",
     "stages/restore_draw_modes.py",
     "stages/static_eyes.py",
+    "texture_packs.py",
     "validate.py"
   ]
 }

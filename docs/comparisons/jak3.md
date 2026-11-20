@@ -14,6 +14,14 @@ Original left, Cinematic right. In-game screenshots.
 
 ![Jak, Side: Original left, Cinematic right](jak3/jak-1.webp)
 
+**Smile**
+
+![Smile. Original left, Cinematic right.](jak3/expressions/jak-smile.webp)
+
+**Frown**
+
+![Frown. Original left, Cinematic right.](jak3/expressions/jak-frown.webp)
+
 ## Dark Jak
 
 **Front**
@@ -47,6 +55,22 @@ Original left, Cinematic right. In-game screenshots.
 **Side**
 
 ![Daxter, Side: Original left, Cinematic right](jak3/dax-1.webp)
+
+**Side grin**
+
+![Side grin. Original left, Cinematic right.](jak3/expressions/daxter-side-grin.webp)
+
+**Eyes closed**
+
+![Eyes closed. Original left, Cinematic right.](jak3/expressions/daxter-eyes-closed.webp)
+
+**Wide clench**
+
+![Wide clench. Original left, Cinematic right.](jak3/expressions/daxter-wide-clench.webp)
+
+**One-sided grin**
+
+![One-sided grin. Original left, Cinematic right.](jak3/expressions/daxter-one-sided-grin.webp)
 
 ## Damas
 
