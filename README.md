@@ -4,7 +4,7 @@ Play Jak 3 with the cinematic character models. Includes Jak, Daxter, transforma
 
 [Trilogy hub](https://github.com/JacopoBassan/the-cinematic-legacy) · Other games: [Jak and Daxter](https://github.com/JacopoBassan/the-cinematic-legacy-jak1) · [Jak II](https://github.com/JacopoBassan/the-cinematic-legacy-jak2)
 
-[![Original and Cinematic comparison](docs/comparisons/jak3/jak-0.webp)](docs/comparisons/jak3.md)
+[![Original and Cinematic comparison](docs/comparisons/jak3/jak-0.jpg)](docs/comparisons/jak3.md)
 
 [Install](#install) · [All comparisons](docs/comparisons/jak3.md) · [Behind the scenes](https://github.com/JacopoBassan/the-cinematic-legacy/blob/main/docs/behind-the-scenes.md)
 
