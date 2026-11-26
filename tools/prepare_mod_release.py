@@ -28,7 +28,7 @@ def verify_metadata(metadata,game):
 
 
 def prepare(inputs,output,version=None):
-    config=json.loads((ROOT/'mod-release.json').read_text())
+    config=json.loads((ROOT/'mod-release.json').read_text(encoding='utf-8'))
     game=config['game'];version=version or config['version']
     if version!=config['version']:raise ValueError('Commit the new mod version before packaging it')
     inputs=Path(inputs).resolve();output=Path(output).resolve()
