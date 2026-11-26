@@ -60,6 +60,7 @@
     "stages/npc_rigs.py",
     "stages/restore_authored.py",
     "stages/restore_draw_modes.py",
+    "stages/secret_outfit.py",
     "stages/static_eyes.py",
     "texture_packs.py",
     "validate.py"
@@ -113,6 +114,7 @@
     "stages/npc_rigs.py",
     "stages/restore_authored.py",
     "stages/restore_draw_modes.py",
+    "stages/secret_outfit.py",
     "stages/static_eyes.py",
     "texture_packs.py",
     "validate.py"

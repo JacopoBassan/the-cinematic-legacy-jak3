@@ -4,6 +4,7 @@
   "displayName": "Jak 3: The Cinematic Legacy",
   "description": "Cinematic character models in Jak 3 gameplay",
   "repository": "JacopoBassan/the-cinematic-legacy-jak3",
-  "version": "0.3.10",
-  "openGoalVersion": "v0.3.9"
+  "version": "0.3.11",
+  "openGoalVersion": "v0.3.9",
+  "releaseNotes": "The secret Jak II outfit now uses the blue-jacket cinematic model from the Arena cutscene. Checked with the Scatter Gun, Jet-Board and Dark and Light transformations."
 }

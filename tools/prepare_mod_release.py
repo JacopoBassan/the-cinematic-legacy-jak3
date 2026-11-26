@@ -68,6 +68,7 @@ def prepare(inputs,output,version=None):
     (output/'SHA256SUMS.txt').write_text(''.join(shared.file_sha(output/name)+'  '+name+'\n' for name in names))
     base='https://github.com/'+config['repository']
     notes=(f"{config['displayName']} {version}\n\n{config['description']}\n\n"
+           f"{config['releaseNotes']}\n\n"
            'Windows x64, Apple Silicon macOS, and experimental Linux x64. Requires OpenGOAL v0.3.9 and a supported EU or USA game installation. '
            +('Jak 1 also requires vanilla Jak II in the same launcher. ' if game=='jak1' else '')+
            '\n\nDownload the Windows ZIP, Mac TAR.GZ, or Linux TAR.GZ. In OpenGOAL Launcher, select the game and open Features > Mods > Add from File. '
@@ -76,7 +77,7 @@ def prepare(inputs,output,version=None):
            f'Comparisons: {base}/blob/main/docs/comparisons/{game}.md\n'
            f'Compatibility: {base}/blob/main/docs/verification.md\n'
            f'Source commit: {commit}\n\nDeveloped by @jacopobassan\nhttps://jacopobassan.me\n')
-    (output/'RELEASE-NOTES.md').write_text(notes)
+    (output/'RELEASE-NOTES.md').write_text(notes, encoding='utf-8')
     # Check the one-download-per-platform contract used by JakMods.
     selected={'windows':None,'macos':None,'linux':None};meta=[]
     for name in names:

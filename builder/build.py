@@ -353,6 +353,27 @@ def build(data,tools,work,output,config):
                                        work/'prototype/GAME-faces.fr3', dark_path)
     (work/'transformation-model-validation.json').write_text(json.dumps(dark_report,indent=2))
     os.replace(dark_path, work/'prototype/GAME-transformations.fr3')
+    # Only the native secret model is taken from this import. Keep the
+    # validated main player, Daxter and transformation archives intact.
+    from retarget_glb import retarget
+    from secret_outfit import fit_archive, merge_archive, restore_dark_variant
+    levels = project/'decompiler_out/jak3/levels'
+    secret_stock = levels/'common/jakb-normal-lod0.glb'
+    secret_donor = levels/'arenacst/jak-highres-lod0.glb'
+    secret_destination = project/'custom_assets/jak3/merc_replacements'/secret_stock.name
+    retarget(secret_stock, secret_donor, secret_destination,
+             donor_path=fr3/'arenacst.fr3', joint_aliases={'pantsLthigh':'hips'},
+             preserve_morph_targets=True, use_default_aliases=False)
+    extract(data,tools,project,False,env,work/'08-secret-outfit-import.log',config)
+    fitted_outfit = work/'prototype/GAME-secret-outfit.fr3'
+    face_report = fit_archive(project/'out/jak3/fr3/GAME.fr3', work/'prototype/GAME-baseline.fr3',
+                              fr3/'arenacst.fr3', secret_stock, secret_destination, fitted_outfit)
+    forms = work/'prototype/GAME-transformations.fr3'
+    both_outfits = work/'prototype/GAME-outfits.fr3'
+    outfit_report = merge_archive(forms, fitted_outfit, both_outfits)
+    (work/'secret-outfit-validation.json').write_text(
+        json.dumps({'geometry':outfit_report,'expressions':face_report},indent=2))
+    os.replace(both_outfits, forms)
     # These builders consume only the user's pinned local FR3 and rig objects.
     from build_npc_expansion import build as build_npcs
     from build_additional_npcs import build as build_additional_npcs
@@ -387,12 +408,15 @@ def build(data,tools,work,output,config):
             source = patch_source(source)
             from dark_vertex_runtime import patch_foreground
             source = patch_foreground(source, REPLACEMENT)
+            source = restore_dark_variant(source, '(-> dc mgeo name)', '(-> dc process)')
             from dax_shadow import patch_source as patch_shadow
             source=patch_shadow(source)
         path.write_text(source)
     from dark_vertex_runtime import patch_eye, patch_shader
     eye_renderer = project/'goal_src/jak3/engine/gfx/foreground/eye.gc'
-    eye_renderer.write_text(patch_eye(eye_renderer.read_text(), REPLACEMENT))
+    renderer_source = patch_eye(eye_renderer.read_text(), REPLACEMENT)
+    eye_renderer.write_text(restore_dark_variant(
+        renderer_source, '(-> (the process-drawable v1-7) draw mgeo name)', 'v1-7'))
     shader_relative=Path('game/graphics/opengl_renderer/shaders/merc2.vert')
     shader_path=project/shader_relative
     shader_path.write_bytes(patch_shader(shader_path.read_bytes(), dark_report['transitionColors']))
