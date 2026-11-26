@@ -2,6 +2,7 @@
 from __future__ import annotations
 import argparse
 import hashlib
+from http.client import IncompleteRead
 import json
 import os
 import platform as native_platform
@@ -10,9 +11,36 @@ import subprocess
 import sys
 import tarfile
 import tempfile
+import time
+from urllib.error import HTTPError, URLError
 from urllib.request import urlopen
 
 ROOT=Path(__file__).resolve().parents[1]
+
+
+def download_runtime(url, expected_sha256, archive):
+    for attempt in range(1, 4):
+        digest = hashlib.sha256()
+        try:
+            with urlopen(url, timeout=120) as response, archive.open('wb') as stream:
+                size = response.headers.get('Content-Length')
+                while block := response.read(1024 * 1024):
+                    stream.write(block)
+                    digest.update(block)
+                if size is not None and stream.tell() != int(size):
+                    raise ConnectionError(f'incomplete HTTP body ({stream.tell()} of {size} bytes)')
+        except (ConnectionError, IncompleteRead, TimeoutError, URLError) as error:
+            retryable = not isinstance(error, HTTPError) or error.code in (408, 429, 500, 502, 503, 504)
+            if attempt == 3 or not retryable:
+                raise
+            print(f'Python runtime download attempt {attempt}/3 failed: {error}. Retrying.',
+                  file=sys.stderr, flush=True)
+            time.sleep(attempt)
+        else:
+            break
+
+    if digest.hexdigest() != expected_sha256:
+        raise ValueError('Python runtime checksum mismatch')
 
 
 def build(platform,output):
@@ -28,10 +56,7 @@ def build(platform,output):
                          if not key.startswith(('LD_','DYLD_')) and key not in ('PYTHONHOME','PYTHONPATH')}
     with tempfile.TemporaryDirectory(prefix='cinematic-package-') as temporary:
         work=Path(temporary).resolve();archive=work/'python.tar.gz'
-        digest=hashlib.sha256()
-        with urlopen(pins['url'],timeout=120) as response,archive.open('wb') as stream:
-            while block:=response.read(1024*1024):stream.write(block);digest.update(block)
-        if digest.hexdigest()!=pins['sha256']:raise ValueError('Python runtime checksum mismatch')
+        download_runtime(pins['url'], pins['sha256'], archive)
         host=work/'host';host.mkdir()
         with tarfile.open(archive) as source:source.extractall(host,filter='data')
         python=host/('python/python.exe' if platform=='windows-x64' else 'python/bin/python3.11')

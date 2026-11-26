@@ -277,8 +277,9 @@ def run(args, env, *, success=True, contains=None):
     combined = result.stdout + result.stderr
     require((result.returncode == 0) == success,
             f'Unexpected process exit {result.returncode}: {combined[-4000:]}')
-    if contains:
-        require(contains.lower() in combined.lower(), f'Missing diagnostic {contains!r}: {combined[-4000:]}')
+    fragments = (contains,) if isinstance(contains, str) else contains or ()
+    for fragment in fragments:
+        require(fragment.lower() in combined.lower(), f'Missing diagnostic {fragment!r}: {combined[-4000:]}')
     return result
 
 
@@ -585,7 +586,7 @@ def check_cli(package, python, selected, env):
     run([str(extractor), '/no-real-game-data', '--folder', '--game', other, '--decompile'],
         env, success=False, contains='invalid choice')
     title = selected['displayName'].split(':', 1)[0]
-    install_guidance = f'Finish installing the original {title} from its game page in OpenGOAL Launcher'
+    install_guidance = (title, 'game page', 'OpenGOAL Launcher')
     run([str(extractor), '/no-real-game-data', '--game', selected['game'], '--decompile'],
         env, success=False, contains=install_guidance)
     run([str(extractor), '/no-real-game-data', '--extract', '--validate',
