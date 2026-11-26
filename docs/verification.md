@@ -2,6 +2,10 @@
 
 The mod targets Windows x64, [Apple Silicon macOS](macos.md) and [experimental Linux x64](linux.md) with official OpenGOAL **v0.3.9**. The launcher protocol was checked with **v2.11.2**. Intel Macs are unsupported. Linux launcher import and gameplay still need testing.
 
+## Secret Jak II outfit
+
+On Windows PAL, the secret blue-jacket outfit was checked in Spargus with the Scatter Gun and Jet-Board, on entry to Dark and Light forms, and on returning to the board. The standard outfit was also checked with the secret switched off. [In-game comparisons](comparisons/jak3.md#jak)
+
 ## Refreshed HUD
 
 Refreshed HUD 1.1 texture preservation was verified with the supported PAL and USA discs on Windows using OpenGOAL v0.3.9. The same texture handling runs in the macOS and Linux installers.

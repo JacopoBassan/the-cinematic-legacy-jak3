@@ -1271,6 +1271,116 @@
             "commit": "6076908d89828b1c0c7ec361d745d27b1d9e1db0",
             "sha256": "ce6b02eba831b090902065717797c1ebb6cdf3dbfd214228c274b199c462b2a6"
           }
+        },
+        {
+          "subject": "Jak",
+          "view": "Jak II secret outfit with the Scatter Gun",
+          "path": "jak3/expressions/jak-secret-blue-jacket.jpg",
+          "dimensions": [
+            2048,
+            993
+          ],
+          "sha256": "725fb1115e71ad9ec54d638f8092822b100fc934b99dccd7f5a2fe1e66096c7e",
+          "bytes": 788442,
+          "framing": {
+            "sourceDimensions": [
+              1920,
+              1080
+            ],
+            "sharedCrop": [
+              410,
+              45,
+              1430,
+              1000
+            ],
+            "sourceImagesResized": false,
+            "sourcePixelEdits": false,
+            "sourceCaptureSha256": {
+              "original": "00431b4e719e0a5914ce70132e738dd1bb4c6919e47a2f32e04f7ee062316366",
+              "cinematic": "578686063168cae0c9a12326a1288680fd3f7b7e1e550cad5dab9e8f2f09fc7a"
+            },
+            "outputEncoding": {
+              "format": "JPEG",
+              "quality": 94,
+              "subsampling": 0,
+              "progressive": true,
+              "optimize": true,
+              "lossless": false
+            },
+            "outputLayout": {
+              "header": 38,
+              "gap": 8,
+              "margin": 0
+            }
+          },
+          "matchedCapture": {
+            "scene": "Spargus",
+            "clip": "jakb-gun-stance-yellow",
+            "nativeFrame": 4.0,
+            "matchingNativeExpressionAndGaze": true,
+            "secretEnabled": true
+          },
+          "captureBuild": {
+            "version": "0.3.11",
+            "platform": "windows-x64",
+            "openGoalVersion": "v0.3.9",
+            "cinematicGameFr3Sha256": "9c8788447b21060bb85c3cb540247164b6e5607694f251a0ebd6e0d827321f64"
+          }
+        },
+        {
+          "subject": "Jak",
+          "view": "Jak II secret outfit on the Jet-Board",
+          "path": "jak3/expressions/jak-secret-jet-board.jpg",
+          "dimensions": [
+            1678,
+            798
+          ],
+          "sha256": "5c538c5f4eb4b7b9dcd1953d690c00fa398ae9b4d88b92ed070d2c84117c07fa",
+          "bytes": 532695,
+          "framing": {
+            "sourceDimensions": [
+              1920,
+              1080
+            ],
+            "sharedCrop": [
+              545,
+              200,
+              1380,
+              960
+            ],
+            "sourceImagesResized": false,
+            "sourcePixelEdits": false,
+            "sourceCaptureSha256": {
+              "original": "7c9b8f705981207c43cb8b54b9b995e540020c4ebde474729173df4d2f05f9b0",
+              "cinematic": "c7fa26d54f0c0237ebcbace352555c15c3cfe34619cad8116c1529943e908566"
+            },
+            "outputEncoding": {
+              "format": "JPEG",
+              "quality": 94,
+              "subsampling": 0,
+              "progressive": true,
+              "optimize": true,
+              "lossless": false
+            },
+            "outputLayout": {
+              "header": 38,
+              "gap": 8,
+              "margin": 0
+            }
+          },
+          "matchedCapture": {
+            "scene": "Spargus",
+            "clip": "jakb-board-turn",
+            "nativeFrame": 4.7966,
+            "matchingNativeExpressionAndGaze": true,
+            "secretEnabled": true
+          },
+          "captureBuild": {
+            "version": "0.3.11",
+            "platform": "windows-x64",
+            "openGoalVersion": "v0.3.9",
+            "cinematicGameFr3Sha256": "9c8788447b21060bb85c3cb540247164b6e5607694f251a0ebd6e0d827321f64"
+          }
         }
       ]
     }

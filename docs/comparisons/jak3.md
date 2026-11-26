@@ -22,6 +22,14 @@ Original left, Cinematic right. In-game screenshots.
 
 ![Frown. Original left, Cinematic right.](jak3/expressions/jak-frown.jpg)
 
+**Jak II secret outfit with the Scatter Gun**
+
+![Jak II secret outfit with the Scatter Gun. Original left, Cinematic right.](jak3/expressions/jak-secret-blue-jacket.jpg)
+
+**Jak II secret outfit on the Jet-Board**
+
+![Jak II secret outfit on the Jet-Board. Original left, Cinematic right.](jak3/expressions/jak-secret-jet-board.jpg)
+
 ## Dark Jak
 
 **Front**
